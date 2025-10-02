@@ -1,0 +1,125 @@
+{
+  "Scene": {
+    "MaxRecursionDepth": "6",
+    "BackgroundColor": "0 0 0",
+    "ShadowRayEpsilon": "1e-3",
+    "IntersectionTestEpsilon": "1e-6",
+    "Cameras": {
+      "Camera": {
+        "_id": "1",
+        "Position": "0 0 0",
+        "Gaze": "0 0 -1",
+        "Up": "0 1 0",
+        "NearPlane": "-1 1 -1 1 10",
+        "NearDistance": "10",
+        "ImageResolution": "720 720",
+        "ImageName": "spheres_mirror.png"
+      }
+    },
+    "Lights": {
+      "AmbientLight": "25 25 25",
+      "PointLight": [
+        {
+          "_id": "1",
+          "Position": "-4 4 -13",
+          "Intensity": "4550 4550 4550"
+        },
+        {
+          "_id": "2",
+          "Position": "4 4 -13",
+          "Intensity": "4550 4550 4550"
+        }
+      ]
+    },
+    "Materials": {
+      "Material": [
+        {
+          "_id": "1",
+          "AmbientReflectance": "1 1 1",
+          "DiffuseReflectance": "1 1 1",
+          "SpecularReflectance": "1 1 1",
+          "PhongExponent": "100"
+        },
+        {
+          "_id": "2",
+          "_type": "mirror",
+          "AmbientReflectance": "1 1 1",
+          "DiffuseReflectance": "1 0 0",
+          "SpecularReflectance": "1 1 1",
+          "PhongExponent": "100",
+          "MirrorReflectance": "1 1 1"
+        },
+        {
+          "_id": "3",
+          "AmbientReflectance": "1 1 1",
+          "DiffuseReflectance": "0 1 0",
+          "SpecularReflectance": "1 1 1",
+          "PhongExponent": "100"
+        },
+        {
+          "_id": "4",
+          "_type": "mirror",
+          "AmbientReflectance": "1 1 1",
+          "DiffuseReflectance": "0.2 0.2 0.2",
+          "SpecularReflectance": "0 0 0",
+          "PhongExponent": "1",
+          "MirrorReflectance": "1 1 1"
+        },
+        {
+          "_id": "5",
+          "AmbientReflectance": "1 1 1",
+          "DiffuseReflectance": "0.1 0.9 0.9",
+          "SpecularReflectance": "0 0 0",
+          "PhongExponent": "1"
+        }
+      ]
+    },
+    "VertexData": "-10 -0.8 0   \n\t\t10 -0.8 0    \n\t\t-10 -0.8 -100\n\t\t10 -0.8 -100 \n\t\t0 -0.2 -17   \n\t\t0.5 -0.5 -15 \n\t\t1.0 -0.5 -16 \n\t\t-1.0 -0.5 -13\n\t\t-0.8 -0.5 -12",
+    "Objects": {
+      "Triangle": [
+        {
+          "_id": "1",
+          "Indices": "1 2 3",
+          "Material": "4"
+        },
+        {
+          "_id": "2",
+          "Indices": "3 2 4",
+          "Material": "4"
+        }
+      ],
+      "Sphere": [
+        {
+          "_id": "1",
+          "Center": "5",
+          "Radius": "0.6",
+          "Material": "2"
+        },
+        {
+          "_id": "2",
+          "Center": "6",
+          "Radius": "0.3",
+          "Material": "5"
+        },
+        {
+          "_id": "3",
+          "Center": "7",
+          "Radius": "0.3",
+          "Material": "3"
+        },
+        {
+          "_id": "4",
+          "Center": "8",
+          "Radius": "0.3",
+          "Material": "1"
+        },
+        {
+          "_id": "5",
+          "Center": "9",
+          "Radius": "0.3",
+          "Material": "5"
+        }
+      ]
+    }
+  }
+}

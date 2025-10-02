@@ -1,0 +1,15 @@
+{
+  "originHash" : "cb547c5ecab87fbf92e8d4baa81c9e7063241f75a0c01c986f990feccc05ab63",
+  "pins" : [
+    {
+      "identity" : "parsingkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/erndmrcn/ParsingKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "50f26d00b3b3cbaf80d2a58d09b4659d73613481"
+      }
+    }
+  ],
+  "version" : 3
+}
