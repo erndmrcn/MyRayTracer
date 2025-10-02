@@ -88,9 +88,115 @@ public final class RayTracerEngine: @unchecked Sendable {
     public func render(scene: Scene, config: RenderConfig,
                        progressRow: ((Int) -> Void)? = nil) -> [SIMD3<Float>]
     {
-        // … your current render loop …
-        // Call progressRow?(y) at the end of each scanline if you want progress.
-        return [] // ← replace with actual pixels
+        for cam in scene.cameras.cameras {
+            // Use the first camera (you can iterate in your CLI/app if you want multiple)
+            let width  = cam.imageResolution[0]
+            let height = cam.imageResolution[1]
+            precondition(width == config.width && height == config.height,
+                         "RenderConfig size must match scene camera resolution")
+
+            typealias Vec3 = SIMD3<Double>
+
+            // --- Camera basis (RIGHT-HANDED) ---
+            let w: Vec3 = normalize(-cam.gaze)
+            let v: Vec3 = normalize(cam.up)
+            let u: Vec3 = normalize(simd_cross(v, w))
+
+            let e  = cam.position
+            let nd = Double(cam.nearDistance)
+            let l  = Double(cam.nearPlane[0])
+            let r  = Double(cam.nearPlane[1])
+            let b  = Double(cam.nearPlane[2])
+            let t  = Double(cam.nearPlane[3])
+
+            // Output buffer (linear 0..1 RGB as Float)
+            var out = [SIMD3<Float>](repeating: .zero, count: width * height)
+
+            // Precompute deltas for raster
+            let du = (r - l) / Double(width)
+            let dv = (t - b) / Double(height)
+
+            // Main loop (scanlines outer so we can report progress per row)
+            for j in 0..<height {
+                // Near plane geometry
+                let m: Vec3 = e + (-w) * nd           // center of near plane
+                let q0: Vec3 = m + u * l + v * t      // top-left corner
+
+                for i in 0..<width {
+                    // Pixel position on near plane
+                    let s_u = (Double(i) + 0.5) * du
+                    let s_v = (Double(j) + 0.5) * dv
+                    let s   = q0 + s_u * u - s_v * v
+
+                    // Primary ray
+                    var ray = Ray(origin: e, direction: s - e, t: 0)
+
+                    // Closest hit search
+                    var tMin = Double.infinity
+                    var hitObject: Object?
+
+                    for obj in scene.objects.objects {
+                        if obj.intersect(ray: &ray, backfaceCulling: false), ray.t < tMin {
+                            tMin = ray.t
+                            hitObject = obj
+                        }
+                    }
+
+                    let idx = j * width + i
+
+                    if let object = hitObject {
+                        // Intersection point (IMPORTANT: same, unnormalized ray dir)
+                        let p = ray.origin + ray.direction * tMin
+
+                        // Start with ambient
+                        var pixel = scene.lights.ambientLight * scene.materials.materials[object.materialIdx].ambient
+
+                        // Shadows + direct lighting
+                        for light in scene.lights.pointLights {
+                            // Shadow ray
+                            var wi = light.position - p
+                            let dist = simd_length(wi)
+                            wi = simd_normalize(wi)
+
+                            let nGeom = shadedNormalAt(p, for: object)
+                            let shadowOrigin = p + nGeom * scene.shadowRayEpsilon
+                            var shadowRay = Ray(origin: shadowOrigin, direction: wi, t: 0)
+
+                            var occluded = false
+                            for blocker in scene.objects.objects {
+                                if blocker.shadowIntersect(ray: &shadowRay, distance: dist, backfaceCulling: false) {
+                                    occluded = true
+                                    break
+                                }
+                            }
+                            if occluded { continue }
+
+                            // Add Blinn–Phong (your light.shade)
+                            let mat = scene.materials.materials[object.materialIdx]
+                            pixel += light.shade(material: mat,
+                                                 ray: ray,
+                                                 normal: shadedNormalAt(p, for: object),
+                                                 at: p)
+                        }
+
+                        // Clamp to [0,1] as in your main.swift (then we convert to Float)
+                        var clamped = pixel
+                        clamp01InPlace(&clamped)
+                        out[idx] = SIMD3<Float>(Float(clamped.x), Float(clamped.y), Float(clamped.z))
+                    } else {
+                        // Miss → background
+                        let bg = scene.backgroundColor
+                        out[idx] = SIMD3<Float>(Float(bg.x), Float(bg.y), Float(bg.z))
+                    }
+                }
+
+                // Progress per scanline
+                progressRow?(j)
+            }
+            return out
+        }
+
+        return []
     }
 }
 
@@ -172,4 +278,25 @@ extension RayTracerEngine {
     // simple Reinhard: L / (1+L)
     let one = SIMD3<Float>(repeating: 1)
     return c / (one + c)
+}
+
+// Uses your existing Object protocol + Sphere/Triangle types
+@inline(__always)
+private func shadedNormalAt(_ point: SIMD3<Double>, for object: Object) -> SIMD3<Double> {
+    switch object {
+    case let sphere as Sphere:
+        return normalize(point - sphere.center)
+    case let tri as Triangle:
+        // flat shading (you can extend to smooth with barycentrics)
+        return normalize(cross(tri.e1, tri.e2))
+    default:
+        return SIMD3<Double>(0,0,0)
+    }
+}
+
+@inline(__always)
+private func clamp01InPlace(_ c: inout SIMD3<Double>) {
+    c.x = max(0.0, min(1.0, c.x))
+    c.y = max(0.0, min(1.0, c.y))
+    c.z = max(0.0, min(1.0, c.z))
 }
