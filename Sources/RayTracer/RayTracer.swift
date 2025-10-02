@@ -118,11 +118,11 @@ extension RayTracerEngine {
                 // Tone map + sRGB encode into 8-bit
                 var p = 0
                 for c in linear {
-                    let mapped = reinhard(c * config.exposure) // simple tone-map
-                    let sr = srgb(mapped.x), sg = srgb(mapped.y), sb = srgb(mapped.z)
-                    rgba[p+0] = UInt8(clamp01(sr) * 255)
-                    rgba[p+1] = UInt8(clamp01(sg) * 255)
-                    rgba[p+2] = UInt8(clamp01(sb) * 255)
+//                    let mapped = reinhard(c * config.exposure) // simple tone-map
+//                    let sr = srgb(mapped.x), sg = srgb(mapped.y), sb = srgb(mapped.z)
+                    rgba[p+0] = UInt8(clamp01(c.x) * 255)
+                    rgba[p+1] = UInt8(clamp01(c.y) * 255)
+                    rgba[p+2] = UInt8(clamp01(c.z) * 255)
                     rgba[p+3] = 255
                     p += 4
                 }
