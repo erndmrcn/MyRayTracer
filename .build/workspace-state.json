@@ -1,0 +1,30 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "parsingkit",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/erndmrcn/ParsingKit",
+          "name" : "ParsingKit"
+        },
+        "state" : {
+          "checkoutState" : {
+            "branch" : "main",
+            "revision" : "50f26d00b3b3cbaf80d2a58d09b4659d73613481"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "ParsingKit"
+      }
+    ],
+    "prebuilts" : [
+
+    ]
+  },
+  "version" : 7
+}
