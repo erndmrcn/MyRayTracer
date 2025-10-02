@@ -10,8 +10,8 @@ import CoreGraphics
 import ImageIO
 import UniformTypeIdentifiers
 
-struct ImageHelper {
-    static func savePNG(_ image: CGImage, to path: String) throws {
+public struct ImageHelper {
+    public static func savePNG(_ image: CGImage, to path: String) throws {
         let url = URL(fileURLWithPath: path)
         guard let dest = CGImageDestinationCreateWithURL(url as CFURL,
                                                          UTType.png.identifier as CFString,
@@ -24,7 +24,7 @@ struct ImageHelper {
         }
     }
 
-    static func makeCGImage(width: Int, height: Int, rgba: [UInt8]) -> CGImage? {
+    public static func makeCGImage(width: Int, height: Int, rgba: [UInt8]) -> CGImage? {
         let bytesPerPixel = 4
         let bitsPerComponent = 8
         let bytesPerRow = width * bytesPerPixel
