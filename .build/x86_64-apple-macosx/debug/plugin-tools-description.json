@@ -1,0 +1,650 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ParsingKit-x86_64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/sources",
+      "importPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "ParsingKit",
+      "moduleOutputPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/ParsingKit.swiftmodule",
+      "objects" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx12.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/include/ParsingKit-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings",
+        "-package-name",
+        "parsingkit"
+      ],
+      "outputFileMapPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/ParsingKit.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+      ],
+      "tempsPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.RayTracer-x86_64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/sources",
+      "importPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/ParsingKit.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "RayTracer",
+      "moduleOutputPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/RayTracer.swiftmodule",
+      "objects" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx12.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/include/RayTracer-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "6",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "myraytracer"
+      ],
+      "outputFileMapPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/RayTracer.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
+      ],
+      "tempsPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ParsingKit" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "ParsingKit",
+      "-package-name",
+      "parsingkit",
+      "-c",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift",
+      "-I",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx12.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/include/ParsingKit-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-package-name",
+      "parsingkit",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "RayTracer" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "RayTracer",
+      "-package-name",
+      "myraytracer",
+      "-c",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift",
+      "-I",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx12.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/include/RayTracer-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "6",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "myraytracer",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ParsingKit" : [
+
+    ],
+    "RayTracer" : [
+      "ParsingKit"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/sources"
+    },
+    "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/sources"
+    },
+    "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

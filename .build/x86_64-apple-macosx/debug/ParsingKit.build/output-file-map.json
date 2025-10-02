@@ -1,0 +1,40 @@
+{
+  "": {
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/master.swiftdeps"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.dia"
+  }
+}

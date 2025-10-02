@@ -1,0 +1,3 @@
+module RayTracer {
+    header "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/include/RayTracer-Swift.h"
+}

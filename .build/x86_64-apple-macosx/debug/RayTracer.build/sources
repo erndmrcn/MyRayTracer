@@ -1,0 +1,12 @@
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift
+/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift

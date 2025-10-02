@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/master.swiftdeps"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.dia"
+  },
+  "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.dia"
+  }
+}
