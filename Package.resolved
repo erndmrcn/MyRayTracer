@@ -1,5 +1,5 @@
 {
-  "originHash" : "f9aa9803c0be16ec925d0b26a341e18d1ce8638bfe3c5a9c3d2c4f3562291f82",
+  "originHash" : "c29fd6643c1546a17c9a2aff796c6f6cb7a3c5cea95ca6f69ab95a02ac2e41d7",
   "pins" : [
     {
       "identity" : "parsingkit",
@@ -7,7 +7,16 @@
       "location" : "https://github.com/erndmrcn/ParsingKit",
       "state" : {
         "branch" : "main",
-        "revision" : "50f26d00b3b3cbaf80d2a58d09b4659d73613481"
+        "revision" : "318ae53de96a0c434e7fa9480ddc67f71ae224dd"
+      }
+    },
+    {
+      "identity" : "xmlcoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CoreOffice/XMLCoder.git",
+      "state" : {
+        "revision" : "b1e944cbd0ef33787b13f639a5418d55b3bed501",
+        "version" : "0.17.1"
       }
     }
   ],
