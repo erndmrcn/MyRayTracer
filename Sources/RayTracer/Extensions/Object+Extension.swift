@@ -268,19 +268,26 @@ extension Renderer {
 
 // MARK: - Rendering
 extension Renderer {
+    private struct ChunkResult: Sendable {
+        let startRow: Int
+        let endRow: Int    // exclusive
+        let pixels: [Vec3] // (end-start)*width items
+        let rays: Int64
+    }
+
     @inline(__always)
     func render(
         scene: Scene,
         cameraIndex: Int = 0,
-        progressRow: ((Int) -> Void)? = nil,
+        progressRow: (@Sendable (Int) -> Void)? = nil,
         raysTraced: inout Int64
-    ) -> [Vec3] {
+    ) async throws -> [Vec3] {
 
         let cam = scene.cameras[cameraIndex]
         let width  = cam.imageResolution.0
         let height = cam.imageResolution.1
 
-        // Camera basis
+        // Camera basis (immutable, captured by tasks safely)
         let e  = cam.position
         let nd = Double(cam.nearDistance)
         let l  = Double(cam.nearPlane[0])
@@ -294,76 +301,126 @@ extension Renderer {
         let u = normalize(cross(upNorm, wv))
         let v = normalize(cross(wv, u))
 
-        // Output buffer (linear RGB)
-        var out = [Vec3](repeating: .zero, count: width * height)
-
-        // Raster deltas
+        // Raster deltas + near plane geometry
         let du = (r - l) / Double(width)
         let dv = (t - b) / Double(height)
+        let m: Vec3 = e - wv * nd                // near plane center
+        let q0Base: Vec3 = m + u * l + v * t     // near plane top-left
 
-        // Precompute near plane center and top-left once per row
-        let m: Vec3 = e - wv * nd           // center of near plane
-        let q0Base: Vec3 = m + u * l + v * t
+        // Output image (parent thread stitches chunks here)
+        var out = [Vec3](repeating: .zero, count: width * height)
 
-        for j in 0..<height {
-            if Task.isCancelled { break }
+        // Chunking (tune CH for your CPU/cache)
+        let CH = 16
+        var chunks: [(Int, Int)] = []
+        chunks.reserveCapacity((height + CH - 1) / CH)
+        var row = 0
+        while row < height {
+            let end = min(row + CH, height)
+            chunks.append((row, end))
+            row = end
+        }
 
-            // row’s top-left pixel center
-            let rowTopLeft = q0Base - v * (Double(j) + 0.5) * dv
+        var raysSum: Int64 = 0
 
-            for i in 0..<width {
-                if Task.isCancelled { break }
+        try await withThrowingTaskGroup(of: ChunkResult.self) { group in
+            // Spawn a child task per chunk
+            for (startRow, endRow) in chunks {
+                group.addTask { [self] in
+                    // Local buffer for this chunk only
+                    var local = [Vec3](repeating: .zero, count: (endRow - startRow) * width)
+                    var localRays: Int64 = 0
 
-                // Pixel position on near plane
-                let s = rowTopLeft + (Double(i) + 0.5) * du * u
+                    for j in startRow..<endRow {
+                        if Task.isCancelled { throw CancellationError() }
 
-                // Primary ray
-                var ray = makeRay(origin: e, dir: s - e)
+                        // row’s top-left pixel center on the near plane
+                        let rowTopLeft = q0Base - v * (Double(j) + 0.5) * dv
 
-                // Intersections
-                _ = self.intersectTriangles(ray: &ray)
-                _ = self.intersectSpheres(ray: &ray)
-                _ = self.intersectPlanes(ray: &ray)
+                        // Render one scanline in this chunk
+                        let base = (j - startRow) * width
+                        for i in 0..<width {
+                            if Task.isCancelled { throw CancellationError() }
 
-                let idx = j * width + i
+                            // Pixel center on near plane
+                            let s = rowTopLeft + (Double(i) + 0.5) * du * u
 
-                if ray.kind != .none {
-                    // NOTE: tri/sphere builders wrote material/object indices as scene-array indices
-                    let mat = scene.materials[Int(ray.mat)]
+                            // Primary ray
+                            var ray = makeRay(origin: e, dir: s - e)
 
-                    // Hit point & face-forward normal
-                    let p = ray.origin + ray.dir * ray.tMax
-                    var N = ray.normal
-                    if dot(N, -ray.dir) < 0 { N = -N }
+                            // Intersections
+                            _ = self.intersectTriangles(ray: &ray)
+                            _ = self.intersectSpheres(ray: &ray)
+                            _ = self.intersectPlanes(ray: &ray)
 
-                    // Ambient
-                    var pixel = scene.lights.ambient * mat.ambient
+                            let dst = base + i
+                            if ray.kind != .none {
+                                let mat = scene.materials[Int(ray.mat)]
 
-                    // Direct lights + shadows
-                    for light in scene.lights.points {
-                        var wi = light.position - p
-                        let dist = length(wi)
-                        wi = normalize(wi)
+                                // Hit point & face-forward normal
+                                let p = ray.origin + ray.dir * ray.tMax
+                                var N = ray.normal
+                                if dot(N, -ray.dir) < 0 { N = -N }
 
-                        // Shadow ray
-                        var sRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: wi)
-                        sRay.tMax = dist - self.ctx.shadowRayEpsilon
-                        let blocked = self.occluded(shadowRay: sRay, excludeObj: ray.obj, backfaceCulling: false)
-                        if blocked { continue }
+                                // Ambient
+                                var pixel = scene.lights.ambient * mat.ambient
 
-                        // Your point-light BRDF/shading
-                        pixel += light.shade(material: mat, ray: ray, cameraPos: e, normal: N, at: p)
+                                // Direct lights + shadows
+                                for light in scene.lights.points {
+                                    var wi = light.position - p
+                                    let dist = length(wi)
+                                    wi = normalize(wi)
+
+                                    // Shadow ray (use ctx epsilons, no globals)
+                                    var sRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: wi)
+                                    sRay.tMax = dist - self.ctx.shadowRayEpsilon
+                                    let blocked = self.occluded(shadowRay: sRay, excludeObj: ray.obj, backfaceCulling: false)
+                                    if !blocked {
+                                        pixel += light.shade(material: mat, ray: ray, cameraPos: e, normal: N, at: p)
+                                    }
+                                }
+                                local[dst] = pixel
+                            } else {
+                                let bg = scene.backgroundColor
+                                local[dst] = Vec3(x: bg.x, y: bg.y, z: bg.z)
+                            }
+
+                            // (Optional) count rays if you track them here
+                            // localRays &+= 1
+                        }
                     }
-                    out[idx] = pixel
-                } else {
-                    let bg = scene.backgroundColor
-                    out[idx] = Vec3(x: bg.x, y: bg.y, z: bg.z)
+
+                    return ChunkResult(startRow: startRow, endRow: endRow, pixels: local, rays: localRays)
                 }
             }
 
-            // Progress per scanline
-            progressRow?(j)
+            // Collect results as they finish (order doesn't matter)
+            for try await chunk in group {
+                let start = chunk.startRow
+                let end   = chunk.endRow
+                let rows  = end - start
+                // Stitch the chunk into the final image (single-threaded write)
+                chunk.pixels.withUnsafeBufferPointer { src in
+                    out.withUnsafeMutableBufferPointer { dst in
+                        let dstStart = start * width
+                        dst.baseAddress!.advanced(by: dstStart)
+                            .assign(from: src.baseAddress!, count: rows * width)
+                    }
+                }
+                // Progress callback per completed row (still in the parent task → cancel works)
+                if let progressRow {
+                    for r in start..<end {
+                        progressRow(r)
+                    }
+                }
+                raysSum &+= chunk.rays
+            }
         }
+
+        // Accumulate to the caller's counter once (thread-safe by design)
+        raysTraced &+= raysSum
+        // If parent requested cancel, surface it here (optional)
+        if Task.isCancelled { throw CancellationError() }
 
         return out
     }
