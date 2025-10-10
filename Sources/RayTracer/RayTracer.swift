@@ -48,8 +48,8 @@ public final class RayTracerEngine: @unchecked Sendable {
         let camSpecs: [CameraSpec] = cams.enumerated().map { idx, c in
             CameraSpec(index: idx, id: c.id, imageName: c.imageName, width: c.imageResolution.0, height: c.imageResolution.1)
         }
-        let (meshCount, triCount, sphereCount) = sceneMeshAndTriangleCounts(scene)
-        return SceneInfo(cameras: camSpecs, meshes: meshCount, triangles: triCount, spheres: sphereCount)
+        let (meshCount, triCount, sphereCount, plane) = sceneMeshAndTriangleCounts(scene)
+        return SceneInfo(cameras: camSpecs, meshes: meshCount, triangles: triCount, spheres: sphereCount, planes: plane)
     }
 
     public func renderAll(
@@ -60,16 +60,28 @@ public final class RayTracerEngine: @unchecked Sendable {
         var results: [RenderResult] = []
         results.reserveCapacity(cams.count)
 
-        for (idx, _) in cams.enumerated() {
-            let ok = progress?(RenderProgress(
-                Double(idx) / Double(max(cams.count, 1)),
-                message: "Camera \(idx+1)/\(cams.count)"
-            )) ?? true
-            if !ok { break }
+        let totalRowsAll = max(1, cams.reduce(0) { $0 + $1.imageResolution.1 })
+        var rowsOffset = 0  // rows completed from previous cameras
+
+        for (idx, cam) in cams.enumerated() {
+            let height = max(1, cam.imageResolution.1)
+            let camCount = max(1, cams.count)
+
+            let baseOffset = rowsOffset
+
+            let startedOK = progress?(RenderProgress(
+                        Double(baseOffset) / Double(totalRowsAll),
+                        message: "Camera \(idx+1)/\(camCount) — 0/\(height)"
+                    )) ?? true
+                    if !startedOK { break }
 
             let (rgba, stats, spec) = try await renderRGBA8Async(cameraIndex: idx) { p in
-                let camFrac = (Double(idx) + p.fraction) / Double(max(cams.count, 1))
-                return progress?(RenderProgress(camFrac, message: p.message)) ?? true
+                let y = min(height - 1, max(0, Int(ceil(p.fraction * Double(height)) - 1)))
+                let doneRowsGlobal = baseOffset + (y + 1)
+                let globalFrac = Double(doneRowsGlobal) / Double(totalRowsAll)
+
+                let msg = "Camera \(idx+1)/\(camCount) — Row \(y+1)/\(height)"
+                return progress?(RenderProgress(globalFrac, message: msg)) ?? true
             }
 
             let cg = try makeCGImage(width: spec.width, height: spec.height, rgba: rgba)
@@ -119,7 +131,7 @@ extension RayTracerEngine {
         let cameraSpec = CameraSpec(index: cameraIndex, id: cam.id, imageName: cam.imageName, width: width, height: height)
 
         // 2) static counts once (for stats)
-        let (meshCount, triCount, sphereCount) = sceneMeshAndTriangleCounts(scene)
+        let (meshCount, triCount, sphereCount, planeCount) = sceneMeshAndTriangleCounts(scene)
 
         let started = DispatchTime.now()
 
@@ -157,12 +169,12 @@ extension RayTracerEngine {
         }
 
         let elapsedMs = Int(Double(DispatchTime.now().uptimeNanoseconds - started.uptimeNanoseconds) / 1_000_000.0)
-        let stats = RenderStats(meshes: meshCount, triangles: triCount, spheres: sphereCount, rays: rays, milliseconds: elapsedMs)
+        let stats = RenderStats(meshes: meshCount, triangles: triCount, spheres: sphereCount, planes: planeCount, rays: rays, milliseconds: elapsedMs)
         return (rgba, stats, cameraSpec)
     }
 
-    public func sceneMeshAndTriangleCounts(_ scene: Scene) -> (meshes: Int, tris: Int, spheres: Int) {
-        var meshes = 0, spheres = 0, tris = 0
+    public func sceneMeshAndTriangleCounts(_ scene: Scene) -> (meshes: Int, tris: Int, spheres: Int, planes: Int) {
+        var meshes = 0, spheres = 0, tris = 0, planes = 0
         let objs: [SceneObject] = scene.objects
         for obj in objs {
             switch obj {
@@ -173,10 +185,13 @@ extension RayTracerEngine {
                 tris += m.faces.data.count
             case _ as Triangle:
                 tris += 1
-            default: break
+            case _ as Plane:
+                planes += 1
+            default:
+                break
             }
         }
-        return (meshes, tris, spheres)
+        return (meshes, tris, spheres, planes)
     }
 }
 

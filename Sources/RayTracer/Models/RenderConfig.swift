@@ -29,4 +29,5 @@ public struct SceneInfo: Sendable {
     public let meshes: Int
     public let triangles: Int
     public let spheres: Int
+    public let planes: Int
 }

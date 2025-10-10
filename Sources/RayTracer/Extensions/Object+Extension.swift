@@ -6,10 +6,34 @@
 //
 
 import ParsingKit
+import UIKit
 import simd
 
-// MARK: - Renderer
+private actor ProgressRelay {
+    private var done: Int = 0
+    private let total: Int
+    private let cb: (@Sendable (Int) -> Void)?
 
+    init(total: Int, cb: (@Sendable (Int) -> Void)?) {
+        self.total = total
+        self.cb = cb
+    }
+
+    /// Call after finishing a scanline. Throttled: every 8 rows or on completion.
+    func rowFinished() async {
+        done &+= 1
+        guard let cb else { return }
+        if (done & 7) == 0 || done == total {          // every 8 rows or final row
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                cb(done)
+            }
+        }
+    }
+}
+
+
+// MARK: - Renderer
 final class Renderer: @unchecked Sendable {
     let ctx: RTContext
 
@@ -270,8 +294,8 @@ extension Renderer {
 extension Renderer {
     private struct ChunkResult: Sendable {
         let startRow: Int
-        let endRow: Int    // exclusive
-        let pixels: [Vec3] // (end-start)*width items
+        let endRow: Int
+        let pixels: [Vec3]
         let rays: Int64
     }
 
@@ -288,13 +312,12 @@ extension Renderer {
         let height = cam.imageResolution.1
 
         // Camera basis (immutable, captured by tasks safely)
-        let e  = cam.position
+        let e = cam.position
         let nd = Double(cam.nearDistance)
-        let l  = Double(cam.nearPlane[0])
-        let r  = Double(cam.nearPlane[1])
-        let b  = Double(cam.nearPlane[2])
-        let t  = Double(cam.nearPlane[3])
-
+        let l = Double(cam.nearPlane[0])
+        let r = Double(cam.nearPlane[1])
+        let b = Double(cam.nearPlane[2])
+        let t = Double(cam.nearPlane[3])
         let gazeNorm = normalize(cam.gaze)
         let wv = -gazeNorm
         let upNorm = normalize(cam.up)
@@ -304,12 +327,17 @@ extension Renderer {
         // Raster deltas + near plane geometry
         let du = (r - l) / Double(width)
         let dv = (t - b) / Double(height)
-        let m: Vec3 = e - wv * nd                // near plane center
-        let q0Base: Vec3 = m + u * l + v * t     // near plane top-left
+        let m: Vec3 = e - wv * nd
 
-        // Output image (parent thread stitches chunks here)
+        // near plane center
+        let q0Base: Vec3 = m + u * l + v * t // near plane top-left
+
+        // Output image
         var out = [Vec3](repeating: .zero, count: width * height)
 
+        let relay: ProgressRelay? = (progressRow == nil) ? nil : ProgressRelay(total: height, cb: progressRow)
+
+        // --- chunking (unchanged) ---
         // Chunking (tune CH for your CPU/cache)
         let CH = 16
         var chunks: [(Int, Int)] = []
@@ -323,83 +351,185 @@ extension Renderer {
 
         var raysSum: Int64 = 0
 
+        // 👇 Add this helper just BEFORE the task group to capture the scene/camera constants
+        @inline(__always)
+        func reflect(_ d: Vec3, _ n: Vec3) -> Vec3 {
+            d - 2.0 * dot(d, n) * n
+        }
+
+        // NOTE: if your Scene stores recursion as something else, adjust this:
+        let maxDepth: Int = scene.maxRecursionDepth   // or Int(scene.maxRecursionDepth)
+
+        // Recursive shading: direct light + perfect mirror
+        @inline(__always)
+        func trace(_ inRay: inout Ray, _ depth: Int) -> Vec3 {
+            // Intersect current ray
+            _ = self.intersectTriangles(ray: &inRay)
+            _ = self.intersectSpheres(ray: &inRay)
+            _ = self.intersectPlanes(ray: &inRay)
+
+            if inRay.kind == .none {
+                // background
+                let bg = scene.backgroundColor
+                return Vec3(x: bg.x, y: bg.y, z: bg.z)
+            }
+
+            // Material at hit
+            let mat = scene.materials[Int(inRay.mat)]
+
+            // Face-forward normal and hit point
+            let p = inRay.origin + inRay.dir * inRay.tMax
+            var N = inRay.normal
+            if dot(N, -inRay.dir) < 0 { N = -N }
+
+            // Direct lighting (ambient + un-occluded points)
+            var Lo = scene.lights.ambient * mat.ambient
+
+            for light in scene.lights.points {
+                var wi = light.position - p
+                let dist = length(wi)
+                wi = normalize(wi)
+
+                // Shadow ray
+                var sRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: wi)
+                sRay.tMax = dist - self.ctx.shadowRayEpsilon
+                let blocked = self.occluded(shadowRay: sRay, excludeObj: inRay.obj, backfaceCulling: false)
+                if !blocked {
+                    Lo += light.shade(material: mat, ray: inRay, cameraPos: e, normal: N, at: p)
+                }
+            }
+
+//            let mirror = mat.mirror
+//            let hasMirror = mirror.x > 0 || mirror.y > 0 || mirror.z > 0
+//
+//            let refractionIdx = mat.ior
+//            let hasRefraction = refractionIdx.isZero == false
+//            let absorption = mat.absorption
+//            let hasAbsorption = absorption.x > 0 || absorption.y > 0 || absorption.z > 0
+//
+//
+//            if hasMirror && depth < maxDepth {
+//                let rd = normalize(reflect(inRay.dir, N))
+//                var rRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: rd)
+//                // Recurse
+//                let Li = trace(&rRay, depth + 1)
+//                Lo += mirror * Li
+//            }
+//
+//            return Lo
+
+            let mirror = mat.mirror
+            let hasMirror = mirror.x > 0 || mirror.y > 0 || mirror.z > 0
+
+            let ior = Double(mat.ior)
+            let hasRefraction = (ior > 0)   // your sentinel: 0 = no refraction
+            let absorption = mat.absorption
+            let hasAbsorption = absorption.x > 0 || absorption.y > 0 || absorption.z > 0
+
+            // Use the *geometric* normal to determine entering/exiting,
+            // not the face-forwarded one, because we flipped N above.
+            let Ngeo = inRay.normal
+            let entering = dot(inRay.dir, Ngeo) < 0.0
+
+            if hasRefraction && depth < maxDepth {
+                // Dielectric (glass-like): Fresnel mix of reflection + refraction
+                // N is face-forwarded already (points against incoming dir)
+                let n = N
+
+                let n1: Double = entering ? 1.0 : ior
+                let n2: Double = entering ? ior : 1.0
+                let eta = n1 / n2
+
+                // Reflection ray (always valid)
+                let rd = normalize(reflect(inRay.dir, n))
+                var rRay = makeRay(origin: p + n * self.ctx.shadowRayEpsilon, dir: rd)
+
+                // Refraction test (Snell)
+                let cosi = max(0.0, min(1.0, -dot(inRay.dir, n)))  // cosθ_i with face-forward normal
+                let sin2t = eta * eta * max(0.0, 1.0 - cosi * cosi)
+
+                if sin2t > 1.0 {
+                    // Total Internal Reflection → 100% reflection
+                    let LiR = trace(&rRay, depth + 1)
+                    Lo += LiR
+                } else {
+                    let cost = sqrt(1.0 - sin2t)
+                    // Refracted direction
+                    let td = normalize(eta * inRay.dir + (eta * cosi - cost) * n)
+                    // Offset *into* the transmitted side:
+                    // - entering: go slightly into the object (−n)
+                    // - exiting : go slightly into the air (+n)
+                    let tOrigin = entering ? (p - n * self.ctx.shadowRayEpsilon)
+                                           : (p + n * self.ctx.shadowRayEpsilon)
+                    var tRay = makeRay(origin: tOrigin, dir: td)
+
+                    // Fresnel reflectance (Schlick)
+                    let R = schlickFresnel(cosTheta: entering ? cosi : max(0.0, -dot(td, n)), n1: n1, n2: n2)
+
+                    var LiR = trace(&rRay, depth + 1)
+                    var LiT = trace(&tRay, depth + 1)
+
+                    // Beer–Lambert absorption only while traveling *inside* the medium
+                    if hasAbsorption && entering {
+                        let d = tRay.tMax  // distance inside dielectric until the next hit
+                        let att = Vec3(x: exp(-absorption.x * d),
+                                       y: exp(-absorption.y * d),
+                                       z: exp(-absorption.z * d))
+                        LiT = LiT * att
+                    }
+
+                    // Mix reflection & refraction by Fresnel
+                    Lo += LiR * R + LiT * (1.0 - R)
+                }
+
+            } else if hasMirror && depth < maxDepth {
+                // Perfect mirror (metals/specular) only if no refraction
+                let rd = normalize(reflect(inRay.dir, N))
+                var rRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: rd)
+                let Li = trace(&rRay, depth + 1)
+                Lo += mirror * Li
+            }
+
+            return Lo
+        }
+
         try await withThrowingTaskGroup(of: ChunkResult.self) { group in
-            // Spawn a child task per chunk
             for (startRow, endRow) in chunks {
                 group.addTask { [self] in
-                    // Local buffer for this chunk only
                     var local = [Vec3](repeating: .zero, count: (endRow - startRow) * width)
                     var localRays: Int64 = 0
 
                     for j in startRow..<endRow {
                         if Task.isCancelled { throw CancellationError() }
 
-                        // row’s top-left pixel center on the near plane
                         let rowTopLeft = q0Base - v * (Double(j) + 0.5) * dv
-
-                        // Render one scanline in this chunk
                         let base = (j - startRow) * width
+
                         for i in 0..<width {
                             if Task.isCancelled { throw CancellationError() }
 
-                            // Pixel center on near plane
                             let s = rowTopLeft + (Double(i) + 0.5) * du * u
-
-                            // Primary ray
                             var ray = makeRay(origin: e, dir: s - e)
 
-                            // Intersections
-                            _ = self.intersectTriangles(ray: &ray)
-                            _ = self.intersectSpheres(ray: &ray)
-                            _ = self.intersectPlanes(ray: &ray)
+                            // 🔁 Use recursive tracer (does intersections internally)
+                            let pixel = trace(&ray, 0)
+                            local[base + i] = pixel
 
-                            let dst = base + i
-                            if ray.kind != .none {
-                                let mat = scene.materials[Int(ray.mat)]
-
-                                // Hit point & face-forward normal
-                                let p = ray.origin + ray.dir * ray.tMax
-                                var N = ray.normal
-                                if dot(N, -ray.dir) < 0 { N = -N }
-
-                                // Ambient
-                                var pixel = scene.lights.ambient * mat.ambient
-
-                                // Direct lights + shadows
-                                for light in scene.lights.points {
-                                    var wi = light.position - p
-                                    let dist = length(wi)
-                                    wi = normalize(wi)
-
-                                    // Shadow ray (use ctx epsilons, no globals)
-                                    var sRay = makeRay(origin: p + N * self.ctx.shadowRayEpsilon, dir: wi)
-                                    sRay.tMax = dist - self.ctx.shadowRayEpsilon
-                                    let blocked = self.occluded(shadowRay: sRay, excludeObj: ray.obj, backfaceCulling: false)
-                                    if !blocked {
-                                        pixel += light.shade(material: mat, ray: ray, cameraPos: e, normal: N, at: p)
-                                    }
-                                }
-                                local[dst] = pixel
-                            } else {
-                                let bg = scene.backgroundColor
-                                local[dst] = Vec3(x: bg.x, y: bg.y, z: bg.z)
-                            }
-
-                            // (Optional) count rays if you track them here
-                            // localRays &+= 1
+                            // localRays &+= 1  // (optional)
                         }
+                        if let relay { await relay.rowFinished() }
                     }
 
                     return ChunkResult(startRow: startRow, endRow: endRow, pixels: local, rays: localRays)
                 }
             }
 
-            // Collect results as they finish (order doesn't matter)
+            // --- collector loop (unchanged except your existing progressRow call) ---
             for try await chunk in group {
                 let start = chunk.startRow
                 let end   = chunk.endRow
                 let rows  = end - start
-                // Stitch the chunk into the final image (single-threaded write)
+
                 chunk.pixels.withUnsafeBufferPointer { src in
                     out.withUnsafeMutableBufferPointer { dst in
                         let dstStart = start * width
@@ -407,21 +537,25 @@ extension Renderer {
                             .assign(from: src.baseAddress!, count: rows * width)
                     }
                 }
-                // Progress callback per completed row (still in the parent task → cancel works)
+
                 if let progressRow {
-                    for r in start..<end {
-                        progressRow(r)
-                    }
+                    for r in start..<end { progressRow(r) }
                 }
-                raysSum &+= chunk.rays
+                raysSum += chunk.rays
             }
         }
 
-        // Accumulate to the caller's counter once (thread-safe by design)
-        raysTraced &+= raysSum
-        // If parent requested cancel, surface it here (optional)
+        raysTraced += raysSum
         if Task.isCancelled { throw CancellationError() }
-
         return out
     }
+
+    @inline(__always)
+    func schlickFresnel(cosTheta: Double, n1: Double, n2: Double) -> Double {
+        // R(θ) ≈ R0 + (1 − R0) (1 − cosθ)^5
+        let r0 = (n1 - n2) / (n1 + n2)
+        let r0sq = r0 * r0
+        return r0sq + (1.0 - r0sq) * pow(1.0 - cosTheta, 5.0)
+    }
+
 }
