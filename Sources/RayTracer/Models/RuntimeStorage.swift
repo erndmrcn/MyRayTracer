@@ -15,17 +15,16 @@ struct RuntimeStorage: Sendable {
                v2 = [Vec3](),
                e1 = [Vec3](),
                e2 = [Vec3]()
-    let triObj = [Int32](), triMat = [Int32]()     // NEW
+    let triObj = [Int32](), triMat = [Int32]()
     let sphCenter = [Vec3](), sphRadius = [Scalar]()
-    let sphObj = [Int32](), sphMat = [Int32]()     // NEW
+    let sphObj = [Int32](), sphMat = [Int32]()
 
     let planeCenter = [Vec3]()
     let planeNormal = [Vec3]()
-    let planeObj = [Int32](), planeMat = [Int32]()     // NEW
+    let planeObj = [Int32](), planeMat = [Int32]()
 
-    // For non–hot-path lookups (optional):
-    let objects = [SceneObject]()                  // indexable by obj id
-    let materials = [Material]()            // indexable by mat id
-    let materialIndexById = [String: Int32]()      // "_id" -> idx
+    let objects = [SceneObject]()
+    let materials = [Material]()
+    let materialIndexById = [String: Int32]()
     let objectIndexByIdentity = [ObjectIdentifier: Int32]()
 }

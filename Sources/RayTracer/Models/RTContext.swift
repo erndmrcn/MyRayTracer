@@ -7,7 +7,12 @@
 
 import ParsingKit
 
-struct RTContext: Sendable {
+public struct BVHPrim: Sendable {
+    public let type: UInt8
+    public let index: Int
+}
+
+public struct RTContext: Sendable {
     // Scalars
     let intersectionTestEpsilon: Scalar
     let shadowRayEpsilon: Scalar
@@ -20,7 +25,7 @@ struct RTContext: Sendable {
     let positions: [Vec3]
 
     // Triangles
-    let triIndex: [Int32]     // i0,i1,i2, ...
+    let triIndex: [Int32]
     let triObj: [Int32]
     let triMat: [Int32]
     let v0: [Vec3], v1: [Vec3], v2: [Vec3]
@@ -35,6 +40,9 @@ struct RTContext: Sendable {
     var planeCount: Int {
         planeCenter.count
     }
+
+    let bvhRoot: BVHNode?
+    let bvhPrims: [BVHPrim]
 }
 
 extension RTContext {
@@ -142,5 +150,38 @@ extension RTContext {
 
         self.planeCenter = planeC; self.planeNormal = planeN
         self.planeObj = planeObj; self.planeMat = planeMat
+
+        self.bvhRoot = nil
+        self.bvhPrims = []
+    }
+}
+
+extension RTContext {
+    func buildBVH(maxLeaf: Int = 8, split: BVHSplitMode = .sah) -> RTContext {
+        let builder = BVHBuilder(maxLeaf: maxLeaf, split: split)
+        let (root, prims) = builder.buildFinite(
+            triCount: v0.count,
+            sphereCount: sphCenter.count,
+            context: self
+        )
+
+        return RTContext(
+            intersectionTestEpsilon: intersectionTestEpsilon,
+            shadowRayEpsilon: shadowRayEpsilon,
+            materialIndexById: materialIndexById,
+            objectIndexByIdentity: objectIndexByIdentity,
+            positions: positions,
+            triIndex: triIndex,
+            triObj: triObj,
+            triMat: triMat,
+            v0: v0, v1: v1, v2: v2,
+            e1: e1, e2: e2,
+            sphCenter: sphCenter, sphRadius: sphRadius,
+            sphObj: sphObj, sphMat: sphMat,
+            planeCenter: planeCenter, planeNormal: planeNormal,
+            planeObj: planeObj, planeMat: planeMat,
+            bvhRoot: root,
+            bvhPrims: prims
+        )
     }
 }

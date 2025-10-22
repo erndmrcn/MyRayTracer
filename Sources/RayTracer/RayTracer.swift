@@ -20,7 +20,6 @@ public typealias Scene = ParsingKit.Scene
 public typealias Material = ParsingKit.Material
 
 public final class RayTracerEngine: @unchecked Sendable {
-    // Optional: if you initialize with a scene upfront
     private var renderer: Renderer?
     private var scene: Scene?
 
@@ -36,7 +35,7 @@ public final class RayTracerEngine: @unchecked Sendable {
         }
 
         if let scene {
-            let rtContext = RTContext(scene: scene)
+            let rtContext = RTContext(scene: scene).buildBVH(maxLeaf: 8, split: .sah)
             self.renderer = Renderer(ctx: rtContext)
         } else {
             self.renderer = nil
@@ -68,12 +67,6 @@ public final class RayTracerEngine: @unchecked Sendable {
             let camCount = max(1, cams.count)
 
             let baseOffset = rowsOffset
-
-            let startedOK = progress?(RenderProgress(
-                        Double(baseOffset) / Double(totalRowsAll),
-                        message: "Camera \(idx+1)/\(camCount) — 0/\(height)"
-                    )) ?? true
-                    if !startedOK { break }
 
             let (rgba, stats, spec) = try await renderRGBA8Async(cameraIndex: idx) { p in
                 let y = min(height - 1, max(0, Int(ceil(p.fraction * Double(height)) - 1)))
@@ -120,7 +113,6 @@ extension RayTracerEngine {
         progress: (@Sendable (RenderProgress) -> Bool)? = nil
     ) async throws -> ([UInt8], RenderStats, CameraSpec) {
         guard let scene else { throw NSError(domain: "Render", code: -20, userInfo: [NSLocalizedDescriptionKey: "No scene loaded. Can't render."]) }
-        // 1) choose camera + resolution
         let cams = scene.cameras
         guard cameraIndex >= 0 && cameraIndex < cams.count else {
             throw NSError(domain: "Ray", code: -10, userInfo: [NSLocalizedDescriptionKey: "Invalid camera index"])
@@ -130,13 +122,11 @@ extension RayTracerEngine {
         let height = cam.imageResolution.1
         let cameraSpec = CameraSpec(index: cameraIndex, id: cam.id, imageName: cam.imageName, width: width, height: height)
 
-        // 2) static counts once (for stats)
         let (meshCount, triCount, sphereCount, planeCount) = sceneMeshAndTriangleCounts(scene)
 
         let started = DispatchTime.now()
 
-        // Build a fresh renderer for THIS scene (context stays immutable & thread-safe)
-        let localRenderer = Renderer(ctx: RTContext(scene: scene))
+        let localRenderer = Renderer(ctx: RTContext(scene: scene).buildBVH(maxLeaf: 8, split: .sah))
 
         var rays: Int64 = 0
         let linear = try await localRenderer.render(
@@ -149,14 +139,13 @@ extension RayTracerEngine {
                         message: "Row \(y + 1)/\(height)"
                     ))
                     if !cont {
-                        withUnsafeCurrentTask { $0?.cancel() } // cooperative cancel
+                        withUnsafeCurrentTask { $0?.cancel() }
                     }
                 }
             },
             raysTraced: &rays
         )
 
-        // Pack to RGBA8 (kept same policy you had)
         let n = linear.count
         var rgba = [UInt8](repeating: 0, count: width * height * 4)
         for pix in 0..<n {
