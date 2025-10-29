@@ -9,22 +9,22 @@ import ParsingKit
 
 struct RuntimeStorage: Sendable {
     let positions = [Vec3]()
-    let triIdx    = [Int32]()
+    let triIdx    = [Int]()
     let v0 = [Vec3](),
                v1 = [Vec3](),
                v2 = [Vec3](),
                e1 = [Vec3](),
                e2 = [Vec3]()
-    let triObj = [Int32](), triMat = [Int32]()
+    let triObj = [Int](), triMat = [Int]()
     let sphCenter = [Vec3](), sphRadius = [Scalar]()
-    let sphObj = [Int32](), sphMat = [Int32]()
+    let sphObj = [Int](), sphMat = [Int]()
 
     let planeCenter = [Vec3]()
     let planeNormal = [Vec3]()
-    let planeObj = [Int32](), planeMat = [Int32]()
+    let planeObj = [Int](), planeMat = [Int]()
 
     let objects = [SceneObject]()
     let materials = [Material]()
-    let materialIndexById = [String: Int32]()
-    let objectIndexByIdentity = [ObjectIdentifier: Int32]()
+    let materialIndexById = [String: Int]()
+    let objectIndexByIdentity = [ObjectIdentifier: Int]()
 }

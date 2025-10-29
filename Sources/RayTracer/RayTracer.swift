@@ -27,6 +27,7 @@ public final class RayTracerEngine: @unchecked Sendable {
         do {
             if let url = url {
                 scene = try SceneLoader.load(.url(url))
+                scene?.path = url
             } else if let data = data {
                 scene = try SceneLoader.load(.data(data, format: .auto))
             }
@@ -35,7 +36,7 @@ public final class RayTracerEngine: @unchecked Sendable {
         }
 
         if let scene {
-            let rtContext = RTContext(scene: scene).buildBVH(maxLeaf: 8, split: .sah)
+            let rtContext = RTContext(scene: scene).buildBVH(maxLeaf: 16, split: .sah)
             self.renderer = Renderer(ctx: rtContext)
         } else {
             self.renderer = nil
@@ -112,7 +113,7 @@ extension RayTracerEngine {
         cameraIndex: Int,
         progress: (@Sendable (RenderProgress) -> Bool)? = nil
     ) async throws -> ([UInt8], RenderStats, CameraSpec) {
-        guard let scene else { throw NSError(domain: "Render", code: -20, userInfo: [NSLocalizedDescriptionKey: "No scene loaded. Can't render."]) }
+        guard let localRenderer = renderer, let scene else { throw NSError(domain: "Render", code: -20, userInfo: [NSLocalizedDescriptionKey: "No scene loaded. Can't render."]) }
         let cams = scene.cameras
         guard cameraIndex >= 0 && cameraIndex < cams.count else {
             throw NSError(domain: "Ray", code: -10, userInfo: [NSLocalizedDescriptionKey: "Invalid camera index"])
@@ -126,7 +127,7 @@ extension RayTracerEngine {
 
         let started = DispatchTime.now()
 
-        let localRenderer = Renderer(ctx: RTContext(scene: scene).buildBVH(maxLeaf: 8, split: .sah))
+//        let localRenderer = Renderer(ctx: RTContext(scene: scene).buildBVH(maxLeaf: 16, split: .sah))
 
         var rays: Int64 = 0
         let linear = try await localRenderer.render(

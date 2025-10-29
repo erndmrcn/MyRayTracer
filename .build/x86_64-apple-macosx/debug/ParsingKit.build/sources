@@ -1,5 +1,9 @@
-/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift
-/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift
-/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift
-/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift
-/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift
+/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift

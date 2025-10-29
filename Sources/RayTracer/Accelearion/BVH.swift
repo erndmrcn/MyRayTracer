@@ -85,7 +85,7 @@ public struct BVHBuilder: Sendable {
             let nNorm = n / len
 
             let size: Scalar = 1e3
-            let axisU = abs(nNorm.x) > 0.5 ? Vec3(0, 1, 0) : Vec3(1, 0, 0)
+            let axisU: Vec3 = Swift.abs(nNorm.x) > 0.5 ? Vec3(0.0, 1.0, 0.0) : Vec3(1.0, 0.0, 0.0)
             let tangent = normalize(cross(nNorm, axisU))
             let bitangent = normalize(cross(nNorm, tangent))
             let extent = tangent * size + bitangent * size + nNorm * 1.0
@@ -216,7 +216,8 @@ public struct BVHBuilder: Sendable {
             mid = m
 
             guard mid > begin && mid < end else {
-                mid = (begin + end) >> 1
+                node.start = begin
+                node.count = count
                 return node
             }
         }

@@ -8,18 +8,32 @@
         "basedOn" : null,
         "packageRef" : {
           "identity" : "parsingkit",
-          "kind" : "remoteSourceControl",
-          "location" : "https://github.com/erndmrcn/ParsingKit",
+          "kind" : "fileSystem",
+          "location" : "/Users/erendemircan/ParsingKit",
           "name" : "ParsingKit"
         },
         "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/erendemircan/ParsingKit"
+        },
+        "subpath" : "parsingkit"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "xmlcoder",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/CoreOffice/XMLCoder.git",
+          "name" : "XMLCoder"
+        },
+        "state" : {
           "checkoutState" : {
-            "branch" : "main",
-            "revision" : "50f26d00b3b3cbaf80d2a58d09b4659d73613481"
+            "revision" : "b1e944cbd0ef33787b13f639a5418d55b3bed501",
+            "version" : "0.17.1"
           },
           "name" : "sourceControlCheckout"
         },
-        "subpath" : "ParsingKit"
+        "subpath" : "XMLCoder"
       }
     ],
     "prebuilts" : [

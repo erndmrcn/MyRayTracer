@@ -306,6 +306,6698 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma clang attribute pop
 #endif
 #if defined(__cplusplus)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnon-modular-include-in-framework-module"
+// Allow user to find the header using additional include paths
+#if __has_include(<swiftToCxx/_SwiftCxxInteroperability.h>)
+#include <swiftToCxx/_SwiftCxxInteroperability.h>
+// Look for the C++ interop support header relative to clang's resource dir:
+//  '<toolchain>/usr/lib/clang/<version>/include/../../../swift/swiftToCxx'.
+#elif __has_include(<../../../swift/swiftToCxx/_SwiftCxxInteroperability.h>)
+#include <../../../swift/swiftToCxx/_SwiftCxxInteroperability.h>
+#elif __has_include(<../../../../../lib/swift/swiftToCxx/_SwiftCxxInteroperability.h>)
+//  '<toolchain>/usr/local/lib/clang/<version>/include/../../../../../lib/swift/swiftToCxx'.
+#include <../../../../../lib/swift/swiftToCxx/_SwiftCxxInteroperability.h>
+#endif
+#pragma clang diagnostic pop
+#if __has_feature(objc_modules)
+#if __has_warning("-Watimport-in-framework-header")
+#pragma clang diagnostic ignored "-Watimport-in-framework-header"
+#endif
+#pragma clang module import CoreGraphics
+#endif
+
+#ifndef SWIFT_SWIFT_H
+#define SWIFT_SWIFT_H
+#ifdef SWIFT_SYMBOL
+#undef SWIFT_SYMBOL
+#endif
+#define SWIFT_SYMBOL(usrValue) SWIFT_SYMBOL_MODULE_USR("swift", usrValue)
+#ifndef SWIFT_CXX_INTEROP_HIDE_STL_OVERLAY
+#include <string>
+#endif
+#include <new>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+#ifndef SWIFT_PRINTED_CORE
+#define SWIFT_PRINTED_CORE
+namespace swift SWIFT_PRIVATE_ATTR {
+
+namespace _impl {
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Swift type metadata response type.
+struct MetadataResponseTy {
+  void * _Null_unspecified _0;
+  uint64_t _1;
+};
+// Swift type metadata request type.
+typedef uint64_t MetadataRequestTy;
+
+#if __cplusplus > 201402L
+#  define SWIFT_NOEXCEPT_FUNCTION_PTR noexcept
+#else
+#  define SWIFT_NOEXCEPT_FUNCTION_PTR
+#endif
+
+using ValueWitnessInitializeBufferWithCopyOfBufferTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(55882))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessDestroyTy = void(* __ptrauth_swift_value_witness_function_pointer(1272))(void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessInitializeWithCopyTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(58298))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessAssignWithCopyTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(34641))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessInitializeWithTakeTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(18648))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessAssignWithTakeTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(61402))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessGetEnumTagSinglePayloadTy = unsigned(* __ptrauth_swift_value_witness_function_pointer(24816))(const void * _Nonnull, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessStoreEnumTagSinglePayloadTy = void(* __ptrauth_swift_value_witness_function_pointer(41169))(void * _Nonnull, unsigned, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+
+struct ValueWitnessTable {
+  ValueWitnessInitializeBufferWithCopyOfBufferTy _Nonnull initializeBufferWithCopyOfBuffer;
+  ValueWitnessDestroyTy _Nonnull destroy;
+  ValueWitnessInitializeWithCopyTy _Nonnull initializeWithCopy;
+  ValueWitnessAssignWithCopyTy _Nonnull assignWithCopy;
+  ValueWitnessInitializeWithTakeTy _Nonnull initializeWithTake;
+  ValueWitnessAssignWithTakeTy _Nonnull assignWithTake;
+  ValueWitnessGetEnumTagSinglePayloadTy _Nonnull getEnumTagSinglePayload;
+  ValueWitnessStoreEnumTagSinglePayloadTy _Nonnull storeEnumTagSinglePayload;
+  size_t size;
+  size_t stride;
+  unsigned flags;
+  unsigned extraInhabitantCount;
+
+  constexpr size_t getAlignment() const { return (flags & 255) + 1; }
+};
+
+using EnumValueWitnessGetEnumTagTy = unsigned(* __ptrauth_swift_value_witness_function_pointer(41909))(const void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using EnumValueWitnessDestructiveProjectEnumDataTy = void(* __ptrauth_swift_value_witness_function_pointer(1053))(void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using EnumValueWitnessDestructiveInjectEnumTagTy = void(* __ptrauth_swift_value_witness_function_pointer(45796))(void * _Nonnull, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+
+struct EnumValueWitnessTable {
+  ValueWitnessTable vwTable;
+  EnumValueWitnessGetEnumTagTy _Nonnull getEnumTag;
+  EnumValueWitnessDestructiveProjectEnumDataTy _Nonnull destructiveProjectEnumData;
+  EnumValueWitnessDestructiveInjectEnumTagTy _Nonnull destructiveInjectEnumTag;
+};
+
+#undef SWIFT_NOEXCEPT_FUNCTION_PTR
+
+
+// type metadata address for Bool.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSbN;
+// type metadata address for Int8.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss4Int8VN;
+// type metadata address for UInt8.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5UInt8VN;
+// type metadata address for Int16.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int16VN;
+// type metadata address for UInt16.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt16VN;
+// type metadata address for Int32.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int32VN;
+// type metadata address for UInt32.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt32VN;
+// type metadata address for Int64.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int64VN;
+// type metadata address for UInt64.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt64VN;
+// type metadata address for Float.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSfN;
+// type metadata address for Double.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSdN;
+// type metadata address for OpaquePointer.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss13OpaquePointerVN;
+// type metadata address for Int.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSiN;
+// type metadata address for UInt.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSuN;
+
+#ifdef __cplusplus
+}
+#endif
+
+
+} // namespace _impl
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<bool> = true;
+
+template<>
+struct TypeMetadataTrait<bool> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSbN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int8_t> = true;
+
+template<>
+struct TypeMetadataTrait<int8_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss4Int8VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint8_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint8_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5UInt8VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int16_t> = true;
+
+template<>
+struct TypeMetadataTrait<int16_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int16VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint16_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint16_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt16VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int32_t> = true;
+
+template<>
+struct TypeMetadataTrait<int32_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int32VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint32_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint32_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt32VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int64_t> = true;
+
+template<>
+struct TypeMetadataTrait<int64_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int64VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint64_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint64_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt64VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<float> = true;
+
+template<>
+struct TypeMetadataTrait<float> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSfN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<double> = true;
+
+template<>
+struct TypeMetadataTrait<double> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSdN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<void *> = true;
+
+template<>
+struct TypeMetadataTrait<void *> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss13OpaquePointerVN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::Int> = true;
+
+template<>
+struct TypeMetadataTrait<swift::Int> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSiN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::UInt> = true;
+
+template<>
+struct TypeMetadataTrait<swift::UInt> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSuN;
+  }
+};
+
+#pragma clang diagnostic pop
+
+} // namespace swift
+
+#endif
+#ifdef __cplusplus
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+namespace _impl {
+extern "C" {
+#endif
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_swift_void_ptr_0_8 {
+  void * _Nullable _1;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_swift_void_ptr_0_8(char * _Nonnull result, struct swift_interop_returnStub_swift_void_ptr_0_8 value) {
+  memcpy(result + 0, &value._1, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_swift_void_ptr_0_8 $sS2ayxGycfC(void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // init()
+SWIFT_EXTERN struct swift_interop_returnStub_swift_void_ptr_0_8 $sSa9repeating5countSayxGx_SitcfC(const void * _Nonnull repeatedValue, ptrdiff_t count, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // init(repeating:count:)
+SWIFT_EXTERN void $sSa15reserveCapacityyySiF(ptrdiff_t minimumCapacity, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // reserveCapacity(_:)
+SWIFT_EXTERN void $sSa6appendyyxnF(const void * _Nonnull newElement, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // append(_:)
+SWIFT_EXTERN void $sSa17_customRemoveLastxSgyF(SWIFT_INDIRECT_RESULT void * _Nonnull, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _customRemoveLast()
+SWIFT_EXTERN void $sSa6remove2atxSi_tF(SWIFT_INDIRECT_RESULT void * _Nonnull, ptrdiff_t index, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // remove(at:)
+SWIFT_EXTERN void $sSa6insert_2atyxn_SitF(const void * _Nonnull newElement, ptrdiff_t i, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // insert(_:at:)
+SWIFT_EXTERN void $sSa9removeAll15keepingCapacityySb_tF(bool keepCapacity, void * _Nonnull , SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // removeAll(keepingCapacity:)
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_swift_void_ptr_0_8 {
+  void * _Nullable _1;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_swift_void_ptr_0_8 swift_interop_passDirect_swift_void_ptr_0_8(const char * _Nonnull value) {
+  struct swift_interop_passStub_swift_void_ptr_0_8 result;
+  memcpy(&result._1, value + 0, 8);
+  return result;
+}
+
+SWIFT_EXTERN ptrdiff_t $sSa10startIndexSivg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSa8endIndexSivg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSa8distance4from2toS2i_SitF(ptrdiff_t start, ptrdiff_t end, struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // distance(from:to:)
+SWIFT_EXTERN void $sSayxSicig(SWIFT_INDIRECT_RESULT void * _Nonnull, ptrdiff_t index, struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSa5countSivg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN bool $sSa29_hoistableIsNativeTypeCheckedSbyF(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _hoistableIsNativeTypeChecked()
+SWIFT_EXTERN ptrdiff_t $sSa8capacitySivg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+#if defined(__OBJC__)
+SWIFT_EXTERN id _Nullable $sSa6_owneryXlSgvg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+#endif
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 {
+  uint64_t _1;
+  void * _Nullable _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(char * _Nonnull result, struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSa11descriptionSSvg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSa16debugDescriptionSSvg(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _
+#if defined(__OBJC__)
+SWIFT_EXTERN id _Nonnull $sSa23_bridgeToObjectiveCImplyXlyF(struct swift_interop_passStub_swift_void_ptr_0_8 _self, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _bridgeToObjectiveCImpl()
+#endif
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_swift_uint64_t_0_8 {
+  uint64_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_swift_uint64_t_0_8(char * _Nonnull result, struct swift_interop_returnStub_swift_uint64_t_0_8 value) {
+  memcpy(result + 0, &value._1, 8);
+}
+
+#if defined(__OBJC__)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSa44_bridgeFromObjectiveCAdoptingNativeStorageOfySayxGSgyXlFZ(id _Nonnull source, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _bridgeFromObjectiveCAdoptingNativeStorageOf(_:)
+#endif
+#if defined(__OBJC__)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_void_ptr_0_8 $sSa20_immutableCocoaArraySayxGyXl_tcfC(id _Nonnull _immutableCocoaArray, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // init(_immutableCocoaArray:)
+#endif
+SWIFT_EXTERN struct swift_interop_returnStub_swift_void_ptr_0_8 $sSa12arrayLiteralSayxGxd_tcfC(struct swift_interop_passStub_swift_void_ptr_0_8 elements, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // init(arrayLiteral:)
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_swift_uint64_t_0_8 {
+  uint64_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_swift_uint64_t_0_8 swift_interop_passDirect_swift_uint64_t_0_8(const char * _Nonnull value) {
+  struct swift_interop_passStub_swift_uint64_t_0_8 result;
+  memcpy(&result._1, value + 0, 8);
+  return result;
+}
+
+SWIFT_EXTERN ptrdiff_t $sSS5IndexV13encodedOffsetSivg(struct swift_interop_passStub_swift_uint64_t_0_8 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS5IndexV13encodedOffsetABSi_tcfC(ptrdiff_t offset) SWIFT_NOEXCEPT SWIFT_CALL; // init(encodedOffset:)
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 {
+  uint64_t _1;
+  uint8_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(char * _Nonnull result, struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 1);
+}
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 {
+  uint64_t _1;
+  void * _Nullable _2;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(const char * _Nonnull value) {
+  struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 result;
+  memcpy(&result._1, value + 0, 8);
+  memcpy(&result._2, value + 8, 8);
+  return result;
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 $sSS5IndexV_6withinABSgAB_SStcfC(struct swift_interop_passStub_swift_uint64_t_0_8 sourcePosition, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 target) SWIFT_NOEXCEPT SWIFT_CALL; // init(_:within:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 $sSS5IndexV12samePosition2inABSgSS8UTF8ViewV_tF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 utf8, struct swift_interop_passStub_swift_uint64_t_0_8 _self) SWIFT_NOEXCEPT SWIFT_CALL; // samePosition(in:)
+SWIFT_EXTERN ptrdiff_t $sSS5IndexV9hashValueSivg(struct swift_interop_passStub_swift_uint64_t_0_8 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 $sSS5IndexV12samePosition2inABSgSS_tF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 characters, struct swift_interop_passStub_swift_uint64_t_0_8 _self) SWIFT_NOEXCEPT SWIFT_CALL; // samePosition(in:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 $sSS5IndexV_6withinABSgAB_SS8UTF8ViewVtcfC(struct swift_interop_passStub_swift_uint64_t_0_8 idx, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 target) SWIFT_NOEXCEPT SWIFT_CALL; // init(_:within:)
+struct Swift_String_Index {
+  _Alignas(8) char _storage[8];
+};
+
+#if defined(__OBJC__)
+SWIFT_EXTERN id _Nonnull $sSq19_bridgeToObjectiveCyXlyF(void * _Nonnull , SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _bridgeToObjectiveC()
+#endif
+#if defined(__OBJC__)
+SWIFT_EXTERN void $sSq26_forceBridgeFromObjectiveC_6resultyyXl_xSgSgztFZ(id _Nonnull source, void * _Nonnull result, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _forceBridgeFromObjectiveC(_:result:)
+#endif
+#if defined(__OBJC__)
+SWIFT_EXTERN bool $sSq34_conditionallyBridgeFromObjectiveC_6resultSbyXl_xSgSgztFZ(id _Nonnull source, void * _Nonnull result, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _conditionallyBridgeFromObjectiveC(_:result:)
+#endif
+#if defined(__OBJC__)
+SWIFT_EXTERN void $sSq36_unconditionallyBridgeFromObjectiveCyxSgyXlSgFZ(SWIFT_INDIRECT_RESULT void * _Nonnull, id _Nullable source, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // _unconditionallyBridgeFromObjectiveC(_:)
+#endif
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSq16debugDescriptionSSvg(void * _Nonnull , SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $sSq17unsafelyUnwrappedxvg(SWIFT_INDIRECT_RESULT void * _Nonnull, void * _Nonnull , SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $sSqyxSgxcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull value, void * _Nonnull ) SWIFT_NOEXCEPT SWIFT_CALL; // init(_:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sS2SycfC(void) SWIFT_NOEXCEPT SWIFT_CALL; // init()
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS10startIndexSS0B0Vvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8endIndexSS0B0Vvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSS5countSivg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSS8distance4from2toSiSS5IndexV_AEtF(struct swift_interop_passStub_swift_uint64_t_0_8 start, struct swift_interop_passStub_swift_uint64_t_0_8 end, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // distance(from:to:)
+SWIFT_EXTERN void $sSS15reserveCapacityyySiF(ptrdiff_t n, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // reserveCapacity(_:)
+SWIFT_EXTERN void $sSS6appendyySSF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 other, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // append(_:)
+SWIFT_EXTERN void $sSS6append10contentsOfySS_tF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 newElements, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // append(contentsOf:)
+SWIFT_EXTERN void $sSS9removeAll15keepingCapacityySb_tF(bool keepCapacity, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // removeAll(keepingCapacity:)
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_swift_uint64_t_0_8_uint64_t_8_16 {
+  uint64_t _1;
+  uint64_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_swift_uint64_t_0_8_uint64_t_8_16(char * _Nonnull result, struct swift_interop_returnStub_swift_uint64_t_0_8_uint64_t_8_16 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS4utf8SS8UTF8ViewVvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $sSS4utf8SS8UTF8ViewVvs(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 newValue, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS10charactersSSvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $sSS10charactersSSvs(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 newValue, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSS9hashValueSivg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_void_ptr_0_8 $sSS13_nfcCodeUnitsSays5UInt8VGvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS10lowercasedSSyF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // lowercased()
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS10uppercasedSSyF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // uppercased()
+SWIFT_EXTERN bool $sSS7isEmptySbvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $sSS5writeyySSF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 other, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // write(_:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS11descriptionSSvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS16debugDescriptionSSvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN bool $sSS9hasPrefixySbSSF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 prefix, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // hasPrefix(_:)
+SWIFT_EXTERN bool $sSS9hasSuffixySbSSF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 suffix, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // hasSuffix(_:)
+SWIFT_EXTERN void $sSS5_dumpyyF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _dump()
+#if defined(__OBJC__)
+SWIFT_EXTERN id _Nonnull $sSS23_bridgeToObjectiveCImplyXlyF(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _bridgeToObjectiveCImpl()
+#endif
+struct swift_interop_stub_Swift_String {
+#if UINTPTR_MAX == 0xFFFFFFFFFFFFFFFFu
+uint64_t _1;
+void * _Nullable _2;
+#elif UINTPTR_MAX == 0xFFFFFFFF
+uint32_t _1;
+uint32_t _2;
+uint32_t _3;
+#endif
+};
+static SWIFT_INLINE_THUNK struct swift_interop_stub_Swift_String swift_interop_passDirect_Swift_String(const char * _Nonnull value) {
+struct swift_interop_stub_Swift_String result;
+#if UINTPTR_MAX == 0xFFFFFFFFFFFFFFFFu
+memcpy(&result._1, value, 8);
+memcpy(&result._2, value + 8, 8);
+#elif UINTPTR_MAX == 0xFFFFFFFF
+memcpy(&result._1, value, 4);
+memcpy(&result._2, value + 4, 4);
+memcpy(&result._3, value + 8, 4);
+#endif
+return result;
+}
+SWIFT_EXTERN void *_Nonnull $sSS10FoundationE19_bridgeToObjectiveCSo8NSStringCyF(swift_interop_stub_Swift_String) SWIFT_NOEXCEPT SWIFT_CALL;
+SWIFT_EXTERN swift_interop_stub_Swift_String $sSS10FoundationE36_unconditionallyBridgeFromObjectiveCySSSo8NSStringCSgFZ(void * _Nullable) SWIFT_NOEXCEPT SWIFT_CALL;
+SWIFT_EXTERN swift_interop_stub_Swift_String $sSS7cStringSSSPys4Int8VG_tcfC(const char * _Nonnull) SWIFT_NOEXCEPT SWIFT_CALL;
+struct Swift_String {
+  _Alignas(8) char _storage[16];
+};
+
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8UTF8ViewV10startIndexSS0D0Vvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8UTF8ViewV8endIndexSS0D0Vvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8UTF8ViewV5index5afterSS5IndexVAF_tF(struct swift_interop_passStub_swift_uint64_t_0_8 i, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // index(after:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8UTF8ViewV5index6beforeSS5IndexVAF_tF(struct swift_interop_passStub_swift_uint64_t_0_8 i, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // index(before:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8 $sSS8UTF8ViewV5index_8offsetBySS5IndexVAF_SitF(struct swift_interop_passStub_swift_uint64_t_0_8 i, ptrdiff_t n, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // index(_:offsetBy:)
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_uint8_t_8_9 $sSS8UTF8ViewV5index_8offsetBy07limitedE0SS5IndexVSgAG_SiAGtF(struct swift_interop_passStub_swift_uint64_t_0_8 i, ptrdiff_t n, struct swift_interop_passStub_swift_uint64_t_0_8 limit, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // index(_:offsetBy:limitedBy:)
+SWIFT_EXTERN ptrdiff_t $sSS8UTF8ViewV8distance4from2toSiSS5IndexV_AGtF(struct swift_interop_passStub_swift_uint64_t_0_8 i, struct swift_interop_passStub_swift_uint64_t_0_8 j, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // distance(from:to:)
+SWIFT_EXTERN uint8_t $sSS8UTF8ViewVys5UInt8VSS5IndexVcig(struct swift_interop_passStub_swift_uint64_t_0_8 i, struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS8UTF8ViewV11descriptionSSvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_swift_uint64_t_0_8_void_ptr_8_16 $sSS8UTF8ViewV16debugDescriptionSSvg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $sSS8UTF8ViewV5countSivg(struct swift_interop_passStub_swift_uint64_t_0_8_void_ptr_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct Swift_UTF8View {
+  _Alignas(8) char _storage[16];
+};
+
+}
+}
+}
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SWIFT_SYMBOL("s:Sq") Optional;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isUsableInGenericContext<swift::Optional<T_0_0>> = isUsableInGenericContext<T_0_0>;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+class SWIFT_SYMBOL("s:SS") String;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::String> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SWIFT_SYMBOL("s:Sa") Array;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isUsableInGenericContext<swift::Array<T_0_0>> = isUsableInGenericContext<T_0_0>;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+namespace _impl {
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class _impl_Array;
+
+static_assert(1 <= 3, "unsupported generic requirement list for metadata func");
+// Type metadata accessor for Array
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSaMa(swift::_impl::MetadataRequestTy, void * _Nonnull) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SWIFT_SYMBOL("s:Sa") Array final {
+public:
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK ~Array() noexcept {
+    auto metadata = _impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK Array(const Array &other) noexcept {
+    auto metadata = _impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    _storage = swift::_impl::OpaqueStorage(vwTable->size, vwTable->getAlignment());
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK Array &operator =(const Array &other) noexcept {
+    auto metadata = _impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK Array &operator =(Array &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER Array(Array &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+/// Creates a new, empty array.
+/// This is equivalent to initializing with an empty array literal.
+/// For example:
+/// \code
+/// var emptyArray = Array<Int>()
+/// print(emptyArray.isEmpty)
+/// // Prints "true"
+///
+/// emptyArray = []
+/// print(emptyArray.isEmpty)
+/// // Prints "true"
+///
+/// \endcode
+  static SWIFT_INLINE_THUNK Array<T_0_0> init() SWIFT_SYMBOL("s:S2ayxGycfc");
+/// Creates a new array containing the specified number of a single, repeated
+/// value.
+/// Here’s an example of creating an array initialized with five strings
+/// containing the letter <em>Z</em>.
+/// \code
+/// let fiveZs = Array(repeating: "Z", count: 5)
+/// print(fiveZs)
+/// // Prints "["Z", "Z", "Z", "Z", "Z"]"
+///
+/// \endcode\param repeatedValue The element to repeat.
+///
+/// \param count The number of times to repeat the value passed in the
+/// <code>repeating</code> parameter. <code>count</code> must be zero or greater.
+///
+  static SWIFT_INLINE_THUNK Array<T_0_0> init(const T_0_0& repeatedValue, swift::Int count) SWIFT_SYMBOL("s:Sa9repeating5countSayxGx_Sitcfc");
+/// Reserves enough space to store the specified number of elements.
+/// If you are adding a known number of elements to an array, use this method
+/// to avoid multiple reallocations. This method ensures that the array has
+/// unique, mutable, contiguous storage, with space allocated for at least
+/// the requested number of elements.
+/// Calling the <code>reserveCapacity(_:)</code> method on an array with bridged storage
+/// triggers a copy to contiguous storage even if the existing storage
+/// has room to store <code>minimumCapacity</code> elements.
+/// For performance reasons, the size of the newly allocated storage might be
+/// greater than the requested capacity. Use the array’s <code>capacity</code> property
+/// to determine the size of the new storage.
+/// <h1>Preserving an Array’s Geometric Growth Strategy</h1>
+/// If you implement a custom data structure backed by an array that grows
+/// dynamically, naively calling the <code>reserveCapacity(_:)</code> method can lead
+/// to worse than expected performance. Arrays need to follow a geometric
+/// allocation pattern for appending elements to achieve amortized
+/// constant-time performance. The <code>Array</code> type’s <code>append(_:)</code> and
+/// <code>append(contentsOf:)</code> methods take care of this detail for you, but
+/// <code>reserveCapacity(_:)</code> allocates only as much space as you tell it to
+/// (padded to a round value), and no more. This avoids over-allocation, but
+/// can result in insertion not having amortized constant-time performance.
+/// The following code declares <code>values</code>, an array of integers, and the
+/// <code>addTenQuadratic()</code> function, which adds ten more values to the <code>values</code>
+/// array on each call.
+/// \code
+///   var values: [Int] = [0, 1, 2, 3]
+///
+///   // Don't use 'reserveCapacity(_:)' like this
+///   func addTenQuadratic() {
+///       let newCount = values.count + 10
+///       values.reserveCapacity(newCount)
+///       for n in values.count..<newCount {
+///           values.append(n)
+///       }
+///   }
+///
+/// \endcodeThe call to <code>reserveCapacity(_:)</code> increases the <code>values</code> array’s capacity
+/// by exactly 10 elements on each pass through <code>addTenQuadratic()</code>, which
+/// is linear growth. Instead of having constant time when averaged over
+/// many calls, the function may decay to performance that is linear in
+/// <code>values.count</code>. This is almost certainly not what you want.
+/// In cases like this, the simplest fix is often to simply remove the call
+/// to <code>reserveCapacity(_:)</code>, and let the <code>append(_:)</code> method grow the array
+/// for you.
+/// \code
+///   func addTen() {
+///       let newCount = values.count + 10
+///       for n in values.count..<newCount {
+///           values.append(n)
+///       }
+///   }
+///
+/// \endcodeIf you need more control over the capacity of your array, implement your
+/// own geometric growth strategy, passing the size you compute to
+/// <code>reserveCapacity(_:)</code>.
+/// complexity:
+/// O(<em>n</em>), where <em>n</em> is the number of elements in the array.
+/// \param minimumCapacity The requested number of elements to store.
+///
+  SWIFT_INLINE_THUNK void reserveCapacity(swift::Int minimumCapacity) SWIFT_SYMBOL("s:Sa15reserveCapacityyySiF");
+/// Adds a new element at the end of the array.
+/// Use this method to append a single element to the end of a mutable array.
+/// \code
+/// var numbers = [1, 2, 3, 4, 5]
+/// numbers.append(100)
+/// print(numbers)
+/// // Prints "[1, 2, 3, 4, 5, 100]"
+///
+/// \endcodeBecause arrays increase their allocated capacity using an exponential
+/// strategy, appending a single element to an array is an O(1) operation
+/// when averaged over many calls to the <code>append(_:)</code> method. When an array
+/// has additional capacity and is not sharing its storage with another
+/// instance, appending an element is O(1). When an array needs to
+/// reallocate storage before appending or its storage is shared with
+/// another copy, appending is O(<em>n</em>), where <em>n</em> is the length of the array.
+/// complexity:
+/// O(1) on average, over many calls to <code>append(_:)</code> on the
+/// same array.
+/// \param newElement The element to append to the array.
+///
+  SWIFT_INLINE_THUNK void append(const T_0_0& newElement) SWIFT_SYMBOL("s:Sa6appendyyxnF");
+  SWIFT_INLINE_THUNK swift::Optional<T_0_0> _customRemoveLast() SWIFT_SYMBOL("s:Sa17_customRemoveLastxSgyF");
+/// Removes and returns the element at the specified position.
+/// All the elements following the specified position are moved up to
+/// close the gap.
+/// \code
+/// var measurements: [Double] = [1.1, 1.5, 2.9, 1.2, 1.5, 1.3, 1.2]
+/// let removed = measurements.remove(at: 2)
+/// print(measurements)
+/// // Prints "[1.1, 1.5, 1.2, 1.5, 1.3, 1.2]"
+///
+/// \endcodecomplexity:
+/// O(<em>n</em>), where <em>n</em> is the length of the array.
+/// \param index The position of the element to remove. <code>index</code> must
+/// be a valid index of the array.
+///
+///
+/// returns:
+/// The element at the specified index.
+  SWIFT_INLINE_THUNK T_0_0 removeAt(swift::Int index) SWIFT_SYMBOL("s:Sa6remove2atxSi_tF");
+/// Inserts a new element at the specified position.
+/// The new element is inserted before the element currently at the specified
+/// index. If you pass the array’s <code>endIndex</code> property as the <code>index</code>
+/// parameter, the new element is appended to the array.
+/// \code
+/// var numbers = [1, 2, 3, 4, 5]
+/// numbers.insert(100, at: 3)
+/// numbers.insert(200, at: numbers.endIndex)
+///
+/// print(numbers)
+/// // Prints "[1, 2, 3, 100, 4, 5, 200]"
+///
+/// \endcodecomplexity:
+/// O(<em>n</em>), where <em>n</em> is the length of the array. If
+/// <code>i == endIndex</code>, this method is equivalent to <code>append(_:)</code>.
+/// \param newElement The new element to insert into the array.
+///
+/// \param i The position at which to insert the new element.
+/// <code>index</code> must be a valid index of the array or equal to its <code>endIndex</code>
+/// property.
+///
+  SWIFT_INLINE_THUNK void insertAt(const T_0_0& newElement, swift::Int i) SWIFT_SYMBOL("s:Sa6insert_2atyxn_SitF");
+/// Removes all elements from the array.
+/// complexity:
+/// O(<em>n</em>), where <em>n</em> is the length of the array.
+/// \param keepCapacity Pass <code>true</code> to keep the existing capacity of
+/// the array after removing its elements. The default value is
+/// <code>false</code>.
+///
+  SWIFT_INLINE_THUNK void removeAllKeepingCapacity(bool keepCapacity) SWIFT_SYMBOL("s:Sa9removeAll15keepingCapacityySb_tF");
+  SWIFT_INLINE_THUNK swift::Int getStartIndex() const SWIFT_SYMBOL("s:Sa10startIndexSivp");
+  SWIFT_INLINE_THUNK swift::Int getEndIndex() const SWIFT_SYMBOL("s:Sa8endIndexSivp");
+/// Returns the distance between two indices.
+/// \param start A valid index of the collection.
+///
+/// \param end Another valid index of the collection. If <code>end</code> is equal to
+/// <code>start</code>, the result is zero.
+///
+///
+/// returns:
+/// The distance between <code>start</code> and <code>end</code>.
+  SWIFT_INLINE_THUNK swift::Int distanceFromTo(swift::Int start, swift::Int end) const SWIFT_SYMBOL("s:Sa8distance4from2toS2i_SitF");
+SWIFT_INLINE_THUNK T_0_0 operator [](swift::Int index) const SWIFT_SYMBOL("s:SayxSicig");
+  SWIFT_INLINE_THUNK swift::Int getCount() const SWIFT_SYMBOL("s:Sa5countSivp");
+/// Returns <code>true</code> if the array is native and does not need a deferred
+/// type check.  May be hoisted by the optimizer, which means its
+/// results may be stale by the time they are used if there is an
+/// inout violation in user code.
+  SWIFT_INLINE_THUNK bool _hoistableIsNativeTypeChecked() const SWIFT_SYMBOL("s:Sa29_hoistableIsNativeTypeCheckedSbyF");
+  SWIFT_INLINE_THUNK swift::Int getCapacity() const SWIFT_SYMBOL("s:Sa8capacitySivp");
+  #if defined(__OBJC__)
+SWIFT_INLINE_THUNK id _Nullable get_owner() const SWIFT_SYMBOL("s:Sa6_owneryXlSgvp");
+#endif
+  SWIFT_INLINE_THUNK String getDescription() const SWIFT_SYMBOL("s:Sa11descriptionSSvp");
+  SWIFT_INLINE_THUNK String getDebugDescription() const SWIFT_SYMBOL("s:Sa16debugDescriptionSSvp");
+  #if defined(__OBJC__)
+SWIFT_INLINE_THUNK id _Nonnull _bridgeToObjectiveCImpl() const SWIFT_SYMBOL("s:Sa23_bridgeToObjectiveCImplyXlyF");
+#endif
+/// Tries to downcast the source <code>NSArray</code> as our native buffer type.
+/// If it succeeds, creates a new <code>Array</code> around it and returns that.
+/// Returns <code>nil</code> otherwise.
+  #if defined(__OBJC__)
+static SWIFT_INLINE_THUNK swift::Optional<Array<T_0_0>> _bridgeFromObjectiveCAdoptingNativeStorageOf(id _Nonnull source) SWIFT_SYMBOL("s:Sa44_bridgeFromObjectiveCAdoptingNativeStorageOfySayxGSgyXlFZ");
+#endif
+/// Private initializer used for bridging.
+/// Only use this initializer when both conditions are true:
+/// <ul>
+///   <li>
+///     it is statically known that the given <code>NSArray</code> is immutable;
+///   </li>
+///   <li>
+///     <code>Element</code> is bridged verbatim to Objective-C (i.e.,
+///     is a reference type).
+///   </li>
+/// </ul>
+  #if defined(__OBJC__)
+static SWIFT_INLINE_THUNK Array<T_0_0> init(id _Nonnull _immutableCocoaArray) SWIFT_SYMBOL("s:Sa20_immutableCocoaArraySayxGyXl_tcfc");
+#endif
+/// Creates an array from the given array literal.
+/// Do not call this initializer directly. It is used by the compiler
+/// when you use an array literal. Instead, create a new array by using an
+/// array literal as its value. To do this, enclose a comma-separated list of
+/// values in square brackets.
+/// Here, an array of strings is created from an array literal holding
+/// only strings.
+/// \code
+/// let ingredients = ["cocoa beans", "sugar", "cocoa butter", "salt"]
+///
+/// \endcode\param elements A variadic list of elements of the new array.
+///
+  static SWIFT_INLINE_THUNK Array<T_0_0> init(const Array<T_0_0>& elements) SWIFT_SYMBOL("s:Sa12arrayLiteralSayxGxd_tcfc");
+private:
+  SWIFT_INLINE_THUNK Array(swift::_impl::ValueWitnessTable * _Nonnull vwTable) noexcept : _storage(vwTable->size, vwTable->getAlignment()) {}
+  static SWIFT_INLINE_THUNK Array _make() noexcept {
+    auto metadata = _impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    return Array(vwTable);
+  }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage.getOpaquePointer(); }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage.getOpaquePointer(); }
+
+  swift::_impl::OpaqueStorage _storage;
+  friend class _impl::_impl_Array<T_0_0>;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $sSayxGD;
+  static inline constexpr $sSayxGD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class _impl_Array {
+public:
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(Array<T_0_0> &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const Array<T_0_0> &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER Array<T_0_0> returnNewValue(T callable) {
+    auto result = Array<T_0_0>::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+struct TypeMetadataTrait<swift::Array<T_0_0>> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return swift::_impl::$sSaMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata())._0;
+  }
+};
+namespace _impl{
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isValueType<swift::Array<T_0_0>> = true;
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isOpaqueLayout<swift::Array<T_0_0>> = true;
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+struct implClassFor<swift::Array<T_0_0>> { using type = swift::_impl::_impl_Array<T_0_0>; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+class SWIFT_SYMBOL("s:SS8UTF8ViewV") UTF8View;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::UTF8View> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+class SWIFT_SYMBOL("s:SS5IndexV") String_Index;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::String_Index> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+namespace _impl {
+
+class _impl_String_Index;
+
+// Type metadata accessor for Index
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSS5IndexVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:SS5IndexV") String_Index final {
+public:
+  SWIFT_INLINE_THUNK ~String_Index() noexcept {
+    auto metadata = _impl::$sSS5IndexVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK String_Index(const String_Index &other) noexcept {
+    auto metadata = _impl::$sSS5IndexVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK String_Index &operator =(const String_Index &other) noexcept {
+    auto metadata = _impl::$sSS5IndexVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK String_Index &operator =(String_Index &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER String_Index(String_Index &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Int getEncodedOffset() const SWIFT_SYMBOL("s:SS5IndexV13encodedOffsetSivp");
+/// Creates a new index at the specified code unit offset.
+/// \param offset An offset in code units.
+///
+  static SWIFT_INLINE_THUNK String_Index init(swift::Int offset) SWIFT_SYMBOL("s:SS5IndexV13encodedOffsetABSi_tcfc");
+/// Creates an index in the given string that corresponds exactly to the
+/// specified position.
+/// If the index passed as <code>sourcePosition</code> represents the start of an
+/// extended grapheme cluster—the element type of a string—then the
+/// initializer succeeds.
+/// The following example converts the position of the Unicode scalar <code>"e"</code>
+/// into its corresponding position in the string. The character at that
+/// position is the composed <code>"é"</code> character.
+/// \code
+/// let cafe = "Cafe\u{0301}"
+/// print(cafe)
+/// // Prints "Café"
+///
+/// let scalarsIndex = cafe.unicodeScalars.firstIndex(of: "e")!
+/// let stringIndex = String.Index(scalarsIndex, within: cafe)!
+///
+/// print(cafe[...stringIndex])
+/// // Prints "Café"
+///
+/// \endcodeIf the index passed as <code>sourcePosition</code> doesn’t have an exact
+/// corresponding position in <code>target</code>, the result of the initializer is
+/// <code>nil</code>. For example, an attempt to convert the position of the combining
+/// acute accent (<code>"\u{0301}"</code>) fails. Combining Unicode scalars do not have
+/// their own position in a string.
+/// \code
+/// let nextScalarsIndex = cafe.unicodeScalars.index(after: scalarsIndex)
+/// let nextStringIndex = String.Index(nextScalarsIndex, within: cafe)
+///
+/// print(nextStringIndex)
+/// // Prints "nil"
+///
+/// \endcode\param sourcePosition A position in a view of the <code>target</code> parameter.
+/// <code>sourcePosition</code> must be a valid index of at least one of the views
+/// of <code>target</code>.
+///
+/// \param target The string referenced by the resulting index.
+///
+  static SWIFT_INLINE_THUNK swift::Optional<String_Index> init(const String_Index& sourcePosition, const String& target) SWIFT_SYMBOL("s:SS5IndexV_6withinABSgAB_SStcfc");
+/// Returns the position in the given UTF-8 view that corresponds exactly to
+/// this index.
+/// This example first finds the position of the character <code>"é"</code>, and then
+/// uses this method find the same position in the string’s <code>utf8</code> view.
+/// \code
+/// let cafe = "Café"
+/// if let i = cafe.firstIndex(of: "é") {
+///     let j = i.samePosition(in: cafe.utf8)!
+///     print(Array(cafe.utf8[j...]))
+/// }
+/// // Prints "[195, 169]"
+///
+/// \endcode\param utf8 The view to use for the index conversion. This index
+/// must be a valid index of at least one view of the string shared by
+/// <code>utf8</code>.
+///
+///
+/// returns:
+/// The position in <code>utf8</code> that corresponds exactly to this index.
+/// If this index does not have an exact corresponding position in <code>utf8</code>,
+/// this method returns <code>nil</code>. For example, an attempt to convert the
+/// position of a UTF-16 trailing surrogate returns <code>nil</code>.
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> samePositionIn(const UTF8View& utf8) const SWIFT_SYMBOL("s:SS5IndexV12samePosition2inABSgSS8UTF8ViewV_tF");
+  SWIFT_INLINE_THUNK swift::Int getHashValue() const SWIFT_SYMBOL("s:SS5IndexV9hashValueSivp");
+/// Returns the position in the given string that corresponds exactly to this
+/// index.
+/// This example first finds the position of a space (UTF-8 code point <code>32</code>)
+/// in a string’s <code>utf8</code> view and then uses this method find the same position
+/// in the string.
+/// \code
+/// let cafe = "Café 🍵"
+/// let i = cafe.unicodeScalars.firstIndex(of: "🍵")!
+/// let j = i.samePosition(in: cafe)!
+/// print(cafe[j...])
+/// // Prints "🍵"
+///
+/// \endcode\param characters The string to use for the index conversion.
+/// This index must be a valid index of at least one view of <code>characters</code>.
+///
+///
+/// returns:
+/// The position in <code>characters</code> that corresponds exactly to
+/// this index. If this index does not have an exact corresponding
+/// position in <code>characters</code>, this method returns <code>nil</code>. For example,
+/// an attempt to convert the position of a UTF-8 continuation byte
+/// returns <code>nil</code>.
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> samePositionIn(const String& characters) const SWIFT_SYMBOL("s:SS5IndexV12samePosition2inABSgSS_tF");
+/// Creates an index in the given UTF-8 view that corresponds exactly to the
+/// specified <code>UTF16View</code> position.
+/// The following example finds the position of a space in a string’s <code>utf16</code>
+/// view and then converts that position to an index in the string’s
+/// <code>utf8</code> view.
+/// \code
+/// let cafe = "Café 🍵"
+///
+/// let utf16Index = cafe.utf16.firstIndex(of: 32)!
+/// let utf8Index = String.UTF8View.Index(utf16Index, within: cafe.utf8)!
+///
+/// print(Array(cafe.utf8[..<utf8Index]))
+/// // Prints "[67, 97, 102, 195, 169]"
+///
+/// \endcodeIf the position passed in <code>utf16Index</code> doesn’t have an exact
+/// corresponding position in <code>utf8</code>, the result of the initializer is
+/// <code>nil</code>. For example, because UTF-8 and UTF-16 represent high Unicode code
+/// points differently, an attempt to convert the position of the trailing
+/// surrogate of a UTF-16 surrogate pair fails.
+/// The next example attempts to convert the indices of the two UTF-16 code
+/// points that represent the teacup emoji (<code>"🍵"</code>). The index of the lead
+/// surrogate is successfully converted to a position in <code>utf8</code>, but the
+/// index of the trailing surrogate is not.
+/// \code
+/// let emojiHigh = cafe.utf16.index(after: utf16Index)
+/// print(String.UTF8View.Index(emojiHigh, within: cafe.utf8))
+/// // Prints "Optional(String.Index(...))"
+///
+/// let emojiLow = cafe.utf16.index(after: emojiHigh)
+/// print(String.UTF8View.Index(emojiLow, within: cafe.utf8))
+/// // Prints "nil"
+///
+/// \endcode\param idx A position in a <code>String</code> or one of its views.
+///
+/// \param target The <code>UTF8View</code> in which to find the new position.
+///
+  static SWIFT_INLINE_THUNK swift::Optional<String_Index> init(const String_Index& idx, const UTF8View& target) SWIFT_SYMBOL("s:SS5IndexV_6withinABSgAB_SS8UTF8ViewVtcfc");
+private:
+  SWIFT_INLINE_THUNK String_Index() noexcept {}
+  static SWIFT_INLINE_THUNK String_Index _make() noexcept { return String_Index(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[8];
+  friend class _impl::_impl_String_Index;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $sSS5IndexVD;
+  static inline constexpr $sSS5IndexVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_String_Index {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(String_Index &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const String_Index &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER String_Index returnNewValue(T callable) {
+    auto result = String_Index::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$sSS5IndexVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<swift::String_Index> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return swift::_impl::$sSS5IndexVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<swift::String_Index> = true;
+template<>
+struct implClassFor<swift::String_Index> { using type = swift::_impl::_impl_String_Index; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+/// A type that represents either a wrapped value or the absence of a value.
+/// You use the <code>Optional</code> type whenever you use optional values, even if you
+/// never type the word <code>Optional</code>. Swift’s type system usually shows the
+/// wrapped type’s name with a trailing question mark (<code>?</code>) instead of showing
+/// the full type name. For example, if a variable has the type <code>Int?</code>, that’s
+/// just another way of writing <code>Optional<Int></code>. The shortened form is
+/// preferred for ease of reading and writing code.
+/// The types of <code>shortForm</code> and <code>longForm</code> in the following code sample are
+/// the same:
+/// \code
+/// let shortForm: Int? = Int("42")
+/// let longForm: Optional<Int> = Int("42")
+///
+/// \endcodeThe <code>Optional</code> type is an enumeration with two cases. <code>Optional.none</code> is
+/// equivalent to the <code>nil</code> literal. <code>Optional.some(Wrapped)</code> stores a wrapped
+/// value. For example:
+/// \code
+/// let number: Int? = Optional.some(42)
+/// let noNumber: Int? = Optional.none
+/// print(noNumber == nil)
+/// // Prints "true"
+///
+/// \endcodeYou must unwrap the value of an <code>Optional</code> instance before you can use it
+/// in many contexts. Because Swift provides several ways to safely unwrap
+/// optional values, you can choose the one that helps you write clear,
+/// concise code.
+/// The following examples use this dictionary of image names and file paths:
+/// \code
+/// let imagePaths = ["star": "/glyphs/star.png",
+///                   "portrait": "/images/content/portrait.jpg",
+///                   "spacer": "/images/shared/spacer.gif"]
+///
+/// \endcodeGetting a dictionary’s value using a key returns an optional value, so
+/// <code>imagePaths["star"]</code> has type <code>Optional<String></code> or, written in the
+/// preferred manner, <code>String?</code>.
+/// <h2>Optional Binding</h2>
+/// To conditionally bind the wrapped value of an <code>Optional</code> instance to a new
+/// variable, use one of the optional binding control structures, including
+/// <code>if let</code>, <code>guard let</code>, and <code>switch</code>.
+/// \code
+/// if let starPath = imagePaths["star"] {
+///     print("The star image is at '\(starPath)'")
+/// } else {
+///     print("Couldn't find the star image")
+/// }
+/// // Prints "The star image is at '/glyphs/star.png'"
+///
+/// \endcode<h2>Optional Chaining</h2>
+/// To safely access the properties and methods of a wrapped instance, use the
+/// postfix optional chaining operator (postfix <code>?</code>). The following example uses
+/// optional chaining to access the <code>hasSuffix(_:)</code> method on a <code>String?</code>
+/// instance.
+/// \code
+/// if imagePaths["star"]?.hasSuffix(".png") == true {
+///     print("The star image is in PNG format")
+/// }
+/// // Prints "The star image is in PNG format"
+///
+/// \endcode<h2>Using the Nil-Coalescing Operator</h2>
+/// Use the nil-coalescing operator (<code>??</code>) to supply a default value in case
+/// the <code>Optional</code> instance is <code>nil</code>. Here a default path is supplied for an
+/// image that is missing from <code>imagePaths</code>.
+/// \code
+/// let defaultImagePath = "/images/default.png"
+/// let heartPath = imagePaths["heart"] ?? defaultImagePath
+/// print(heartPath)
+/// // Prints "/images/default.png"
+///
+/// \endcodeThe <code>??</code> operator also works with another <code>Optional</code> instance on the
+/// right-hand side. As a result, you can chain multiple <code>??</code> operators
+/// together.
+/// \code
+/// let shapePath = imagePaths["cir"] ?? imagePaths["squ"] ?? defaultImagePath
+/// print(shapePath)
+/// // Prints "/images/default.png"
+///
+/// \endcode<h2>Unconditional Unwrapping</h2>
+/// When you’re certain that an instance of <code>Optional</code> contains a value, you
+/// can unconditionally unwrap the value by using the forced
+/// unwrap operator (postfix <code>!</code>). For example, the result of the failable <code>Int</code>
+/// initializer is unconditionally unwrapped in the example below.
+/// \code
+/// let number = Int("42")!
+/// print(number)
+/// // Prints "42"
+///
+/// \endcodeYou can also perform unconditional optional chaining by using the postfix
+/// <code>!</code> operator.
+/// \code
+/// let isPNG = imagePaths["star"]!.hasSuffix(".png")
+/// print(isPNG)
+/// // Prints "true"
+///
+/// \endcodeUnconditionally unwrapping a <code>nil</code> instance with <code>!</code> triggers a runtime
+/// error.
+namespace _impl {
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class _impl_Optional;
+
+static_assert(1 <= 3, "unsupported generic requirement list for metadata func");
+// Type metadata accessor for Optional
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSqMa(swift::_impl::MetadataRequestTy, void * _Nonnull) SWIFT_NOEXCEPT SWIFT_CALL;
+
+// Tags for resilient enum Optional
+extern "C" {
+extern unsigned $sSq4noneyxSgABmlFWC;
+extern unsigned $sSq4someyxSgxcABmlFWC;
+}
+
+} // namespace _impl
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SWIFT_SYMBOL("s:Sq") Optional final {
+public:
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK ~Optional() noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK Optional(const Optional &other) noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    _storage = swift::_impl::OpaqueStorage(vwTable->size, vwTable->getAlignment());
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK Optional &operator =(const Optional &other) noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK Optional &operator =(Optional &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER Optional(Optional &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+
+  enum class cases {
+    some SWIFT_SYMBOL("s:Sq4someyxSgxcABmlF"),
+    none SWIFT_SYMBOL("s:Sq4noneyxSgABmlF")
+  };
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"  // allow use of inline static data member
+  inline const static struct _impl_some {  // impl struct for case some
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::some;
+    }
+    SWIFT_INLINE_THUNK Optional<T_0_0> operator()(const T_0_0& val) const;
+  } some SWIFT_SYMBOL("s:Sq4someyxSgxcABmlF");
+  SWIFT_INLINE_THUNK bool isSome() const;
+  SWIFT_INLINE_THUNK T_0_0 getSome() const;
+
+  inline const static struct _impl_none {  // impl struct for case none
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::none;
+    }
+    SWIFT_INLINE_THUNK Optional<T_0_0> operator()() const;
+  } none SWIFT_SYMBOL("s:Sq4noneyxSgABmlF");
+  SWIFT_INLINE_THUNK bool isNone() const;
+
+#pragma clang diagnostic pop
+  SWIFT_INLINE_THUNK operator cases() const {
+    switch (_getEnumTag()) {
+      case 0: return cases::some;
+      case 1: return cases::none;
+      default: abort();
+    }
+  }
+
+  #if defined(__OBJC__)
+SWIFT_INLINE_THUNK id _Nonnull _bridgeToObjectiveC() const SWIFT_SYMBOL("s:Sq19_bridgeToObjectiveCyXlyF");
+#endif
+  #if defined(__OBJC__)
+static SWIFT_INLINE_THUNK void _forceBridgeFromObjectiveCResult(id _Nonnull source, swift::Optional<Optional<T_0_0>>& result) SWIFT_SYMBOL("s:Sq26_forceBridgeFromObjectiveC_6resultyyXl_xSgSgztFZ");
+#endif
+  #if defined(__OBJC__)
+static SWIFT_INLINE_THUNK bool _conditionallyBridgeFromObjectiveCResult(id _Nonnull source, swift::Optional<Optional<T_0_0>>& result) SWIFT_SYMBOL("s:Sq34_conditionallyBridgeFromObjectiveC_6resultSbyXl_xSgSgztFZ");
+#endif
+  #if defined(__OBJC__)
+static SWIFT_INLINE_THUNK swift::Optional<T_0_0> _unconditionallyBridgeFromObjectiveC(id _Nullable source) SWIFT_SYMBOL("s:Sq36_unconditionallyBridgeFromObjectiveCyxSgyXlSgFZ");
+#endif
+  SWIFT_INLINE_THUNK String getDebugDescription() const SWIFT_SYMBOL("s:Sq16debugDescriptionSSvp");
+  SWIFT_INLINE_THUNK T_0_0 getUnsafelyUnwrapped() const SWIFT_SYMBOL("s:SqsRi0_zrlE17unsafelyUnwrappedxvp");
+/// Creates an instance that stores the given value.
+  static SWIFT_INLINE_THUNK swift::Optional<T_0_0> init(const T_0_0& value) SWIFT_SYMBOL("s:SqsRi_zrlEyxSgxcfc");
+#define SWIFT_CXX_INTEROP_OPTIONAL_MIXIN
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnon-modular-include-in-framework-module"
+// Allow user to find the header using additional include paths
+#if __has_include(<swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <swiftToCxx/_SwiftStdlibCxxOverlay.h>
+// Look for the C++ interop support header relative to clang's resource dir:
+//  '<toolchain>/usr/lib/clang/<version>/include/../../../swift/swiftToCxx'.
+#elif __has_include(<../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#elif __has_include(<../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+//  '<toolchain>/usr/local/lib/clang/<version>/include/../../../../../lib/swift/swiftToCxx'.
+#include <../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#endif
+#pragma clang diagnostic pop
+private:
+  SWIFT_INLINE_THUNK Optional(swift::_impl::ValueWitnessTable * _Nonnull vwTable) noexcept : _storage(vwTable->size, vwTable->getAlignment()) {}
+  static SWIFT_INLINE_THUNK Optional _make() noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    return Optional(vwTable);
+  }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage.getOpaquePointer(); }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage.getOpaquePointer(); }
+
+  SWIFT_INLINE_THUNK char * _Nonnull _destructiveProjectEnumData() noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveProjectEnumData(_getOpaquePointer(), metadata._0);
+    return _getOpaquePointer();
+  }
+  SWIFT_INLINE_THUNK void _destructiveInjectEnumTag(unsigned tag) noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveInjectEnumTag(_getOpaquePointer(), tag, metadata._0);
+  }
+  SWIFT_INLINE_THUNK unsigned _getEnumTag() const noexcept {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    return enumVWTable->getEnumTag(_getOpaquePointer(), metadata._0);
+  }
+  swift::_impl::OpaqueStorage _storage;
+  friend class _impl::_impl_Optional<T_0_0>;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $sxSgD;
+  static inline constexpr $sxSgD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class _impl_Optional {
+public:
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(Optional<T_0_0> &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const Optional<T_0_0> &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER Optional<T_0_0> returnNewValue(T callable) {
+    auto result = Optional<T_0_0>::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+struct TypeMetadataTrait<swift::Optional<T_0_0>> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return swift::_impl::$sSqMa(0, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata())._0;
+  }
+};
+namespace _impl{
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isValueType<swift::Optional<T_0_0>> = true;
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+inline const constexpr bool isOpaqueLayout<swift::Optional<T_0_0>> = true;
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+struct implClassFor<swift::Optional<T_0_0>> { using type = swift::_impl::_impl_Optional<T_0_0>; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+namespace _impl {
+
+class _impl_String;
+
+// Type metadata accessor for String
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSSMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:SS") String final {
+public:
+  SWIFT_INLINE_THUNK ~String() noexcept {
+    auto metadata = _impl::$sSSMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK String(const String &other) noexcept {
+    auto metadata = _impl::$sSSMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK String &operator =(const String &other) noexcept {
+    auto metadata = _impl::$sSSMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK String &operator =(String &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER String(String &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+/// Creates an empty string.
+/// Using this initializer is equivalent to initializing a string with an
+/// empty string literal.
+/// \code
+/// let empty = ""
+/// let alsoEmpty = String()
+///
+/// \endcode
+  static SWIFT_INLINE_THUNK String init() SWIFT_SYMBOL("s:S2Sycfc");
+  SWIFT_INLINE_THUNK String_Index getStartIndex() const SWIFT_SYMBOL("s:SS10startIndexSS0B0Vvp");
+  SWIFT_INLINE_THUNK String_Index getEndIndex() const SWIFT_SYMBOL("s:SS8endIndexSS0B0Vvp");
+  SWIFT_INLINE_THUNK swift::Int getCount() const SWIFT_SYMBOL("s:SS5countSivp");
+/// Returns the distance between two indices.
+/// complexity:
+/// O(<em>n</em>), where <em>n</em> is the resulting distance.
+/// \param start A valid index of the collection.
+///
+/// \param end Another valid index of the collection. If <code>end</code> is equal to
+/// <code>start</code>, the result is zero.
+///
+///
+/// returns:
+/// The distance between <code>start</code> and <code>end</code>.
+  SWIFT_INLINE_THUNK swift::Int distanceFromTo(const String_Index& start, const String_Index& end) const SWIFT_SYMBOL("s:SS8distance4from2toSiSS5IndexV_AEtF");
+/// Reserves enough space in the string’s underlying storage to store the
+/// specified number of ASCII characters.
+/// Because each character in a string can require more than a single ASCII
+/// character’s worth of storage, additional allocation may be necessary
+/// when adding characters to a string after a call to
+/// <code>reserveCapacity(_:)</code>.
+/// complexity:
+/// O(<em>n</em>)
+/// \param n The minimum number of ASCII character’s worth of storage
+/// to allocate.
+///
+  SWIFT_INLINE_THUNK void reserveCapacity(swift::Int n) SWIFT_SYMBOL("s:SS15reserveCapacityyySiF");
+/// Appends the given string to this string.
+/// The following example builds a customized greeting by using the
+/// <code>append(_:)</code> method:
+/// \code
+/// var greeting = "Hello, "
+/// if let name = getUserName() {
+///     greeting.append(name)
+/// } else {
+///     greeting.append("friend")
+/// }
+/// print(greeting)
+/// // Prints "Hello, friend"
+///
+/// \endcode\param other Another string.
+///
+  SWIFT_INLINE_THUNK void append(const String& other) SWIFT_SYMBOL("s:SS6appendyySSF");
+  SWIFT_INLINE_THUNK void appendContentsOf(const String& newElements) SWIFT_SYMBOL("s:SS6append10contentsOfySS_tF");
+/// Replaces this string with the empty string.
+/// Calling this method invalidates any existing indices for use with this
+/// string.
+/// \param keepCapacity Pass <code>true</code> to prevent the release of the
+/// string’s allocated storage. Retaining the storage can be a useful
+/// optimization when you’re planning to grow the string again. The
+/// default value is <code>false</code>.
+///
+  SWIFT_INLINE_THUNK void removeAllKeepingCapacity(bool keepCapacity) SWIFT_SYMBOL("s:SS9removeAll15keepingCapacityySb_tF");
+  SWIFT_INLINE_THUNK UTF8View getUtf8() const SWIFT_SYMBOL("s:SS4utf8SS8UTF8ViewVvp");
+  SWIFT_INLINE_THUNK void setUtf8(const UTF8View& newValue) SWIFT_SYMBOL("s:SS4utf8SS8UTF8ViewVvp");
+  SWIFT_INLINE_THUNK String getCharacters() const SWIFT_SYMBOL("s:SS10charactersSSvp");
+  SWIFT_INLINE_THUNK void setCharacters(const String& newValue) SWIFT_SYMBOL("s:SS10charactersSSvp");
+  SWIFT_INLINE_THUNK swift::Int getHashValue() const SWIFT_SYMBOL("s:SS9hashValueSivp");
+  SWIFT_INLINE_THUNK Array<uint8_t> get_nfcCodeUnits() const SWIFT_SYMBOL("s:SS13_nfcCodeUnitsSays5UInt8VGvp");
+/// Returns a lowercase version of the string.
+/// Here’s an example of transforming a string to all lowercase letters.
+/// \code
+/// let cafe = "BBQ Café 🍵"
+/// print(cafe.lowercased())
+/// // Prints "bbq café 🍵"
+///
+/// \endcodecomplexity:
+/// O(<em>n</em>)
+///
+/// returns:
+/// A lowercase copy of the string.
+  SWIFT_INLINE_THUNK String lowercased() const SWIFT_SYMBOL("s:SS10lowercasedSSyF");
+/// Returns an uppercase version of the string.
+/// The following example transforms a string to uppercase letters:
+/// \code
+/// let cafe = "Café 🍵"
+/// print(cafe.uppercased())
+/// // Prints "CAFÉ 🍵"
+///
+/// \endcodecomplexity:
+/// O(<em>n</em>)
+///
+/// returns:
+/// An uppercase copy of the string.
+  SWIFT_INLINE_THUNK String uppercased() const SWIFT_SYMBOL("s:SS10uppercasedSSyF");
+  SWIFT_INLINE_THUNK bool isEmpty() const SWIFT_SYMBOL("s:SS7isEmptySbvp");
+/// Appends the given string to this string.
+/// \param other A string to append.
+///
+  SWIFT_INLINE_THUNK void write(const String& other) SWIFT_SYMBOL("s:SS5writeyySSF");
+  SWIFT_INLINE_THUNK String getDescription() const SWIFT_SYMBOL("s:SS11descriptionSSvp");
+  SWIFT_INLINE_THUNK String getDebugDescription() const SWIFT_SYMBOL("s:SS16debugDescriptionSSvp");
+  SWIFT_INLINE_THUNK bool hasPrefix(const String& prefix) const SWIFT_SYMBOL("s:SS9hasPrefixySbSSF");
+  SWIFT_INLINE_THUNK bool hasSuffix(const String& suffix) const SWIFT_SYMBOL("s:SS9hasSuffixySbSSF");
+  SWIFT_INLINE_THUNK void _dump() const SWIFT_SYMBOL("s:SS5_dumpyyF");
+  #if defined(__OBJC__)
+SWIFT_INLINE_THUNK id _Nonnull _bridgeToObjectiveCImpl() const SWIFT_SYMBOL("s:SS23_bridgeToObjectiveCImplyXlyF");
+#endif
+#if defined(__OBJC__)
+  SWIFT_INLINE_THUNK operator NSString * _Nonnull () const noexcept {
+    return (__bridge_transfer NSString *)(_impl::$sSS10FoundationE19_bridgeToObjectiveCSo8NSStringCyF(_impl::swift_interop_passDirect_Swift_String(_getOpaquePointer())));
+  }
+static SWIFT_INLINE_THUNK String init(NSString * _Nonnull nsString) noexcept {
+    auto result = _make();
+    auto res = _impl::$sSS10FoundationE36_unconditionallyBridgeFromObjectiveCySSSo8NSStringCSgFZ((__bridge void *)nsString);
+    memcpy(result._getOpaquePointer(), &res, sizeof(res));
+    return result;
+  }
+
+#endif // defined(__OBJC__)
+#define SWIFT_CXX_INTEROP_STRING_MIXIN
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnon-modular-include-in-framework-module"
+// Allow user to find the header using additional include paths
+#if __has_include(<swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <swiftToCxx/_SwiftStdlibCxxOverlay.h>
+// Look for the C++ interop support header relative to clang's resource dir:
+//  '<toolchain>/usr/lib/clang/<version>/include/../../../swift/swiftToCxx'.
+#elif __has_include(<../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#elif __has_include(<../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+//  '<toolchain>/usr/local/lib/clang/<version>/include/../../../../../lib/swift/swiftToCxx'.
+#include <../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#endif
+#pragma clang diagnostic pop
+private:
+  SWIFT_INLINE_THUNK String() noexcept {}
+  static SWIFT_INLINE_THUNK String _make() noexcept { return String(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[16];
+  friend class _impl::_impl_String;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $sSSD;
+  static inline constexpr $sSSD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_String {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(String &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const String &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER String returnNewValue(T callable) {
+    auto result = String::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$sSSMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<swift::String> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return swift::_impl::$sSSMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<swift::String> = true;
+template<>
+struct implClassFor<swift::String> { using type = swift::_impl::_impl_String; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+namespace _impl {
+
+class _impl_UTF8View;
+
+// Type metadata accessor for UTF8View
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSS8UTF8ViewVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:SS8UTF8ViewV") UTF8View final {
+public:
+  SWIFT_INLINE_THUNK ~UTF8View() noexcept {
+    auto metadata = _impl::$sSS8UTF8ViewVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK UTF8View(const UTF8View &other) noexcept {
+    auto metadata = _impl::$sSS8UTF8ViewVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK UTF8View &operator =(const UTF8View &other) noexcept {
+    auto metadata = _impl::$sSS8UTF8ViewVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK UTF8View &operator =(UTF8View &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER UTF8View(UTF8View &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK String_Index getStartIndex() const SWIFT_SYMBOL("s:SS8UTF8ViewV10startIndexSS0D0Vvp");
+  SWIFT_INLINE_THUNK String_Index getEndIndex() const SWIFT_SYMBOL("s:SS8UTF8ViewV8endIndexSS0D0Vvp");
+/// Returns the next consecutive position after <code>i</code>.
+/// precondition:
+/// The next position is representable.
+  SWIFT_INLINE_THUNK String_Index indexAfter(const String_Index& i) const SWIFT_SYMBOL("s:SS8UTF8ViewV5index5afterSS5IndexVAF_tF");
+  SWIFT_INLINE_THUNK String_Index indexBefore(const String_Index& i) const SWIFT_SYMBOL("s:SS8UTF8ViewV5index6beforeSS5IndexVAF_tF");
+  SWIFT_INLINE_THUNK String_Index indexOffsetBy(const String_Index& i, swift::Int n) const SWIFT_SYMBOL("s:SS8UTF8ViewV5index_8offsetBySS5IndexVAF_SitF");
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> indexOffsetByLimitedBy(const String_Index& i, swift::Int n, const String_Index& limit) const SWIFT_SYMBOL("s:SS8UTF8ViewV5index_8offsetBy07limitedE0SS5IndexVSgAG_SiAGtF");
+  SWIFT_INLINE_THUNK swift::Int distanceFromTo(const String_Index& i, const String_Index& j) const SWIFT_SYMBOL("s:SS8UTF8ViewV8distance4from2toSiSS5IndexV_AGtF");
+SWIFT_INLINE_THUNK uint8_t operator [](const String_Index& i) const SWIFT_SYMBOL("s:SS8UTF8ViewVys5UInt8VSS5IndexVcig");
+  SWIFT_INLINE_THUNK String getDescription() const SWIFT_SYMBOL("s:SS8UTF8ViewV11descriptionSSvp");
+  SWIFT_INLINE_THUNK String getDebugDescription() const SWIFT_SYMBOL("s:SS8UTF8ViewV16debugDescriptionSSvp");
+  SWIFT_INLINE_THUNK swift::Int getCount() const SWIFT_SYMBOL("s:SS8UTF8ViewV5countSivp");
+private:
+  SWIFT_INLINE_THUNK UTF8View() noexcept {}
+  static SWIFT_INLINE_THUNK UTF8View _make() noexcept { return UTF8View(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[16];
+  friend class _impl::_impl_UTF8View;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $sSS8UTF8ViewVD;
+  static inline constexpr $sSS8UTF8ViewVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_UTF8View {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(UTF8View &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const UTF8View &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER UTF8View returnNewValue(T callable) {
+    auto result = UTF8View::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$sSS8UTF8ViewVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<swift::UTF8View> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return swift::_impl::$sSS8UTF8ViewVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<swift::UTF8View> = true;
+template<>
+struct implClassFor<swift::UTF8View> { using type = swift::_impl::_impl_UTF8View; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace swift SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("swift") {
+
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK Array<T_0_0> Array<T_0_0>::init() {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_Array<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_void_ptr_0_8(result, swift::_impl::$sS2ayxGycfC(swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK Array<T_0_0> Array<T_0_0>::init(const T_0_0& repeatedValue, swift::Int count) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(T_0_0)) char copyBuffer_consumedParamCopy_repeatedValue[sizeof(T_0_0)];
+  auto &consumedParamCopy_repeatedValue = *(new(copyBuffer_consumedParamCopy_repeatedValue) T_0_0(repeatedValue));
+  swift::_impl::ConsumedValueStorageDestroyer<T_0_0> storageGuard_consumedParamCopy_repeatedValue(consumedParamCopy_repeatedValue);
+  return swift::_impl::_impl_Array<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_void_ptr_0_8(result, swift::_impl::$sSa9repeating5countSayxGx_SitcfC(swift::_impl::getOpaquePointer(consumedParamCopy_repeatedValue), count, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK void Array<T_0_0>::reserveCapacity(swift::Int minimumCapacity) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  swift::_impl::$sSa15reserveCapacityyySiF(minimumCapacity, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK void Array<T_0_0>::append(const T_0_0& newElement) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(T_0_0)) char copyBuffer_consumedParamCopy_newElement[sizeof(T_0_0)];
+  auto &consumedParamCopy_newElement = *(new(copyBuffer_consumedParamCopy_newElement) T_0_0(newElement));
+  swift::_impl::ConsumedValueStorageDestroyer<T_0_0> storageGuard_consumedParamCopy_newElement(consumedParamCopy_newElement);
+  swift::_impl::$sSa6appendyyxnF(swift::_impl::getOpaquePointer(consumedParamCopy_newElement), swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Optional<T_0_0> Array<T_0_0>::_customRemoveLast() {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_Optional<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::$sSa17_customRemoveLastxSgyF(result, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  });
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK T_0_0 Array<T_0_0>::removeAt(swift::Int index) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+  if constexpr (std::is_base_of<::swift::_impl::RefCountedClass, T_0_0>::value) {
+  void *returnValue;
+  swift::_impl::$sSa6remove2atxSi_tF(reinterpret_cast<void *>(&returnValue), index, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  return ::swift::_impl::implClassFor<T_0_0>::type::makeRetained(returnValue);
+  } else if constexpr (::swift::_impl::isValueType<T_0_0>) {
+  return ::swift::_impl::implClassFor<T_0_0>::type::returnNewValue([&](void * _Nonnull returnValue) SWIFT_INLINE_THUNK_ATTRIBUTES {
+swift::_impl::$sSa6remove2atxSi_tF(returnValue, index, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  });
+  } else if constexpr (::swift::_impl::isSwiftBridgedCxxRecord<T_0_0>) {
+alignas(alignof(T_0_0)) char storage[sizeof(T_0_0)];
+auto * _Nonnull storageObjectPtr = reinterpret_cast<T_0_0 *>(storage);
+swift::_impl::$sSa6remove2atxSi_tF(storage, index, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+T_0_0 result(static_cast<T_0_0 &&>(*storageObjectPtr));
+storageObjectPtr->~T_0_0();
+return result;
+  } else {
+  T_0_0 returnValue;
+swift::_impl::$sSa6remove2atxSi_tF(reinterpret_cast<void *>(&returnValue), index, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  return returnValue;
+  }
+#pragma clang diagnostic pop
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK void Array<T_0_0>::insertAt(const T_0_0& newElement, swift::Int i) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(T_0_0)) char copyBuffer_consumedParamCopy_newElement[sizeof(T_0_0)];
+  auto &consumedParamCopy_newElement = *(new(copyBuffer_consumedParamCopy_newElement) T_0_0(newElement));
+  swift::_impl::ConsumedValueStorageDestroyer<T_0_0> storageGuard_consumedParamCopy_newElement(consumedParamCopy_newElement);
+  swift::_impl::$sSa6insert_2atyxn_SitF(swift::_impl::getOpaquePointer(consumedParamCopy_newElement), i, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK void Array<T_0_0>::removeAllKeepingCapacity(bool keepCapacity) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  swift::_impl::$sSa9removeAll15keepingCapacityySb_tF(keepCapacity, swift::TypeMetadataTrait<Array<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Int Array<T_0_0>::getStartIndex() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa10startIndexSivg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Int Array<T_0_0>::getEndIndex() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa8endIndexSivg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Int Array<T_0_0>::distanceFromTo(swift::Int start, swift::Int end) const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa8distance4from2toS2i_SitF(start, end, swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK T_0_0 Array<T_0_0>::operator [](swift::Int index) const SWIFT_SYMBOL("s:SayxSicig") {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+  if constexpr (std::is_base_of<::swift::_impl::RefCountedClass, T_0_0>::value) {
+  void *returnValue;
+  swift::_impl::$sSayxSicig(reinterpret_cast<void *>(&returnValue), index, swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  return ::swift::_impl::implClassFor<T_0_0>::type::makeRetained(returnValue);
+  } else if constexpr (::swift::_impl::isValueType<T_0_0>) {
+  return ::swift::_impl::implClassFor<T_0_0>::type::returnNewValue([&](void * _Nonnull returnValue) SWIFT_INLINE_THUNK_ATTRIBUTES {
+swift::_impl::$sSayxSicig(returnValue, index, swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  });
+  } else if constexpr (::swift::_impl::isSwiftBridgedCxxRecord<T_0_0>) {
+alignas(alignof(T_0_0)) char storage[sizeof(T_0_0)];
+auto * _Nonnull storageObjectPtr = reinterpret_cast<T_0_0 *>(storage);
+swift::_impl::$sSayxSicig(storage, index, swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+T_0_0 result(static_cast<T_0_0 &&>(*storageObjectPtr));
+storageObjectPtr->~T_0_0();
+return result;
+  } else {
+  T_0_0 returnValue;
+swift::_impl::$sSayxSicig(reinterpret_cast<void *>(&returnValue), index, swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  return returnValue;
+  }
+#pragma clang diagnostic pop
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Int Array<T_0_0>::getCount() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa5countSivg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK bool Array<T_0_0>::_hoistableIsNativeTypeChecked() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa29_hoistableIsNativeTypeCheckedSbyF(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Int Array<T_0_0>::getCapacity() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSa8capacitySivg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK id _Nullable Array<T_0_0>::get_owner() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+return (__bridge_transfer id)(__bridge void *)swift::_impl::$sSa6_owneryXlSgvg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+#endif
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK String Array<T_0_0>::getDescription() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSa11descriptionSSvg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK String Array<T_0_0>::getDebugDescription() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSa16debugDescriptionSSvg(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK id _Nonnull Array<T_0_0>::_bridgeToObjectiveCImpl() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+return (__bridge_transfer id)(__bridge void *)swift::_impl::$sSa23_bridgeToObjectiveCImplyXlyF(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(_getOpaquePointer()), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+#endif
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Optional<Array<T_0_0>> Array<T_0_0>::_bridgeFromObjectiveCAdoptingNativeStorageOf(id _Nonnull source) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_Optional<Array<T_0_0>>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSa44_bridgeFromObjectiveCAdoptingNativeStorageOfySayxGSgyXlFZ(source, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+#endif
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK Array<T_0_0> Array<T_0_0>::init(id _Nonnull _immutableCocoaArray) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(id _Nonnull)) char copyBuffer_consumedParamCopy__immutableCocoaArray[sizeof(id _Nonnull)];
+  auto &consumedParamCopy__immutableCocoaArray = *(new(copyBuffer_consumedParamCopy__immutableCocoaArray) id _Nonnull(_immutableCocoaArray));
+  swift::_impl::ConsumedValueStorageDestroyer<id _Nonnull> storageGuard_consumedParamCopy__immutableCocoaArray(consumedParamCopy__immutableCocoaArray);
+  return swift::_impl::_impl_Array<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_void_ptr_0_8(result, swift::_impl::$sSa20_immutableCocoaArraySayxGyXl_tcfC(consumedParamCopy__immutableCocoaArray, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+#endif
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK Array<T_0_0> Array<T_0_0>::init(const Array<T_0_0>& elements) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(Array<T_0_0>)) char copyBuffer_consumedParamCopy_elements[sizeof(Array<T_0_0>)];
+  auto &consumedParamCopy_elements = *(new(copyBuffer_consumedParamCopy_elements) Array<T_0_0>(elements));
+  swift::_impl::ConsumedValueStorageDestroyer<Array<T_0_0>> storageGuard_consumedParamCopy_elements(consumedParamCopy_elements);
+  return swift::_impl::_impl_Array<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_void_ptr_0_8(result, swift::_impl::$sSa12arrayLiteralSayxGxd_tcfC(swift::_impl::swift_interop_passDirect_swift_void_ptr_0_8(swift::_impl::_impl_Array<T_0_0>::getOpaquePointer(consumedParamCopy_elements)), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata()));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int String_Index::getEncodedOffset() const {
+  return swift::_impl::$sSS5IndexV13encodedOffsetSivg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK String_Index String_Index::init(swift::Int offset) {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS5IndexV13encodedOffsetABSi_tcfC(offset));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> String_Index::init(const String_Index& sourcePosition, const String& target) {
+  alignas(alignof(String)) char copyBuffer_consumedParamCopy_target[sizeof(String)];
+  auto &consumedParamCopy_target = *(new(copyBuffer_consumedParamCopy_target) String(target));
+  swift::_impl::ConsumedValueStorageDestroyer<String> storageGuard_consumedParamCopy_target(consumedParamCopy_target);
+  return swift::_impl::_impl_Optional<String_Index>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(result, swift::_impl::$sSS5IndexV_6withinABSgAB_SStcfC(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(sourcePosition)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(consumedParamCopy_target))));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> String_Index::samePositionIn(const UTF8View& utf8) const {
+  return swift::_impl::_impl_Optional<String_Index>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(result, swift::_impl::$sSS5IndexV12samePosition2inABSgSS8UTF8ViewV_tF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_UTF8View::getOpaquePointer(utf8)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int String_Index::getHashValue() const {
+  return swift::_impl::$sSS5IndexV9hashValueSivg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> String_Index::samePositionIn(const String& characters) const {
+  return swift::_impl::_impl_Optional<String_Index>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(result, swift::_impl::$sSS5IndexV12samePosition2inABSgSS_tF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(characters)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> String_Index::init(const String_Index& idx, const UTF8View& target) {
+  alignas(alignof(UTF8View)) char copyBuffer_consumedParamCopy_target[sizeof(UTF8View)];
+  auto &consumedParamCopy_target = *(new(copyBuffer_consumedParamCopy_target) UTF8View(target));
+  swift::_impl::ConsumedValueStorageDestroyer<UTF8View> storageGuard_consumedParamCopy_target(consumedParamCopy_target);
+  return swift::_impl::_impl_Optional<String_Index>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(result, swift::_impl::$sSS5IndexV_6withinABSgAB_SS8UTF8ViewVtcfC(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(idx)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_UTF8View::getOpaquePointer(consumedParamCopy_target))));
+  });
+  }
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK Optional<T_0_0> Optional<T_0_0>::_impl_some::operator()(const T_0_0& val) const {
+    auto result = Optional<T_0_0>::_make();
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+if constexpr (std::is_base_of<::swift::_impl::RefCountedClass, T_0_0>::value) {
+    void *ptr = ::swift::_impl::_impl_RefCountedClass::copyOpaquePointer(val);
+    memcpy(result._getOpaquePointer(), &ptr, sizeof(ptr));
+} else if constexpr (::swift::_impl::isValueType<T_0_0>) {
+    alignas(T_0_0) unsigned char buffer[sizeof(T_0_0)];
+    auto *valCopy = new(buffer) T_0_0(val);
+    swift::_impl::implClassFor<T_0_0>::type::initializeWithTake(result._getOpaquePointer(), swift::_impl::implClassFor<T_0_0>::type::getOpaquePointer(*valCopy));
+} else {
+    memcpy(result._getOpaquePointer(), &val, sizeof(val));
+}
+#pragma clang diagnostic pop
+    result._destructiveInjectEnumTag(0);
+    return result;
+  }
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK  bool Optional<T_0_0>::isSome() const {
+    return *this == Optional<T_0_0>::some;
+  }
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK T_0_0 Optional<T_0_0>::getSome() const {
+    if (!isSome()) abort();
+    alignas(Optional) unsigned char buffer[sizeof(Optional)];
+    auto *thisCopy = new(buffer) Optional(*this);
+    char * _Nonnull payloadFromDestruction = thisCopy->_destructiveProjectEnumData();
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+  if constexpr (std::is_base_of<::swift::_impl::RefCountedClass, T_0_0>::value) {
+  void *returnValue;
+  returnValue = *reinterpret_cast<void **>(payloadFromDestruction);
+  return ::swift::_impl::implClassFor<T_0_0>::type::makeRetained(returnValue);
+  } else if constexpr (::swift::_impl::isValueType<T_0_0>) {
+  return ::swift::_impl::implClassFor<T_0_0>::type::returnNewValue([&](void * _Nonnull returnValue) SWIFT_INLINE_THUNK_ATTRIBUTES {
+  return ::swift::_impl::implClassFor<T_0_0>::type::initializeWithTake(reinterpret_cast<char * _Nonnull>(returnValue), payloadFromDestruction);
+  });
+  } else if constexpr (::swift::_impl::isSwiftBridgedCxxRecord<T_0_0>) {
+abort();
+  } else {
+  T_0_0 returnValue;
+memcpy(&returnValue, payloadFromDestruction, sizeof(returnValue));
+  return returnValue;
+  }
+#pragma clang diagnostic pop
+}
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK Optional<T_0_0> Optional<T_0_0>::_impl_none::operator()() const {
+    auto result = Optional<T_0_0>::_make();
+    result._destructiveInjectEnumTag(1);
+    return result;
+  }
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+  SWIFT_INLINE_THUNK  bool Optional<T_0_0>::isNone() const {
+    return *this == Optional<T_0_0>::none;
+  }
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK id _Nonnull Optional<T_0_0>::_bridgeToObjectiveC() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+return (__bridge_transfer id)(__bridge void *)swift::_impl::$sSq19_bridgeToObjectiveCyXlyF(swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  }
+#endif
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK void Optional<T_0_0>::_forceBridgeFromObjectiveCResult(id _Nonnull source, swift::Optional<Optional<T_0_0>>& result) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  swift::_impl::$sSq26_forceBridgeFromObjectiveC_6resultyyXl_xSgSgztFZ(source, swift::_impl::_impl_Optional<Optional<T_0_0>>::getOpaquePointer(result), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+#endif
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK bool Optional<T_0_0>::_conditionallyBridgeFromObjectiveCResult(id _Nonnull source, swift::Optional<Optional<T_0_0>>& result) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::$sSq34_conditionallyBridgeFromObjectiveC_6resultSbyXl_xSgSgztFZ(source, swift::_impl::_impl_Optional<Optional<T_0_0>>::getOpaquePointer(result), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  }
+#endif
+  #if defined(__OBJC__)
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Optional<T_0_0> Optional<T_0_0>::_unconditionallyBridgeFromObjectiveC(id _Nullable source) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_Optional<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::$sSq36_unconditionallyBridgeFromObjectiveCyxSgyXlSgFZ(result, source, swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  });
+  }
+#endif
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK String Optional<T_0_0>::getDebugDescription() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSq16debugDescriptionSSvg(swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer()));
+  });
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK T_0_0 Optional<T_0_0>::getUnsafelyUnwrapped() const {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+  if constexpr (std::is_base_of<::swift::_impl::RefCountedClass, T_0_0>::value) {
+  void *returnValue;
+  swift::_impl::$sSq17unsafelyUnwrappedxvg(reinterpret_cast<void *>(&returnValue), swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  return ::swift::_impl::implClassFor<T_0_0>::type::makeRetained(returnValue);
+  } else if constexpr (::swift::_impl::isValueType<T_0_0>) {
+  return ::swift::_impl::implClassFor<T_0_0>::type::returnNewValue([&](void * _Nonnull returnValue) SWIFT_INLINE_THUNK_ATTRIBUTES {
+swift::_impl::$sSq17unsafelyUnwrappedxvg(returnValue, swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  });
+  } else if constexpr (::swift::_impl::isSwiftBridgedCxxRecord<T_0_0>) {
+alignas(alignof(T_0_0)) char storage[sizeof(T_0_0)];
+auto * _Nonnull storageObjectPtr = reinterpret_cast<T_0_0 *>(storage);
+swift::_impl::$sSq17unsafelyUnwrappedxvg(storage, swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+T_0_0 result(static_cast<T_0_0 &&>(*storageObjectPtr));
+storageObjectPtr->~T_0_0();
+return result;
+  } else {
+  T_0_0 returnValue;
+swift::_impl::$sSq17unsafelyUnwrappedxvg(reinterpret_cast<void *>(&returnValue), swift::TypeMetadataTrait<Optional<T_0_0>>::getTypeMetadata(), _getOpaquePointer());
+  return returnValue;
+  }
+#pragma clang diagnostic pop
+  }
+  template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+SWIFT_INLINE_THUNK swift::Optional<T_0_0> Optional<T_0_0>::init(const T_0_0& value) {
+#ifndef __cpp_concepts
+static_assert(swift::isUsableInGenericContext<T_0_0>, "type cannot be used in a Swift generic context");
+#endif // __cpp_concepts
+  alignas(alignof(T_0_0)) char copyBuffer_consumedParamCopy_value[sizeof(T_0_0)];
+  auto &consumedParamCopy_value = *(new(copyBuffer_consumedParamCopy_value) T_0_0(value));
+  swift::_impl::ConsumedValueStorageDestroyer<T_0_0> storageGuard_consumedParamCopy_value(consumedParamCopy_value);
+  return swift::_impl::_impl_Optional<T_0_0>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::$sSqyxSgxcfC(result, swift::_impl::getOpaquePointer(consumedParamCopy_value), swift::TypeMetadataTrait<T_0_0>::getTypeMetadata());
+  });
+  }
+  SWIFT_INLINE_THUNK String String::init() {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sS2SycfC());
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index String::getStartIndex() const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS10startIndexSS0B0Vvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index String::getEndIndex() const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8endIndexSS0B0Vvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int String::getCount() const {
+  return swift::_impl::$sSS5countSivg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Int String::distanceFromTo(const String_Index& start, const String_Index& end) const {
+  return swift::_impl::$sSS8distance4from2toSiSS5IndexV_AEtF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(start)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(end)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void String::reserveCapacity(swift::Int n) {
+  swift::_impl::$sSS15reserveCapacityyySiF(n, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK void String::append(const String& other) {
+  swift::_impl::$sSS6appendyySSF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(other)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK void String::appendContentsOf(const String& newElements) {
+  swift::_impl::$sSS6append10contentsOfySS_tF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(newElements)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK void String::removeAllKeepingCapacity(bool keepCapacity) {
+  swift::_impl::$sSS9removeAll15keepingCapacityySb_tF(keepCapacity, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK UTF8View String::getUtf8() const {
+  return swift::_impl::_impl_UTF8View::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS4utf8SS8UTF8ViewVvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK void String::setUtf8(const UTF8View& newValue) {
+  alignas(alignof(UTF8View)) char copyBuffer_consumedParamCopy_newValue[sizeof(UTF8View)];
+  auto &consumedParamCopy_newValue = *(new(copyBuffer_consumedParamCopy_newValue) UTF8View(newValue));
+  swift::_impl::ConsumedValueStorageDestroyer<UTF8View> storageGuard_consumedParamCopy_newValue(consumedParamCopy_newValue);
+  swift::_impl::$sSS4utf8SS8UTF8ViewVvs(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_UTF8View::getOpaquePointer(consumedParamCopy_newValue)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK String String::getCharacters() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS10charactersSSvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK void String::setCharacters(const String& newValue) {
+  alignas(alignof(String)) char copyBuffer_consumedParamCopy_newValue[sizeof(String)];
+  auto &consumedParamCopy_newValue = *(new(copyBuffer_consumedParamCopy_newValue) String(newValue));
+  swift::_impl::ConsumedValueStorageDestroyer<String> storageGuard_consumedParamCopy_newValue(consumedParamCopy_newValue);
+  swift::_impl::$sSS10charactersSSvs(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(consumedParamCopy_newValue)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int String::getHashValue() const {
+  return swift::_impl::$sSS9hashValueSivg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK Array<uint8_t> String::get_nfcCodeUnits() const {
+  return swift::_impl::_impl_Array<uint8_t>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_void_ptr_0_8(result, swift::_impl::$sSS13_nfcCodeUnitsSays5UInt8VGvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String String::lowercased() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS10lowercasedSSyF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String String::uppercased() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS10uppercasedSSyF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK bool String::isEmpty() const {
+  return swift::_impl::$sSS7isEmptySbvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void String::write(const String& other) {
+  swift::_impl::$sSS5writeyySSF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(other)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK String String::getDescription() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS11descriptionSSvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String String::getDebugDescription() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS16debugDescriptionSSvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK bool String::hasPrefix(const String& prefix) const {
+  return swift::_impl::$sSS9hasPrefixySbSSF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(prefix)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK bool String::hasSuffix(const String& suffix) const {
+  return swift::_impl::$sSS9hasSuffixySbSSF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(swift::_impl::_impl_String::getOpaquePointer(suffix)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void String::_dump() const {
+  swift::_impl::$sSS5_dumpyyF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  #if defined(__OBJC__)
+SWIFT_INLINE_THUNK id _Nonnull String::_bridgeToObjectiveCImpl() const {
+return (__bridge_transfer id)(__bridge void *)swift::_impl::$sSS23_bridgeToObjectiveCImplyXlyF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+#endif
+  SWIFT_INLINE_THUNK String_Index UTF8View::getStartIndex() const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8UTF8ViewV10startIndexSS0D0Vvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index UTF8View::getEndIndex() const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8UTF8ViewV8endIndexSS0D0Vvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index UTF8View::indexAfter(const String_Index& i) const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8UTF8ViewV5index5afterSS5IndexVAF_tF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index UTF8View::indexBefore(const String_Index& i) const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8UTF8ViewV5index6beforeSS5IndexVAF_tF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String_Index UTF8View::indexOffsetBy(const String_Index& i, swift::Int n) const {
+  return swift::_impl::_impl_String_Index::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8(result, swift::_impl::$sSS8UTF8ViewV5index_8offsetBySS5IndexVAF_SitF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), n, swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<String_Index> UTF8View::indexOffsetByLimitedBy(const String_Index& i, swift::Int n, const String_Index& limit) const {
+  return swift::_impl::_impl_Optional<String_Index>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_uint8_t_8_9(result, swift::_impl::$sSS8UTF8ViewV5index_8offsetBy07limitedE0SS5IndexVSgAG_SiAGtF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), n, swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(limit)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int UTF8View::distanceFromTo(const String_Index& i, const String_Index& j) const {
+  return swift::_impl::$sSS8UTF8ViewV8distance4from2toSiSS5IndexV_AGtF(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(j)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+SWIFT_INLINE_THUNK uint8_t UTF8View::operator [](const String_Index& i) const SWIFT_SYMBOL("s:SS8UTF8ViewVys5UInt8VSS5IndexVcig") {
+  return swift::_impl::$sSS8UTF8ViewVys5UInt8VSS5IndexVcig(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8(swift::_impl::_impl_String_Index::getOpaquePointer(i)), swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK String UTF8View::getDescription() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS8UTF8ViewV11descriptionSSvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK String UTF8View::getDebugDescription() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    swift::_impl::swift_interop_returnDirect_swift_uint64_t_0_8_void_ptr_8_16(result, swift::_impl::$sSS8UTF8ViewV16debugDescriptionSSvg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int UTF8View::getCount() const {
+  return swift::_impl::$sSS8UTF8ViewV5countSivg(swift::_impl::swift_interop_passDirect_swift_uint64_t_0_8_void_ptr_8_16(_getOpaquePointer()));
+  }
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '!==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '%(_:_:)'.
+
+// Unavailable in C++: Swift operator function '%=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '<=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '==(_:_:)'.
+
+// Unavailable in C++: Swift operator function '===(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '>=(_:_:)'.
+
+// Unavailable in C++: Swift operator function '??(_:_:)'.
+
+// Unavailable in C++: Swift operator function '??(_:_:)'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class AdditiveArithmetic { } SWIFT_UNAVAILABLE_MSG("protocol 'AdditiveArithmetic' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'AnyClass'.
+
+class AnyKeyPath { } SWIFT_UNAVAILABLE_MSG("class 'AnyKeyPath' is not yet exposed to C++");
+
+// Unavailable in C++: Swift type alias 'AnyObject'.
+
+// Unavailable in C++: Swift type alias 'ArrayLiteralConvertible'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class BidirectionalCollection { } SWIFT_UNAVAILABLE_MSG("protocol 'BidirectionalCollection' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'BidirectionalIndexable'.
+
+// Unavailable in C++: Swift type alias 'BidirectionalSlice'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class BinaryFloatingPoint { } SWIFT_UNAVAILABLE_MSG("protocol 'BinaryFloatingPoint' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class BinaryInteger { } SWIFT_UNAVAILABLE_MSG("protocol 'BinaryInteger' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class BitwiseCopyable { } SWIFT_UNAVAILABLE_MSG("protocol 'BitwiseCopyable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'BooleanLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'BooleanLiteralType'.
+
+// Unavailable in C++: Swift type alias 'CBool'.
+
+// Unavailable in C++: Swift type alias 'CChar'.
+
+// Unavailable in C++: Swift type alias 'CChar16'.
+
+// Unavailable in C++: Swift type alias 'CChar32'.
+
+// Unavailable in C++: Swift type alias 'CChar8'.
+
+// Unavailable in C++: Swift type alias 'CDouble'.
+
+// Unavailable in C++: Swift type alias 'CFloat'.
+
+// Unavailable in C++: Swift type alias 'CInt'.
+
+// Unavailable in C++: Swift type alias 'CLong'.
+
+// Unavailable in C++: Swift type alias 'CLongDouble'.
+
+// Unavailable in C++: Swift type alias 'CLongLong'.
+
+// Unavailable in C++: Swift type alias 'CShort'.
+
+// Unavailable in C++: Swift type alias 'CSignedChar'.
+
+// Unavailable in C++: Swift type alias 'CUnsignedChar'.
+
+// Unavailable in C++: Swift type alias 'CUnsignedInt'.
+
+// Unavailable in C++: Swift type alias 'CUnsignedLong'.
+
+// Unavailable in C++: Swift type alias 'CUnsignedLongLong'.
+
+// Unavailable in C++: Swift type alias 'CUnsignedShort'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CVarArg { } SWIFT_UNAVAILABLE_MSG("protocol 'CVarArg' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'CWideChar'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CaseIterable { } SWIFT_UNAVAILABLE_MSG("protocol 'CaseIterable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'ClosedRangeIndex'.
+
+// Unavailable in C++: Swift type alias 'Codable'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CodingKey { } SWIFT_UNAVAILABLE_MSG("protocol 'CodingKey' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CodingKeyRepresentable { } SWIFT_UNAVAILABLE_MSG("protocol 'CodingKeyRepresentable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Collection { } SWIFT_UNAVAILABLE_MSG("protocol 'Collection' can not yet be represented in C++");
+
+class CommandLine { } SWIFT_UNAVAILABLE_MSG("'CommandLine' is a zero sized value type, it cannot be exposed to C++ yet");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Comparable { } SWIFT_UNAVAILABLE_MSG("protocol 'Comparable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'ConcurrentValue'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Copyable { } SWIFT_UNAVAILABLE_MSG("protocol 'Copyable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'CountableClosedRange'.
+
+// Unavailable in C++: Swift type alias 'CountablePartialRangeFrom'.
+
+// Unavailable in C++: Swift type alias 'CountableRange'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CustomDebugStringConvertible { } SWIFT_UNAVAILABLE_MSG("protocol 'CustomDebugStringConvertible' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CustomLeafReflectable { } SWIFT_UNAVAILABLE_MSG("protocol 'CustomLeafReflectable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CustomPlaygroundDisplayConvertible { } SWIFT_UNAVAILABLE_MSG("protocol 'CustomPlaygroundDisplayConvertible' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'CustomPlaygroundQuickLookable'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CustomReflectable { } SWIFT_UNAVAILABLE_MSG("protocol 'CustomReflectable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class CustomStringConvertible { } SWIFT_UNAVAILABLE_MSG("protocol 'CustomStringConvertible' can not yet be represented in C++");
+
+// Unavailable in C++: Swift macro 'DebugDescription()'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Decodable { } SWIFT_UNAVAILABLE_MSG("protocol 'Decodable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Decoder { } SWIFT_UNAVAILABLE_MSG("protocol 'Decoder' can not yet be represented in C++");
+
+class DecodingError { } SWIFT_UNAVAILABLE_MSG("enum 'DecodingError' is not yet exposed to C++");
+
+// Unavailable in C++: Swift type alias 'DefaultBidirectionalIndices'.
+
+// Unavailable in C++: Swift type alias 'DefaultRandomAccessIndices'.
+
+// Unavailable in C++: Swift type alias 'DictionaryIndex'.
+
+// Unavailable in C++: Swift type alias 'DictionaryIterator'.
+
+// Unavailable in C++: Swift type alias 'DictionaryLiteral'.
+
+// Unavailable in C++: Swift type alias 'DictionaryLiteralConvertible'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class DurationProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'DurationProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'EmptyIterator'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Encodable { } SWIFT_UNAVAILABLE_MSG("protocol 'Encodable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Encoder { } SWIFT_UNAVAILABLE_MSG("protocol 'Encoder' can not yet be represented in C++");
+
+class EncodingError { } SWIFT_UNAVAILABLE_MSG("enum 'EncodingError' is not yet exposed to C++");
+
+// Unavailable in C++: Swift type alias 'EnumeratedIterator'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Equatable { } SWIFT_UNAVAILABLE_MSG("protocol 'Equatable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Escapable { } SWIFT_UNAVAILABLE_MSG("protocol 'Escapable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByArrayLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByArrayLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByBooleanLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByBooleanLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByDictionaryLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByDictionaryLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByExtendedGraphemeClusterLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByExtendedGraphemeClusterLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByFloatLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByFloatLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByIntegerLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByIntegerLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByNilLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByNilLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByStringInterpolation { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByStringInterpolation' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByStringLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByStringLiteral' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class ExpressibleByUnicodeScalarLiteral { } SWIFT_UNAVAILABLE_MSG("protocol 'ExpressibleByUnicodeScalarLiteral' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'ExtendedGraphemeClusterLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'ExtendedGraphemeClusterType'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class FixedWidthInteger { } SWIFT_UNAVAILABLE_MSG("protocol 'FixedWidthInteger' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'FlattenBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'FlattenBidirectionalCollectionIndex'.
+
+// Unavailable in C++: Swift type alias 'FlattenCollection'.
+
+// Unavailable in C++: Swift type alias 'FlattenCollectionIndex'.
+
+// Unavailable in C++: Swift type alias 'Float32'.
+
+// Unavailable in C++: Swift type alias 'Float64'.
+
+// Unavailable in C++: Swift type alias 'FloatLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'FloatLiteralType'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class FloatingPoint { } SWIFT_UNAVAILABLE_MSG("protocol 'FloatingPoint' can not yet be represented in C++");
+
+class FloatingPointClassification { } SWIFT_UNAVAILABLE_MSG("enum 'FloatingPointClassification' is not yet exposed to C++");
+
+class FloatingPointRoundingRule { } SWIFT_UNAVAILABLE_MSG("enum 'FloatingPointRoundingRule' is not yet exposed to C++");
+
+class FloatingPointSign { } SWIFT_UNAVAILABLE_MSG("enum 'FloatingPointSign' is not yet exposed to C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Hashable { } SWIFT_UNAVAILABLE_MSG("protocol 'Hashable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Identifiable { } SWIFT_UNAVAILABLE_MSG("protocol 'Identifiable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'ImplicitlyUnwrappedOptional'.
+
+// Unavailable in C++: Swift type alias 'Indexable'.
+
+// Unavailable in C++: Swift type alias 'IndexableBase'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class InstantProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'InstantProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'IntegerLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'IntegerLiteralType'.
+
+// Unavailable in C++: Swift type alias 'IteratorOverOne'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class IteratorProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'IteratorProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'JoinedIterator'.
+
+template<class T_0_0, class T_0_1>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0> && swift::isUsableInGenericContext<T_0_1>
+#endif // __cpp_concepts
+class KeyPath { } SWIFT_UNAVAILABLE_MSG("generic generic class 'KeyPath' can not yet be exposed to C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class KeyedDecodingContainerProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'KeyedDecodingContainerProtocol' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class KeyedEncodingContainerProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'KeyedEncodingContainerProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'LazyBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyCollection'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class LazyCollectionProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'LazyCollectionProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'LazyDropWhileBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyDropWhileCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyDropWhileIndex'.
+
+// Unavailable in C++: Swift type alias 'LazyDropWhileIterator'.
+
+// Unavailable in C++: Swift type alias 'LazyFilterBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyFilterCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyFilterIndex'.
+
+// Unavailable in C++: Swift type alias 'LazyFilterIterator'.
+
+// Unavailable in C++: Swift type alias 'LazyMapBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyMapCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyMapIterator'.
+
+// Unavailable in C++: Swift type alias 'LazyMapRandomAccessCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyPrefixWhileBidirectionalCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyPrefixWhileCollection'.
+
+// Unavailable in C++: Swift type alias 'LazyPrefixWhileIndex'.
+
+// Unavailable in C++: Swift type alias 'LazyPrefixWhileIterator'.
+
+// Unavailable in C++: Swift type alias 'LazyRandomAccessCollection'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class LazySequenceProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'LazySequenceProtocol' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class LosslessStringConvertible { } SWIFT_UNAVAILABLE_MSG("protocol 'LosslessStringConvertible' can not yet be represented in C++");
+
+template<class T_0_0, class T_0_1>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0> && swift::isUsableInGenericContext<T_0_1>
+#endif // __cpp_concepts
+class ManagedBuffer { } SWIFT_UNAVAILABLE_MSG("generic generic class 'ManagedBuffer' can not yet be exposed to C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class MemoryLayout { } SWIFT_UNAVAILABLE_MSG("'MemoryLayout' is a zero sized value type, it cannot be exposed to C++ yet");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class MirrorPath { } SWIFT_UNAVAILABLE_MSG("protocol 'MirrorPath' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'MutableBidirectionalSlice'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class MutableCollection { } SWIFT_UNAVAILABLE_MSG("protocol 'MutableCollection' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'MutableIndexable'.
+
+// Unavailable in C++: Swift type alias 'MutableRandomAccessSlice'.
+
+// Unavailable in C++: Swift type alias 'MutableRangeReplaceableBidirectionalSlice'.
+
+// Unavailable in C++: Swift type alias 'MutableRangeReplaceableRandomAccessSlice'.
+
+// Unavailable in C++: Swift type alias 'MutableRangeReplaceableSlice'.
+
+// Unavailable in C++: Swift type alias 'MutableSlice'.
+
+class Never { } SWIFT_UNAVAILABLE_MSG("'Never' is a zero sized value type, it cannot be exposed to C++ yet");
+
+// Unavailable in C++: Swift type alias 'NilLiteralConvertible'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Numeric { } SWIFT_UNAVAILABLE_MSG("protocol 'Numeric' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class OptionSet { } SWIFT_UNAVAILABLE_MSG("protocol 'OptionSet' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class PartialKeyPath { } SWIFT_UNAVAILABLE_MSG("generic generic class 'PartialKeyPath' can not yet be exposed to C++");
+
+// Unavailable in C++: Swift type alias 'PlaygroundQuickLook'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class RandomAccessCollection { } SWIFT_UNAVAILABLE_MSG("protocol 'RandomAccessCollection' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'RandomAccessIndexable'.
+
+// Unavailable in C++: Swift type alias 'RandomAccessSlice'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class RandomNumberGenerator { } SWIFT_UNAVAILABLE_MSG("protocol 'RandomNumberGenerator' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class RangeExpression { } SWIFT_UNAVAILABLE_MSG("protocol 'RangeExpression' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'RangeReplaceableBidirectionalSlice'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class RangeReplaceableCollection { } SWIFT_UNAVAILABLE_MSG("protocol 'RangeReplaceableCollection' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'RangeReplaceableIndexable'.
+
+// Unavailable in C++: Swift type alias 'RangeReplaceableRandomAccessSlice'.
+
+// Unavailable in C++: Swift type alias 'RangeReplaceableSlice'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class RawRepresentable { } SWIFT_UNAVAILABLE_MSG("protocol 'RawRepresentable' can not yet be represented in C++");
+
+template<class T_0_0, class T_0_1>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0> && swift::isUsableInGenericContext<T_0_1>
+#endif // __cpp_concepts
+class ReferenceWritableKeyPath { } SWIFT_UNAVAILABLE_MSG("generic generic class 'ReferenceWritableKeyPath' can not yet be exposed to C++");
+
+template<class T_0_0, class T_0_1>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0> && swift::isUsableInGenericContext<T_0_1>
+#endif // __cpp_concepts
+class Result { } SWIFT_UNAVAILABLE_MSG("generic requirements for generic enum 'Result' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'ReversedIndex'.
+
+// Unavailable in C++: Swift type alias 'ReversedRandomAccessCollection'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SIMD { } SWIFT_UNAVAILABLE_MSG("protocol 'SIMD' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SIMDScalar { } SWIFT_UNAVAILABLE_MSG("protocol 'SIMDScalar' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SIMDStorage { } SWIFT_UNAVAILABLE_MSG("protocol 'SIMDStorage' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Sendable { } SWIFT_UNAVAILABLE_MSG("protocol 'Sendable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SendableMetatype { } SWIFT_UNAVAILABLE_MSG("protocol 'SendableMetatype' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Sequence { } SWIFT_UNAVAILABLE_MSG("protocol 'Sequence' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SetAlgebra { } SWIFT_UNAVAILABLE_MSG("protocol 'SetAlgebra' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'SetIndex'.
+
+// Unavailable in C++: Swift type alias 'SetIterator'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SignedInteger { } SWIFT_UNAVAILABLE_MSG("protocol 'SignedInteger' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SignedNumeric { } SWIFT_UNAVAILABLE_MSG("protocol 'SignedNumeric' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SingleValueDecodingContainer { } SWIFT_UNAVAILABLE_MSG("protocol 'SingleValueDecodingContainer' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class SingleValueEncodingContainer { } SWIFT_UNAVAILABLE_MSG("protocol 'SingleValueEncodingContainer' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class Strideable { } SWIFT_UNAVAILABLE_MSG("protocol 'Strideable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'StringInterpolationConvertible'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class StringInterpolationProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'StringInterpolationProtocol' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'StringLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'StringLiteralType'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class StringProtocol { } SWIFT_UNAVAILABLE_MSG("protocol 'StringProtocol' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class TextOutputStream { } SWIFT_UNAVAILABLE_MSG("protocol 'TextOutputStream' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class TextOutputStreamable { } SWIFT_UNAVAILABLE_MSG("protocol 'TextOutputStreamable' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'UTF16'.
+
+// Unavailable in C++: Swift type alias 'UTF32'.
+
+// Unavailable in C++: Swift type alias 'UTF8'.
+
+// Unavailable in C++: Swift type alias 'UnboundedRange'.
+
+class UnboundedRange_ { } SWIFT_UNAVAILABLE_MSG("'UnboundedRange_' is a zero sized value type, it cannot be exposed to C++ yet");
+
+// Unavailable in C++: Swift type alias 'UnfoldFirstSequence'.
+
+class Unicode { } SWIFT_UNAVAILABLE_MSG("'Unicode' is a zero sized value type, it cannot be exposed to C++ yet");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class UnicodeCodec { } SWIFT_UNAVAILABLE_MSG("protocol 'UnicodeCodec' can not yet be represented in C++");
+
+class UnicodeDecodingResult { } SWIFT_UNAVAILABLE_MSG("enum 'UnicodeDecodingResult' is not yet exposed to C++");
+
+// Unavailable in C++: Swift type alias 'UnicodeScalar'.
+
+// Unavailable in C++: Swift type alias 'UnicodeScalarLiteralConvertible'.
+
+// Unavailable in C++: Swift type alias 'UnicodeScalarType'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class UnkeyedDecodingContainer { } SWIFT_UNAVAILABLE_MSG("protocol 'UnkeyedDecodingContainer' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class UnkeyedEncodingContainer { } SWIFT_UNAVAILABLE_MSG("protocol 'UnkeyedEncodingContainer' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'UnsafeBufferPointerIterator'.
+
+// Unavailable in C++: Swift type alias 'UnsafeConcurrentValue'.
+
+// Unavailable in C++: Swift type alias 'UnsafeMutableRawBufferPointerIterator'.
+
+// Unavailable in C++: Swift type alias 'UnsafeRawBufferPointerIterator'.
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class UnsafeSendable { } SWIFT_UNAVAILABLE_MSG("protocol 'UnsafeSendable' can not yet be represented in C++");
+
+template<class T_0_0>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0>
+#endif // __cpp_concepts
+class UnsignedInteger { } SWIFT_UNAVAILABLE_MSG("protocol 'UnsignedInteger' can not yet be represented in C++");
+
+// Unavailable in C++: Swift type alias 'Void'.
+
+template<class T_0_0, class T_0_1>
+#ifdef __cpp_concepts
+requires swift::isUsableInGenericContext<T_0_0> && swift::isUsableInGenericContext<T_0_1>
+#endif // __cpp_concepts
+class WritableKeyPath { } SWIFT_UNAVAILABLE_MSG("generic generic class 'WritableKeyPath' can not yet be exposed to C++");
+
+// Unavailable in C++: Swift type alias 'Zip2Iterator'.
+
+// Unavailable in C++: Swift global function 'abs(_:)'.
+
+// Unavailable in C++: Swift global function 'all(_:)'.
+
+// Unavailable in C++: Swift global function 'any(_:)'.
+
+// Unavailable in C++: Swift global function 'assert(_:_:file:line:)'.
+
+// Unavailable in C++: Swift global function 'assertionFailure(_:file:line:)'.
+
+// Unavailable in C++: Swift macro 'column()'.
+
+// Unavailable in C++: Swift global function 'debugPrint(_:separator:terminator:)'.
+
+// Unavailable in C++: Swift global function 'debugPrint(_:separator:terminator:to:)'.
+
+// Unavailable in C++: Swift macro 'dsohandle()'.
+
+// Unavailable in C++: Swift global function 'dump(_:name:indent:maxDepth:maxItems:)'.
+
+// Unavailable in C++: Swift global function 'dump(_:to:name:indent:maxDepth:maxItems:)'.
+
+// Unavailable in C++: Swift macro 'error(_:)'.
+
+// Unavailable in C++: Swift global function 'exchange(_:with:)'.
+
+// Unavailable in C++: Swift global function 'extendLifetime(_:)'.
+
+// Unavailable in C++: Swift macro 'externalMacro(module:type:)'.
+
+// Unavailable in C++: Swift global function 'fatalError(_:file:line:)'.
+
+// Unavailable in C++: Swift macro 'file()'.
+
+// Unavailable in C++: Swift macro 'fileID()'.
+
+// Unavailable in C++: Swift macro 'filePath()'.
+
+// Unavailable in C++: Swift macro 'function()'.
+
+// Unavailable in C++: Swift global function 'getVaList(_:)'.
+
+// Unavailable in C++: Swift global function 'isKnownUniquelyReferenced(_:)'.
+
+// Unavailable in C++: Swift global function 'isKnownUniquelyReferenced(_:)'.
+
+// Unavailable in C++: Swift macro 'line()'.
+
+// Unavailable in C++: Swift global function 'max(_:_:)'.
+
+// Unavailable in C++: Swift global function 'max(_:_:_:_:)'.
+
+// Unavailable in C++: Swift global function 'min(_:_:)'.
+
+// Unavailable in C++: Swift global function 'min(_:_:_:_:)'.
+
+// Unavailable in C++: Swift global function 'numericCast(_:)'.
+
+// Unavailable in C++: Swift global function 'pointwiseMax(_:_:)'.
+
+// Unavailable in C++: Swift global function 'pointwiseMax(_:_:)'.
+
+// Unavailable in C++: Swift global function 'pointwiseMin(_:_:)'.
+
+// Unavailable in C++: Swift global function 'pointwiseMin(_:_:)'.
+
+// Unavailable in C++: Swift global function 'precondition(_:_:file:line:)'.
+
+// Unavailable in C++: Swift global function 'preconditionFailure(_:file:line:)'.
+
+// Unavailable in C++: Swift global function 'print(_:separator:terminator:)'.
+
+// Unavailable in C++: Swift global function 'print(_:separator:terminator:to:)'.
+
+// Unavailable in C++: Swift global function 'readLine(strippingNewline:)'.
+
+// Unavailable in C++: Swift global function 'repeatElement(_:count:)'.
+
+// Unavailable in C++: Swift global function 'sequence(first:next:)'.
+
+// Unavailable in C++: Swift global function 'sequence(state:next:)'.
+
+// Unavailable in C++: Swift global function 'stride(from:through:by:)'.
+
+// Unavailable in C++: Swift global function 'stride(from:to:by:)'.
+
+// Unavailable in C++: Swift global function 'swap(_:_:)'.
+
+// Unavailable in C++: Swift global function 'transcode(_:_:_:_:stopOnError:)'.
+
+// Unavailable in C++: Swift global function 'transcode(_:from:to:stoppingOnError:into:)'.
+
+// Unavailable in C++: Swift global function 'type(of:)'.
+
+// Unavailable in C++: Swift global function 'unsafeBitCast(_:to:)'.
+
+// Unavailable in C++: Swift global function 'unsafeDowncast(_:to:)'.
+
+// Unavailable in C++: Swift macro 'warning(_:)'.
+
+// Unavailable in C++: Swift global function 'withExtendedLifetime(_:_:)'.
+
+// Unavailable in C++: Swift global function 'withExtendedLifetime(_:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeBytes(of:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeBytes(of:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeMutableBytes(of:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeMutablePointer(to:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafePointer(to:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafePointer(to:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeTemporaryAllocation(byteCount:alignment:_:)'.
+
+// Unavailable in C++: Swift global function 'withUnsafeTemporaryAllocation(of:capacity:_:)'.
+
+// Unavailable in C++: Swift global function 'withVaList(_:_:)'.
+
+// Unavailable in C++: Swift global function 'withoutActuallyEscaping(_:do:)'.
+
+// Unavailable in C++: Swift global function 'zip(_:_:)'.
+
+// Unavailable in C++: Swift operator function '~=(_:_:)'.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnon-modular-include-in-framework-module"
+// Allow user to find the header using additional include paths
+#if __has_include(<swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <swiftToCxx/_SwiftStdlibCxxOverlay.h>
+// Look for the C++ interop support header relative to clang's resource dir:
+//  '<toolchain>/usr/lib/clang/<version>/include/../../../swift/swiftToCxx'.
+#elif __has_include(<../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+#include <../../../swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#elif __has_include(<../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>)
+//  '<toolchain>/usr/local/lib/clang/<version>/include/../../../../../lib/swift/swiftToCxx'.
+#include <../../../../../lib/swift/swiftToCxx/_SwiftStdlibCxxOverlay.h>
+#endif
+#pragma clang diagnostic pop
+
+} // namespace swift
+
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+#undef SWIFT_SYMBOL
+#endif // SWIFT_SWIFT_H
+#ifdef SWIFT_SYMBOL
+#undef SWIFT_SYMBOL
+#endif
+#define SWIFT_SYMBOL(usrValue) SWIFT_SYMBOL_MODULE_USR("RayTracer", usrValue)
+#ifndef SWIFT_PRINTED_CORE
+#define SWIFT_PRINTED_CORE
+namespace swift SWIFT_PRIVATE_ATTR {
+
+namespace _impl {
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Swift type metadata response type.
+struct MetadataResponseTy {
+  void * _Null_unspecified _0;
+  uint64_t _1;
+};
+// Swift type metadata request type.
+typedef uint64_t MetadataRequestTy;
+
+#if __cplusplus > 201402L
+#  define SWIFT_NOEXCEPT_FUNCTION_PTR noexcept
+#else
+#  define SWIFT_NOEXCEPT_FUNCTION_PTR
+#endif
+
+using ValueWitnessInitializeBufferWithCopyOfBufferTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(55882))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessDestroyTy = void(* __ptrauth_swift_value_witness_function_pointer(1272))(void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessInitializeWithCopyTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(58298))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessAssignWithCopyTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(34641))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessInitializeWithTakeTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(18648))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessAssignWithTakeTy = void * _Nonnull(* __ptrauth_swift_value_witness_function_pointer(61402))(void * _Nonnull, void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessGetEnumTagSinglePayloadTy = unsigned(* __ptrauth_swift_value_witness_function_pointer(24816))(const void * _Nonnull, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using ValueWitnessStoreEnumTagSinglePayloadTy = void(* __ptrauth_swift_value_witness_function_pointer(41169))(void * _Nonnull, unsigned, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+
+struct ValueWitnessTable {
+  ValueWitnessInitializeBufferWithCopyOfBufferTy _Nonnull initializeBufferWithCopyOfBuffer;
+  ValueWitnessDestroyTy _Nonnull destroy;
+  ValueWitnessInitializeWithCopyTy _Nonnull initializeWithCopy;
+  ValueWitnessAssignWithCopyTy _Nonnull assignWithCopy;
+  ValueWitnessInitializeWithTakeTy _Nonnull initializeWithTake;
+  ValueWitnessAssignWithTakeTy _Nonnull assignWithTake;
+  ValueWitnessGetEnumTagSinglePayloadTy _Nonnull getEnumTagSinglePayload;
+  ValueWitnessStoreEnumTagSinglePayloadTy _Nonnull storeEnumTagSinglePayload;
+  size_t size;
+  size_t stride;
+  unsigned flags;
+  unsigned extraInhabitantCount;
+
+  constexpr size_t getAlignment() const { return (flags & 255) + 1; }
+};
+
+using EnumValueWitnessGetEnumTagTy = unsigned(* __ptrauth_swift_value_witness_function_pointer(41909))(const void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using EnumValueWitnessDestructiveProjectEnumDataTy = void(* __ptrauth_swift_value_witness_function_pointer(1053))(void * _Nonnull, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+using EnumValueWitnessDestructiveInjectEnumTagTy = void(* __ptrauth_swift_value_witness_function_pointer(45796))(void * _Nonnull, unsigned, void * _Nonnull) SWIFT_NOEXCEPT_FUNCTION_PTR;
+
+struct EnumValueWitnessTable {
+  ValueWitnessTable vwTable;
+  EnumValueWitnessGetEnumTagTy _Nonnull getEnumTag;
+  EnumValueWitnessDestructiveProjectEnumDataTy _Nonnull destructiveProjectEnumData;
+  EnumValueWitnessDestructiveInjectEnumTagTy _Nonnull destructiveInjectEnumTag;
+};
+
+#undef SWIFT_NOEXCEPT_FUNCTION_PTR
+
+
+// type metadata address for Bool.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSbN;
+// type metadata address for Int8.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss4Int8VN;
+// type metadata address for UInt8.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5UInt8VN;
+// type metadata address for Int16.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int16VN;
+// type metadata address for UInt16.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt16VN;
+// type metadata address for Int32.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int32VN;
+// type metadata address for UInt32.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt32VN;
+// type metadata address for Int64.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss5Int64VN;
+// type metadata address for UInt64.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss6UInt64VN;
+// type metadata address for Float.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSfN;
+// type metadata address for Double.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSdN;
+// type metadata address for OpaquePointer.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $ss13OpaquePointerVN;
+// type metadata address for Int.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSiN;
+// type metadata address for UInt.
+SWIFT_IMPORT_STDLIB_SYMBOL extern size_t $sSuN;
+
+#ifdef __cplusplus
+}
+#endif
+
+
+} // namespace _impl
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<bool> = true;
+
+template<>
+struct TypeMetadataTrait<bool> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSbN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int8_t> = true;
+
+template<>
+struct TypeMetadataTrait<int8_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss4Int8VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint8_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint8_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5UInt8VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int16_t> = true;
+
+template<>
+struct TypeMetadataTrait<int16_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int16VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint16_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint16_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt16VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int32_t> = true;
+
+template<>
+struct TypeMetadataTrait<int32_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int32VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint32_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint32_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt32VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<int64_t> = true;
+
+template<>
+struct TypeMetadataTrait<int64_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss5Int64VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<uint64_t> = true;
+
+template<>
+struct TypeMetadataTrait<uint64_t> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss6UInt64VN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<float> = true;
+
+template<>
+struct TypeMetadataTrait<float> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSfN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<double> = true;
+
+template<>
+struct TypeMetadataTrait<double> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSdN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<void *> = true;
+
+template<>
+struct TypeMetadataTrait<void *> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$ss13OpaquePointerVN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::Int> = true;
+
+template<>
+struct TypeMetadataTrait<swift::Int> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSiN;
+  }
+};
+
+template<>
+inline const constexpr bool isUsableInGenericContext<swift::UInt> = true;
+
+template<>
+struct TypeMetadataTrait<swift::UInt> {
+  static SWIFT_INLINE_THUNK void * _Nonnull getTypeMetadata() {
+    return &_impl::$sSuN;
+  }
+};
+
+#pragma clang diagnostic pop
+
+} // namespace swift
+
+#endif
+#endif
+#ifdef __cplusplus
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+extern "C" {
+#endif
+
+struct RayTracer_AABB {
+  _Alignas(16) char _storage[64];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint8_t_8_9 {
+  uint64_t _1;
+  uint8_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint8_t_8_9 swift_interop_passDirect_RayTracer_uint64_t_0_8_uint8_t_8_9(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint8_t_8_9 result;
+  memcpy(&result._1, value + 0, 8);
+  memcpy(&result._2, value + 8, 1);
+  return result;
+}
+
+SWIFT_EXTERN ptrdiff_t $s9RayTracer10BVHBuilderV7maxLeafSivg(struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint8_t_8_9 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer10BVHBuilderV7maxLeafSivs(ptrdiff_t value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_uint8_t_0_1 {
+  uint8_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_uint8_t_0_1(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_uint8_t_0_1 value) {
+  memcpy(result + 0, &value._1, 1);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint8_t_0_1 $s9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvg(struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint8_t_8_9 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_uint8_t_0_1 {
+  uint8_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_uint8_t_0_1 swift_interop_passDirect_RayTracer_uint8_t_0_1(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_uint8_t_0_1 result;
+  memcpy(&result._1, value + 0, 1);
+  return result;
+}
+
+SWIFT_EXTERN void $s9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvs(struct swift_interop_passStub_RayTracer_uint8_t_0_1 value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint8_t_8_9 {
+  uint64_t _1;
+  uint8_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint8_t_8_9(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint8_t_8_9 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 1);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint8_t_8_9 $s9RayTracer10BVHBuilderV7maxLeaf5splitACSi_AA12BVHSplitModeOtcfC(ptrdiff_t maxLeaf, struct swift_interop_passStub_RayTracer_uint8_t_0_1 split) SWIFT_NOEXCEPT SWIFT_CALL; // init(maxLeaf:split:)
+struct RayTracer_BVHBuilder {
+  _Alignas(8) char _storage[9];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_uint64_t_0_8 {
+  uint64_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_uint64_t_0_8(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_uint64_t_0_8 value) {
+  memcpy(result + 0, &value._1, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8 $s9RayTracer7BVHNodeC4leftACSgvg(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_uint64_t_0_8 {
+  uint64_t _1;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_uint64_t_0_8 swift_interop_passDirect_RayTracer_uint64_t_0_8(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_uint64_t_0_8 result;
+  memcpy(&result._1, value + 0, 8);
+  return result;
+}
+
+SWIFT_EXTERN void $s9RayTracer7BVHNodeC4leftACSgvs(struct swift_interop_passStub_RayTracer_uint64_t_0_8 value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8 $s9RayTracer7BVHNodeC5rightACSgvg(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer7BVHNodeC5rightACSgvs(struct swift_interop_passStub_RayTracer_uint64_t_0_8 value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer7BVHNodeC5startSivg(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer7BVHNodeC5startSivs(ptrdiff_t value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer7BVHNodeC5countSivg(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer7BVHNodeC5countSivs(ptrdiff_t value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN bool $s9RayTracer7BVHNodeC6isLeafSbvg(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void * _Nonnull $s9RayTracer7BVHNodeCACycfC(SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // init()
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_uint8_t_0_1_uint64_t_8_16 {
+  uint8_t _1;
+  uint64_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_uint8_t_0_1_uint64_t_8_16 swift_interop_passDirect_RayTracer_uint8_t_0_1_uint64_t_8_16(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_uint8_t_0_1_uint64_t_8_16 result;
+  memcpy(&result._1, value + 0, 1);
+  memcpy(&result._2, value + 8, 8);
+  return result;
+}
+
+SWIFT_EXTERN uint8_t $s9RayTracer7BVHPrimV4types5UInt8Vvg(struct swift_interop_passStub_RayTracer_uint8_t_0_1_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer7BVHPrimV5indexSivg(struct swift_interop_passStub_RayTracer_uint8_t_0_1_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_BVHPrim {
+  _Alignas(8) char _storage[16];
+};
+
+SWIFT_EXTERN ptrdiff_t $s9RayTracer12BVHSplitModeO9hashValueSivg(struct swift_interop_passStub_RayTracer_uint8_t_0_1 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_BVHSplitMode {
+  _Alignas(1) char _storage[1];
+};
+
+SWIFT_EXTERN ptrdiff_t $s9RayTracer10CameraSpecV5indexSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint64_t_8_16 {
+  uint64_t _1;
+  uint64_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint64_t_8_16 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint64_t_8_16 $s9RayTracer10CameraSpecV2idSSSgvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint64_t_8_16 $s9RayTracer10CameraSpecV9imageNameSSSgvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer10CameraSpecV5widthSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer10CameraSpecV6heightSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_CameraSpec {
+  _Alignas(8) char _storage[56];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_uint64_t_0_8_void_ptr_8_16 {
+  uint64_t _1;
+  void * _Nullable _2;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_uint64_t_0_8_void_ptr_8_16(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_uint64_t_0_8_void_ptr_8_16 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 8);
+}
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint64_t_8_16 {
+  uint64_t _1;
+  uint64_t _2;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint64_t_8_16 swift_interop_passDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint64_t_8_16 result;
+  memcpy(&result._1, value + 0, 8);
+  memcpy(&result._2, value + 8, 8);
+  return result;
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_void_ptr_8_16 $s9RayTracer8PlyErrorO11descriptionSSvg(struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_PlyError {
+  _Alignas(8) char _storage[16];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_void_ptr_0_8 {
+  void * _Nullable _1;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_void_ptr_0_8(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_void_ptr_0_8 value) {
+  memcpy(result + 0, &value._1, 8);
+}
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24 {
+  void * _Nullable _1;
+  void * _Nullable _2;
+  void * _Nullable _3;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24 swift_interop_passDirect_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24 result;
+  memcpy(&result._1, value + 0, 8);
+  memcpy(&result._2, value + 8, 8);
+  memcpy(&result._3, value + 16, 8);
+  return result;
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_void_ptr_0_8 $s9RayTracer7PlyMeshV7indicesSaySiGvg(struct swift_interop_passStub_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_void_ptr_0_8 {
+  void * _Nullable _1;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_void_ptr_0_8 swift_interop_passDirect_RayTracer_void_ptr_0_8(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_void_ptr_0_8 result;
+  memcpy(&result._1, value + 0, 8);
+  return result;
+}
+
+SWIFT_EXTERN void $s9RayTracer7PlyMeshV7indicesSaySiGvs(struct swift_interop_passStub_RayTracer_void_ptr_0_8 value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_PlyMesh {
+  _Alignas(8) char _storage[24];
+};
+
+struct RayTracer_RTContext {
+  _Alignas(8) char _storage[224];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 {
+  float _1;
+  bool _2;
+  uint64_t _3;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 swift_interop_passDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 result;
+  memcpy(&result._1, value + 0, 4);
+  memcpy(&result._2, value + 4, 1);
+  memcpy(&result._3, value + 8, 8);
+  return result;
+}
+
+SWIFT_EXTERN float $s9RayTracer12RenderConfigV8exposureSfvg(struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer12RenderConfigV8exposureSfvs(float value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN bool $s9RayTracer12RenderConfigV15backfaceCullingSbvg(struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer12RenderConfigV15backfaceCullingSbvs(bool value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer12RenderConfigV3sspSivg(struct swift_interop_passStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer12RenderConfigV3sspSivs(ptrdiff_t value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 {
+  float _1;
+  bool _2;
+  uint64_t _3;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 value) {
+  memcpy(result + 0, &value._1, 4);
+  memcpy(result + 4, &value._2, 1);
+  memcpy(result + 8, &value._3, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_float_0_4_bool_4_5_uint64_t_8_16 $s9RayTracer12RenderConfigV8exposure15backfaceCulling3sspACSf_SbSitcfC(float exposure, bool backfaceCulling, ptrdiff_t ssp) SWIFT_NOEXCEPT SWIFT_CALL; // init(exposure:backfaceCulling:ssp:)
+struct RayTracer_RenderConfig {
+  _Alignas(8) char _storage[16];
+};
+
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_passStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 {
+  double _1;
+  uint64_t _2;
+  uint64_t _3;
+};
+
+static SWIFT_C_INLINE_THUNK struct swift_interop_passStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 swift_interop_passDirect_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24(const char * _Nonnull value) {
+  struct swift_interop_passStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 result;
+  memcpy(&result._1, value + 0, 8);
+  memcpy(&result._2, value + 8, 8);
+  memcpy(&result._3, value + 16, 8);
+  return result;
+}
+
+SWIFT_EXTERN double $s9RayTracer14RenderProgressV8fractionSdvg(struct swift_interop_passStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_uint64_t_8_16 $s9RayTracer14RenderProgressV7messageSSSgvg(struct swift_interop_passStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+// Stub struct to be used to pass/return values to/from Swift functions.
+struct swift_interop_returnStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 {
+  double _1;
+  uint64_t _2;
+  uint64_t _3;
+};
+
+static SWIFT_C_INLINE_THUNK void swift_interop_returnDirect_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24(char * _Nonnull result, struct swift_interop_returnStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 value) {
+  memcpy(result + 0, &value._1, 8);
+  memcpy(result + 8, &value._2, 8);
+  memcpy(result + 16, &value._3, 8);
+}
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24 $s9RayTracer14RenderProgressV_7messageACSd_SSSgtcfC(double fraction, struct swift_interop_passStub_RayTracer_uint64_t_0_8_uint64_t_8_16 message) SWIFT_NOEXCEPT SWIFT_CALL; // init(_:message:)
+struct RayTracer_RenderProgress {
+  _Alignas(8) char _storage[24];
+};
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_uint64_t_0_8_void_ptr_8_16 $s9RayTracer12RenderResultV8fileNameSSvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN CGImageRef _Nonnull $s9RayTracer12RenderResultV5imageSo10CGImageRefavg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer12RenderResultV6cameraAA10CameraSpecVvg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer12RenderResultV5statsAA0C5StatsVvg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_RenderResult {
+  _Alignas(8) char _storage[128];
+};
+
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11RenderStatsV6meshesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11RenderStatsV9trianglesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11RenderStatsV7spheresSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11RenderStatsV6planesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN int64_t $s9RayTracer11RenderStatsV4rayss5Int64Vvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11RenderStatsV12millisecondsSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s9RayTracer11RenderStatsV6meshes9triangles7spheres6planes4rays12millisecondsACSi_S3is5Int64VSitcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, ptrdiff_t meshes, ptrdiff_t triangles, ptrdiff_t spheres, ptrdiff_t planes, int64_t rays, ptrdiff_t milliseconds) SWIFT_NOEXCEPT SWIFT_CALL; // init(meshes:triangles:spheres:planes:rays:milliseconds:)
+struct RayTracer_RenderStats {
+  _Alignas(8) char _storage[48];
+};
+
+SWIFT_EXTERN ptrdiff_t $s9RayTracer11SceneFormatO9hashValueSivg(struct swift_interop_passStub_RayTracer_uint8_t_0_1 _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_SceneFormat {
+  _Alignas(1) char _storage[1];
+};
+
+SWIFT_EXTERN struct swift_interop_returnStub_RayTracer_void_ptr_0_8 $s9RayTracer9SceneInfoV7camerasSayAA10CameraSpecVGvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer9SceneInfoV6meshesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer9SceneInfoV9trianglesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer9SceneInfoV7spheresSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN ptrdiff_t $s9RayTracer9SceneInfoV6planesSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+struct RayTracer_SceneInfo {
+  _Alignas(8) char _storage[40];
+};
+
+
+#ifdef __cplusplus
+}
+}
+}
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer4AABBV") AABB;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::AABB> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_AABB;
+
+// Type metadata accessor for AABB
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer4AABBVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer4AABBV") AABB final {
+public:
+  SWIFT_INLINE_THUNK ~AABB() noexcept {
+    auto metadata = _impl::$s9RayTracer4AABBVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK AABB(const AABB &other) noexcept {
+    auto metadata = _impl::$s9RayTracer4AABBVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK AABB &operator =(const AABB &other) noexcept {
+    auto metadata = _impl::$s9RayTracer4AABBVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK AABB &operator =(AABB &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER AABB(AABB &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+private:
+  SWIFT_INLINE_THUNK AABB() noexcept {}
+  static SWIFT_INLINE_THUNK AABB _make() noexcept { return AABB(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(16) char _storage[64];
+  friend class _impl::_impl_AABB;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer4AABBVD;
+  static inline constexpr $s9RayTracer4AABBVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_AABB {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(AABB &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const AABB &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER AABB returnNewValue(T callable) {
+    auto result = AABB::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer4AABBVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::AABB> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer4AABBVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::AABB> = true;
+template<>
+struct implClassFor<RayTracer::AABB> { using type = RayTracer::_impl::_impl_AABB; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO") BVHSplitMode;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::BVHSplitMode> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+class SWIFT_SYMBOL("s:9RayTracer9RTContextV") RTContext;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RTContext> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+class SWIFT_SYMBOL("s:9RayTracer7BVHNodeC") BVHNode;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::BVHNode> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+class SWIFT_SYMBOL("s:9RayTracer7BVHPrimV") BVHPrim;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::BVHPrim> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+class SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV") BVHBuilder;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::BVHBuilder> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_BVHBuilder;
+
+// Type metadata accessor for BVHBuilder
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer10BVHBuilderVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV") BVHBuilder final {
+public:
+  SWIFT_INLINE_THUNK ~BVHBuilder() noexcept {
+    auto metadata = _impl::$s9RayTracer10BVHBuilderVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHBuilder(const BVHBuilder &other) noexcept {
+    auto metadata = _impl::$s9RayTracer10BVHBuilderVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHBuilder &operator =(const BVHBuilder &other) noexcept {
+    auto metadata = _impl::$s9RayTracer10BVHBuilderVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK BVHBuilder &operator =(BVHBuilder &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER BVHBuilder(BVHBuilder &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Int getMaxLeaf() const SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV7maxLeafSivp");
+  SWIFT_INLINE_THUNK void setMaxLeaf(swift::Int value) SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV7maxLeafSivp");
+  SWIFT_INLINE_THUNK BVHSplitMode getSplit() const SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvp");
+  SWIFT_INLINE_THUNK void setSplit(const BVHSplitMode& value) SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvp");
+  static SWIFT_INLINE_THUNK BVHBuilder init(swift::Int maxLeaf, const BVHSplitMode& split) SWIFT_SYMBOL("s:9RayTracer10BVHBuilderV7maxLeaf5splitACSi_AA12BVHSplitModeOtcfc");
+private:
+  SWIFT_INLINE_THUNK BVHBuilder() noexcept {}
+  static SWIFT_INLINE_THUNK BVHBuilder _make() noexcept { return BVHBuilder(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[9];
+  friend class _impl::_impl_BVHBuilder;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer10BVHBuilderVD;
+  static inline constexpr $s9RayTracer10BVHBuilderVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_BVHBuilder {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(BVHBuilder &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const BVHBuilder &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER BVHBuilder returnNewValue(T callable) {
+    auto result = BVHBuilder::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer10BVHBuilderVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::BVHBuilder> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer10BVHBuilderVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::BVHBuilder> = true;
+template<>
+struct implClassFor<RayTracer::BVHBuilder> { using type = RayTracer::_impl::_impl_BVHBuilder; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+namespace _impl {
+
+class _impl_BVHNode;
+// Type metadata accessor for BVHNode
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer7BVHNodeCMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer7BVHNodeC") BVHNode final : public swift::_impl::RefCountedClass {
+public:
+  using RefCountedClass::RefCountedClass;
+  using RefCountedClass::operator=;
+  SWIFT_INLINE_THUNK swift::Optional<BVHNode> getLeft() SWIFT_SYMBOL("s:9RayTracer7BVHNodeC4leftACSgvp");
+  SWIFT_INLINE_THUNK void setLeft(const swift::Optional<BVHNode>& value) SWIFT_SYMBOL("s:9RayTracer7BVHNodeC4leftACSgvp");
+  SWIFT_INLINE_THUNK swift::Optional<BVHNode> getRight() SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5rightACSgvp");
+  SWIFT_INLINE_THUNK void setRight(const swift::Optional<BVHNode>& value) SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5rightACSgvp");
+  SWIFT_INLINE_THUNK swift::Int getStart() SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5startSivp");
+  SWIFT_INLINE_THUNK void setStart(swift::Int value) SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5startSivp");
+  SWIFT_INLINE_THUNK swift::Int getCount() SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5countSivp");
+  SWIFT_INLINE_THUNK void setCount(swift::Int value) SWIFT_SYMBOL("s:9RayTracer7BVHNodeC5countSivp");
+  SWIFT_INLINE_THUNK bool isLeaf() SWIFT_SYMBOL("s:9RayTracer7BVHNodeC6isLeafSbvp");
+  static SWIFT_INLINE_THUNK BVHNode init() SWIFT_SYMBOL("s:9RayTracer7BVHNodeCACycfc");
+protected:
+  SWIFT_INLINE_THUNK BVHNode(void * _Nonnull ptr) noexcept : RefCountedClass(ptr) {}
+private:
+  friend class _impl::_impl_BVHNode;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer7BVHNodeCD;
+  static inline constexpr $s9RayTracer7BVHNodeCD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_BVHNode {
+public:
+static SWIFT_INLINE_THUNK BVHNode makeRetained(void * _Nonnull ptr) noexcept { return BVHNode(ptr); }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::BVHNode> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer7BVHNodeCMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+struct implClassFor<RayTracer::BVHNode> { using type = RayTracer::_impl::_impl_BVHNode; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+namespace _impl {
+
+class _impl_BVHPrim;
+
+// Type metadata accessor for BVHPrim
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer7BVHPrimVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer7BVHPrimV") BVHPrim final {
+public:
+  SWIFT_INLINE_THUNK ~BVHPrim() noexcept {
+    auto metadata = _impl::$s9RayTracer7BVHPrimVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHPrim(const BVHPrim &other) noexcept {
+    auto metadata = _impl::$s9RayTracer7BVHPrimVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHPrim &operator =(const BVHPrim &other) noexcept {
+    auto metadata = _impl::$s9RayTracer7BVHPrimVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK BVHPrim &operator =(BVHPrim &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER BVHPrim(BVHPrim &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK uint8_t getType() const SWIFT_SYMBOL("s:9RayTracer7BVHPrimV4types5UInt8Vvp");
+  SWIFT_INLINE_THUNK swift::Int getIndex() const SWIFT_SYMBOL("s:9RayTracer7BVHPrimV5indexSivp");
+private:
+  SWIFT_INLINE_THUNK BVHPrim() noexcept {}
+  static SWIFT_INLINE_THUNK BVHPrim _make() noexcept { return BVHPrim(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[16];
+  friend class _impl::_impl_BVHPrim;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer7BVHPrimVD;
+  static inline constexpr $s9RayTracer7BVHPrimVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_BVHPrim {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(BVHPrim &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const BVHPrim &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER BVHPrim returnNewValue(T callable) {
+    auto result = BVHPrim::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer7BVHPrimVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::BVHPrim> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer7BVHPrimVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::BVHPrim> = true;
+template<>
+struct implClassFor<RayTracer::BVHPrim> { using type = RayTracer::_impl::_impl_BVHPrim; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+namespace _impl {
+
+class _impl_BVHSplitMode;
+
+// Type metadata accessor for BVHSplitMode
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer12BVHSplitModeOMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO") BVHSplitMode final {
+public:
+  SWIFT_INLINE_THUNK ~BVHSplitMode() noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode(const BVHSplitMode &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode &operator =(const BVHSplitMode &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode &operator =(BVHSplitMode &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER BVHSplitMode(BVHSplitMode &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+
+  enum class cases {
+    sah SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO3sahyA2CmF"),
+    median SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO6medianyA2CmF")
+  };
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"  // allow use of inline static data member
+  inline const static struct _impl_sah {  // impl struct for case sah
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::sah;
+    }
+    SWIFT_INLINE_THUNK BVHSplitMode operator()() const;
+  } sah SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO3sahyA2CmF");
+  SWIFT_INLINE_THUNK bool isSah() const;
+
+  inline const static struct _impl_median {  // impl struct for case median
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::median;
+    }
+    SWIFT_INLINE_THUNK BVHSplitMode operator()() const;
+  } median SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO6medianyA2CmF");
+  SWIFT_INLINE_THUNK bool isMedian() const;
+
+#pragma clang diagnostic pop
+  SWIFT_INLINE_THUNK operator cases() const {
+    switch (_getEnumTag()) {
+      case 0: return cases::sah;
+      case 1: return cases::median;
+      default: abort();
+    }
+  }
+
+  SWIFT_INLINE_THUNK swift::Int getHashValue() const SWIFT_SYMBOL("s:9RayTracer12BVHSplitModeO9hashValueSivp");
+private:
+  SWIFT_INLINE_THUNK BVHSplitMode() noexcept {}
+  static SWIFT_INLINE_THUNK BVHSplitMode _make() noexcept { return BVHSplitMode(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  SWIFT_INLINE_THUNK char * _Nonnull _destructiveProjectEnumData() noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveProjectEnumData(_getOpaquePointer(), metadata._0);
+    return _getOpaquePointer();
+  }
+  SWIFT_INLINE_THUNK void _destructiveInjectEnumTag(unsigned tag) noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveInjectEnumTag(_getOpaquePointer(), tag, metadata._0);
+  }
+  SWIFT_INLINE_THUNK unsigned _getEnumTag() const noexcept {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    return enumVWTable->getEnumTag(_getOpaquePointer(), metadata._0);
+  }
+  alignas(1) char _storage[1];
+  friend class _impl::_impl_BVHSplitMode;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer12BVHSplitModeOD;
+  static inline constexpr $s9RayTracer12BVHSplitModeOD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_BVHSplitMode {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(BVHSplitMode &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const BVHSplitMode &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER BVHSplitMode returnNewValue(T callable) {
+    auto result = BVHSplitMode::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer12BVHSplitModeOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::BVHSplitMode> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer12BVHSplitModeOMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::BVHSplitMode> = true;
+template<>
+struct implClassFor<RayTracer::BVHSplitMode> { using type = RayTracer::_impl::_impl_BVHSplitMode; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer10CameraSpecV") CameraSpec;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::CameraSpec> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_CameraSpec;
+
+// Type metadata accessor for CameraSpec
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer10CameraSpecVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer10CameraSpecV") CameraSpec final {
+public:
+  SWIFT_INLINE_THUNK ~CameraSpec() noexcept {
+    auto metadata = _impl::$s9RayTracer10CameraSpecVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK CameraSpec(const CameraSpec &other) noexcept {
+    auto metadata = _impl::$s9RayTracer10CameraSpecVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK CameraSpec &operator =(const CameraSpec &other) noexcept {
+    auto metadata = _impl::$s9RayTracer10CameraSpecVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK CameraSpec &operator =(CameraSpec &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER CameraSpec(CameraSpec &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Int getIndex() const SWIFT_SYMBOL("s:9RayTracer10CameraSpecV5indexSivp");
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> getId() const SWIFT_SYMBOL("s:9RayTracer10CameraSpecV2idSSSgvp");
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> getImageName() const SWIFT_SYMBOL("s:9RayTracer10CameraSpecV9imageNameSSSgvp");
+  SWIFT_INLINE_THUNK swift::Int getWidth() const SWIFT_SYMBOL("s:9RayTracer10CameraSpecV5widthSivp");
+  SWIFT_INLINE_THUNK swift::Int getHeight() const SWIFT_SYMBOL("s:9RayTracer10CameraSpecV6heightSivp");
+private:
+  SWIFT_INLINE_THUNK CameraSpec() noexcept {}
+  static SWIFT_INLINE_THUNK CameraSpec _make() noexcept { return CameraSpec(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[56];
+  friend class _impl::_impl_CameraSpec;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer10CameraSpecVD;
+  static inline constexpr $s9RayTracer10CameraSpecVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_CameraSpec {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(CameraSpec &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const CameraSpec &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER CameraSpec returnNewValue(T callable) {
+    auto result = CameraSpec::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer10CameraSpecVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::CameraSpec> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer10CameraSpecVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::CameraSpec> = true;
+template<>
+struct implClassFor<RayTracer::CameraSpec> { using type = RayTracer::_impl::_impl_CameraSpec; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer8PlyErrorO") PlyError;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::PlyError> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_PlyError;
+
+// Type metadata accessor for PlyError
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer8PlyErrorOMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer8PlyErrorO") PlyError final {
+public:
+  SWIFT_INLINE_THUNK ~PlyError() noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK PlyError(const PlyError &other) noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK PlyError &operator =(const PlyError &other) noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK PlyError &operator =(PlyError &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER PlyError(PlyError &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+
+  enum class cases {
+    fileOpenFailed SWIFT_SYMBOL("s:9RayTracer8PlyErrorO14fileOpenFailedyACSScACmF"),
+    vertexDataMissing SWIFT_SYMBOL("s:9RayTracer8PlyErrorO17vertexDataMissingyA2CmF"),
+    faceDataMissing SWIFT_SYMBOL("s:9RayTracer8PlyErrorO15faceDataMissingyA2CmF"),
+    triangulationNeedsVerts SWIFT_SYMBOL("s:9RayTracer8PlyErrorO23triangulationNeedsVertsyA2CmF"),
+    corrupted SWIFT_SYMBOL("s:9RayTracer8PlyErrorO9corruptedyA2CmF")
+  };
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"  // allow use of inline static data member
+  inline const static struct _impl_fileOpenFailed {  // impl struct for case fileOpenFailed
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::fileOpenFailed;
+    }
+    SWIFT_INLINE_THUNK PlyError operator()(const swift::String& val) const;
+  } fileOpenFailed SWIFT_SYMBOL("s:9RayTracer8PlyErrorO14fileOpenFailedyACSScACmF");
+  SWIFT_INLINE_THUNK bool isFileOpenFailed() const;
+  SWIFT_INLINE_THUNK swift::String getFileOpenFailed() const;
+
+  inline const static struct _impl_vertexDataMissing {  // impl struct for case vertexDataMissing
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::vertexDataMissing;
+    }
+    SWIFT_INLINE_THUNK PlyError operator()() const;
+  } vertexDataMissing SWIFT_SYMBOL("s:9RayTracer8PlyErrorO17vertexDataMissingyA2CmF");
+  SWIFT_INLINE_THUNK bool isVertexDataMissing() const;
+
+  inline const static struct _impl_faceDataMissing {  // impl struct for case faceDataMissing
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::faceDataMissing;
+    }
+    SWIFT_INLINE_THUNK PlyError operator()() const;
+  } faceDataMissing SWIFT_SYMBOL("s:9RayTracer8PlyErrorO15faceDataMissingyA2CmF");
+  SWIFT_INLINE_THUNK bool isFaceDataMissing() const;
+
+  inline const static struct _impl_triangulationNeedsVerts {  // impl struct for case triangulationNeedsVerts
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::triangulationNeedsVerts;
+    }
+    SWIFT_INLINE_THUNK PlyError operator()() const;
+  } triangulationNeedsVerts SWIFT_SYMBOL("s:9RayTracer8PlyErrorO23triangulationNeedsVertsyA2CmF");
+  SWIFT_INLINE_THUNK bool isTriangulationNeedsVerts() const;
+
+  inline const static struct _impl_corrupted {  // impl struct for case corrupted
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::corrupted;
+    }
+    SWIFT_INLINE_THUNK PlyError operator()() const;
+  } corrupted SWIFT_SYMBOL("s:9RayTracer8PlyErrorO9corruptedyA2CmF");
+  SWIFT_INLINE_THUNK bool isCorrupted() const;
+
+#pragma clang diagnostic pop
+  SWIFT_INLINE_THUNK operator cases() const {
+    switch (_getEnumTag()) {
+      case 0: return cases::fileOpenFailed;
+      case 1: return cases::vertexDataMissing;
+      case 2: return cases::faceDataMissing;
+      case 3: return cases::triangulationNeedsVerts;
+      case 4: return cases::corrupted;
+      default: abort();
+    }
+  }
+
+  SWIFT_INLINE_THUNK swift::String getDescription() const SWIFT_SYMBOL("s:9RayTracer8PlyErrorO11descriptionSSvp");
+private:
+  SWIFT_INLINE_THUNK PlyError() noexcept {}
+  static SWIFT_INLINE_THUNK PlyError _make() noexcept { return PlyError(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  SWIFT_INLINE_THUNK char * _Nonnull _destructiveProjectEnumData() noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveProjectEnumData(_getOpaquePointer(), metadata._0);
+    return _getOpaquePointer();
+  }
+  SWIFT_INLINE_THUNK void _destructiveInjectEnumTag(unsigned tag) noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveInjectEnumTag(_getOpaquePointer(), tag, metadata._0);
+  }
+  SWIFT_INLINE_THUNK unsigned _getEnumTag() const noexcept {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    return enumVWTable->getEnumTag(_getOpaquePointer(), metadata._0);
+  }
+  alignas(8) char _storage[16];
+  friend class _impl::_impl_PlyError;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer8PlyErrorOD;
+  static inline constexpr $s9RayTracer8PlyErrorOD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_PlyError {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(PlyError &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const PlyError &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER PlyError returnNewValue(T callable) {
+    auto result = PlyError::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer8PlyErrorOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::PlyError> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer8PlyErrorOMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::PlyError> = true;
+template<>
+struct implClassFor<RayTracer::PlyError> { using type = RayTracer::_impl::_impl_PlyError; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer7PlyMeshV") PlyMesh;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::PlyMesh> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_PlyMesh;
+
+// Type metadata accessor for PlyMesh
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer7PlyMeshVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer7PlyMeshV") PlyMesh final {
+public:
+  SWIFT_INLINE_THUNK ~PlyMesh() noexcept {
+    auto metadata = _impl::$s9RayTracer7PlyMeshVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK PlyMesh(const PlyMesh &other) noexcept {
+    auto metadata = _impl::$s9RayTracer7PlyMeshVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK PlyMesh &operator =(const PlyMesh &other) noexcept {
+    auto metadata = _impl::$s9RayTracer7PlyMeshVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK PlyMesh &operator =(PlyMesh &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER PlyMesh(PlyMesh &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Array<swift::Int> getIndices() const SWIFT_SYMBOL("s:9RayTracer7PlyMeshV7indicesSaySiGvp");
+  SWIFT_INLINE_THUNK void setIndices(const swift::Array<swift::Int>& value) SWIFT_SYMBOL("s:9RayTracer7PlyMeshV7indicesSaySiGvp");
+private:
+  SWIFT_INLINE_THUNK PlyMesh() noexcept {}
+  static SWIFT_INLINE_THUNK PlyMesh _make() noexcept { return PlyMesh(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[24];
+  friend class _impl::_impl_PlyMesh;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer7PlyMeshVD;
+  static inline constexpr $s9RayTracer7PlyMeshVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_PlyMesh {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(PlyMesh &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const PlyMesh &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER PlyMesh returnNewValue(T callable) {
+    auto result = PlyMesh::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer7PlyMeshVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::PlyMesh> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer7PlyMeshVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::PlyMesh> = true;
+template<>
+struct implClassFor<RayTracer::PlyMesh> { using type = RayTracer::_impl::_impl_PlyMesh; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+namespace _impl {
+
+class _impl_RTContext;
+
+// Type metadata accessor for RTContext
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer9RTContextVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer9RTContextV") RTContext final {
+public:
+  SWIFT_INLINE_THUNK ~RTContext() noexcept {
+    auto metadata = _impl::$s9RayTracer9RTContextVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RTContext(const RTContext &other) noexcept {
+    auto metadata = _impl::$s9RayTracer9RTContextVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RTContext &operator =(const RTContext &other) noexcept {
+    auto metadata = _impl::$s9RayTracer9RTContextVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK RTContext &operator =(RTContext &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER RTContext(RTContext &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+private:
+  SWIFT_INLINE_THUNK RTContext() noexcept {}
+  static SWIFT_INLINE_THUNK RTContext _make() noexcept { return RTContext(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[224];
+  friend class _impl::_impl_RTContext;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer9RTContextVD;
+  static inline constexpr $s9RayTracer9RTContextVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RTContext {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(RTContext &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const RTContext &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER RTContext returnNewValue(T callable) {
+    auto result = RTContext::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer9RTContextVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RTContext> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer9RTContextVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::RTContext> = true;
+template<>
+struct implClassFor<RayTracer::RTContext> { using type = RayTracer::_impl::_impl_RTContext; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer0aB6EngineC") RayTracerEngine;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RayTracerEngine> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_RayTracerEngine;
+// Type metadata accessor for RayTracerEngine
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer0aB6EngineCMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer0aB6EngineC") RayTracerEngine final : public swift::_impl::RefCountedClass {
+public:
+  using RefCountedClass::RefCountedClass;
+  using RefCountedClass::operator=;
+protected:
+  SWIFT_INLINE_THUNK RayTracerEngine(void * _Nonnull ptr) noexcept : RefCountedClass(ptr) {}
+private:
+  friend class _impl::_impl_RayTracerEngine;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer0aB6EngineCD;
+  static inline constexpr $s9RayTracer0aB6EngineCD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RayTracerEngine {
+public:
+static SWIFT_INLINE_THUNK RayTracerEngine makeRetained(void * _Nonnull ptr) noexcept { return RayTracerEngine(ptr); }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RayTracerEngine> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer0aB6EngineCMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+struct implClassFor<RayTracer::RayTracerEngine> { using type = RayTracer::_impl::_impl_RayTracerEngine; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer12RenderConfigV") RenderConfig;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RenderConfig> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_RenderConfig;
+
+// Type metadata accessor for RenderConfig
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer12RenderConfigVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer12RenderConfigV") RenderConfig final {
+public:
+  SWIFT_INLINE_THUNK ~RenderConfig() noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderConfigVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderConfig(const RenderConfig &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderConfigVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderConfig &operator =(const RenderConfig &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderConfigVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK RenderConfig &operator =(RenderConfig &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER RenderConfig(RenderConfig &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK float getExposure() const SWIFT_SYMBOL("s:9RayTracer12RenderConfigV8exposureSfvp");
+  SWIFT_INLINE_THUNK void setExposure(float value) SWIFT_SYMBOL("s:9RayTracer12RenderConfigV8exposureSfvp");
+  SWIFT_INLINE_THUNK bool getBackfaceCulling() const SWIFT_SYMBOL("s:9RayTracer12RenderConfigV15backfaceCullingSbvp");
+  SWIFT_INLINE_THUNK void setBackfaceCulling(bool value) SWIFT_SYMBOL("s:9RayTracer12RenderConfigV15backfaceCullingSbvp");
+  SWIFT_INLINE_THUNK swift::Int getSsp() const SWIFT_SYMBOL("s:9RayTracer12RenderConfigV3sspSivp");
+  SWIFT_INLINE_THUNK void setSsp(swift::Int value) SWIFT_SYMBOL("s:9RayTracer12RenderConfigV3sspSivp");
+  static SWIFT_INLINE_THUNK RenderConfig init(float exposure, bool backfaceCulling, swift::Int ssp) SWIFT_SYMBOL("s:9RayTracer12RenderConfigV8exposure15backfaceCulling3sspACSf_SbSitcfc");
+private:
+  SWIFT_INLINE_THUNK RenderConfig() noexcept {}
+  static SWIFT_INLINE_THUNK RenderConfig _make() noexcept { return RenderConfig(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[16];
+  friend class _impl::_impl_RenderConfig;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer12RenderConfigVD;
+  static inline constexpr $s9RayTracer12RenderConfigVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RenderConfig {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(RenderConfig &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const RenderConfig &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER RenderConfig returnNewValue(T callable) {
+    auto result = RenderConfig::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer12RenderConfigVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RenderConfig> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer12RenderConfigVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::RenderConfig> = true;
+template<>
+struct implClassFor<RayTracer::RenderConfig> { using type = RayTracer::_impl::_impl_RenderConfig; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer14RenderProgressV") RenderProgress;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RenderProgress> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_RenderProgress;
+
+// Type metadata accessor for RenderProgress
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer14RenderProgressVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer14RenderProgressV") RenderProgress final {
+public:
+  SWIFT_INLINE_THUNK ~RenderProgress() noexcept {
+    auto metadata = _impl::$s9RayTracer14RenderProgressVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderProgress(const RenderProgress &other) noexcept {
+    auto metadata = _impl::$s9RayTracer14RenderProgressVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderProgress &operator =(const RenderProgress &other) noexcept {
+    auto metadata = _impl::$s9RayTracer14RenderProgressVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK RenderProgress &operator =(RenderProgress &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER RenderProgress(RenderProgress &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK double getFraction() const SWIFT_SYMBOL("s:9RayTracer14RenderProgressV8fractionSdvp");
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> getMessage() const SWIFT_SYMBOL("s:9RayTracer14RenderProgressV7messageSSSgvp");
+  static SWIFT_INLINE_THUNK RenderProgress init(double fraction, const swift::Optional<swift::String>& message) SWIFT_SYMBOL("s:9RayTracer14RenderProgressV_7messageACSd_SSSgtcfc");
+private:
+  SWIFT_INLINE_THUNK RenderProgress() noexcept {}
+  static SWIFT_INLINE_THUNK RenderProgress _make() noexcept { return RenderProgress(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[24];
+  friend class _impl::_impl_RenderProgress;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer14RenderProgressVD;
+  static inline constexpr $s9RayTracer14RenderProgressVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RenderProgress {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(RenderProgress &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const RenderProgress &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER RenderProgress returnNewValue(T callable) {
+    auto result = RenderProgress::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer14RenderProgressVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RenderProgress> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer14RenderProgressVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::RenderProgress> = true;
+template<>
+struct implClassFor<RayTracer::RenderProgress> { using type = RayTracer::_impl::_impl_RenderProgress; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer11RenderStatsV") RenderStats;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RenderStats> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+class SWIFT_SYMBOL("s:9RayTracer12RenderResultV") RenderResult;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::RenderResult> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_RenderResult;
+
+// Type metadata accessor for RenderResult
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer12RenderResultVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer12RenderResultV") RenderResult final {
+public:
+  SWIFT_INLINE_THUNK ~RenderResult() noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderResultVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderResult(const RenderResult &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderResultVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderResult &operator =(const RenderResult &other) noexcept {
+    auto metadata = _impl::$s9RayTracer12RenderResultVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK RenderResult &operator =(RenderResult &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER RenderResult(RenderResult &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::String getFileName() const SWIFT_SYMBOL("s:9RayTracer12RenderResultV8fileNameSSvp");
+  SWIFT_INLINE_THUNK CGImageRef _Nonnull getImage() const SWIFT_SYMBOL("s:9RayTracer12RenderResultV5imageSo10CGImageRefavp");
+  SWIFT_INLINE_THUNK CameraSpec getCamera() const SWIFT_SYMBOL("s:9RayTracer12RenderResultV6cameraAA10CameraSpecVvp");
+  SWIFT_INLINE_THUNK RenderStats getStats() const SWIFT_SYMBOL("s:9RayTracer12RenderResultV5statsAA0C5StatsVvp");
+private:
+  SWIFT_INLINE_THUNK RenderResult() noexcept {}
+  static SWIFT_INLINE_THUNK RenderResult _make() noexcept { return RenderResult(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[128];
+  friend class _impl::_impl_RenderResult;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer12RenderResultVD;
+  static inline constexpr $s9RayTracer12RenderResultVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RenderResult {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(RenderResult &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const RenderResult &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER RenderResult returnNewValue(T callable) {
+    auto result = RenderResult::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer12RenderResultVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RenderResult> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer12RenderResultVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::RenderResult> = true;
+template<>
+struct implClassFor<RayTracer::RenderResult> { using type = RayTracer::_impl::_impl_RenderResult; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+namespace _impl {
+
+class _impl_RenderStats;
+
+// Type metadata accessor for RenderStats
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer11RenderStatsVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer11RenderStatsV") RenderStats final {
+public:
+  SWIFT_INLINE_THUNK ~RenderStats() noexcept {
+    auto metadata = _impl::$s9RayTracer11RenderStatsVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderStats(const RenderStats &other) noexcept {
+    auto metadata = _impl::$s9RayTracer11RenderStatsVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK RenderStats &operator =(const RenderStats &other) noexcept {
+    auto metadata = _impl::$s9RayTracer11RenderStatsVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK RenderStats &operator =(RenderStats &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER RenderStats(RenderStats &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Int getMeshes() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV6meshesSivp");
+  SWIFT_INLINE_THUNK swift::Int getTriangles() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV9trianglesSivp");
+  SWIFT_INLINE_THUNK swift::Int getSpheres() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV7spheresSivp");
+  SWIFT_INLINE_THUNK swift::Int getPlanes() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV6planesSivp");
+  SWIFT_INLINE_THUNK int64_t getRays() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV4rayss5Int64Vvp");
+  SWIFT_INLINE_THUNK swift::Int getMilliseconds() const SWIFT_SYMBOL("s:9RayTracer11RenderStatsV12millisecondsSivp");
+  static SWIFT_INLINE_THUNK RenderStats init(swift::Int meshes, swift::Int triangles, swift::Int spheres, swift::Int planes, int64_t rays, swift::Int milliseconds) SWIFT_SYMBOL("s:9RayTracer11RenderStatsV6meshes9triangles7spheres6planes4rays12millisecondsACSi_S3is5Int64VSitcfc");
+private:
+  SWIFT_INLINE_THUNK RenderStats() noexcept {}
+  static SWIFT_INLINE_THUNK RenderStats _make() noexcept { return RenderStats(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[48];
+  friend class _impl::_impl_RenderStats;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer11RenderStatsVD;
+  static inline constexpr $s9RayTracer11RenderStatsVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_RenderStats {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(RenderStats &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const RenderStats &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER RenderStats returnNewValue(T callable) {
+    auto result = RenderStats::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer11RenderStatsVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::RenderStats> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer11RenderStatsVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::RenderStats> = true;
+template<>
+struct implClassFor<RayTracer::RenderStats> { using type = RayTracer::_impl::_impl_RenderStats; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer11SceneFormatO") SceneFormat;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::SceneFormat> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_SceneFormat;
+
+// Type metadata accessor for SceneFormat
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer11SceneFormatOMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer11SceneFormatO") SceneFormat final {
+public:
+  SWIFT_INLINE_THUNK ~SceneFormat() noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK SceneFormat(const SceneFormat &other) noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK SceneFormat &operator =(const SceneFormat &other) noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK SceneFormat &operator =(SceneFormat &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER SceneFormat(SceneFormat &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+
+  enum class cases {
+    auto_ SWIFT_SYMBOL("s:9RayTracer11SceneFormatO4autoyA2CmF"),
+    json SWIFT_SYMBOL("s:9RayTracer11SceneFormatO4jsonyA2CmF"),
+    xml SWIFT_SYMBOL("s:9RayTracer11SceneFormatO3xmlyA2CmF")
+  };
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"  // allow use of inline static data member
+  inline const static struct _impl_auto {  // impl struct for case auto
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::auto_;
+    }
+    SWIFT_INLINE_THUNK SceneFormat operator()() const;
+  } auto_ SWIFT_SYMBOL("s:9RayTracer11SceneFormatO4autoyA2CmF");
+  SWIFT_INLINE_THUNK bool isAuto_() const;
+
+  inline const static struct _impl_json {  // impl struct for case json
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::json;
+    }
+    SWIFT_INLINE_THUNK SceneFormat operator()() const;
+  } json SWIFT_SYMBOL("s:9RayTracer11SceneFormatO4jsonyA2CmF");
+  SWIFT_INLINE_THUNK bool isJson() const;
+
+  inline const static struct _impl_xml {  // impl struct for case xml
+    SWIFT_INLINE_THUNK constexpr operator cases() const {
+      return cases::xml;
+    }
+    SWIFT_INLINE_THUNK SceneFormat operator()() const;
+  } xml SWIFT_SYMBOL("s:9RayTracer11SceneFormatO3xmlyA2CmF");
+  SWIFT_INLINE_THUNK bool isXml() const;
+
+#pragma clang diagnostic pop
+  SWIFT_INLINE_THUNK operator cases() const {
+    switch (_getEnumTag()) {
+      case 0: return cases::auto_;
+      case 1: return cases::json;
+      case 2: return cases::xml;
+      default: abort();
+    }
+  }
+
+  SWIFT_INLINE_THUNK swift::Int getHashValue() const SWIFT_SYMBOL("s:9RayTracer11SceneFormatO9hashValueSivp");
+private:
+  SWIFT_INLINE_THUNK SceneFormat() noexcept {}
+  static SWIFT_INLINE_THUNK SceneFormat _make() noexcept { return SceneFormat(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  SWIFT_INLINE_THUNK char * _Nonnull _destructiveProjectEnumData() noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveProjectEnumData(_getOpaquePointer(), metadata._0);
+    return _getOpaquePointer();
+  }
+  SWIFT_INLINE_THUNK void _destructiveInjectEnumTag(unsigned tag) noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    enumVWTable->destructiveInjectEnumTag(_getOpaquePointer(), tag, metadata._0);
+  }
+  SWIFT_INLINE_THUNK unsigned _getEnumTag() const noexcept {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    const auto *enumVWTable = reinterpret_cast<swift::_impl::EnumValueWitnessTable *>(vwTable);
+    return enumVWTable->getEnumTag(_getOpaquePointer(), metadata._0);
+  }
+  alignas(1) char _storage[1];
+  friend class _impl::_impl_SceneFormat;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer11SceneFormatOD;
+  static inline constexpr $s9RayTracer11SceneFormatOD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_SceneFormat {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(SceneFormat &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const SceneFormat &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER SceneFormat returnNewValue(T callable) {
+    auto result = SceneFormat::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer11SceneFormatOMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::SceneFormat> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer11SceneFormatOMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::SceneFormat> = true;
+template<>
+struct implClassFor<RayTracer::SceneFormat> { using type = RayTracer::_impl::_impl_SceneFormat; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+class SWIFT_SYMBOL("s:9RayTracer9SceneInfoV") SceneInfo;
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+inline const constexpr bool isUsableInGenericContext<RayTracer::SceneInfo> = true;
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+namespace _impl {
+
+class _impl_SceneInfo;
+
+// Type metadata accessor for SceneInfo
+SWIFT_EXTERN swift::_impl::MetadataResponseTy $s9RayTracer9SceneInfoVMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
+
+
+} // namespace _impl
+
+class SWIFT_SYMBOL("s:9RayTracer9SceneInfoV") SceneInfo final {
+public:
+  SWIFT_INLINE_THUNK ~SceneInfo() noexcept {
+    auto metadata = _impl::$s9RayTracer9SceneInfoVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->destroy(_getOpaquePointer(), metadata._0);
+  }
+  SWIFT_INLINE_THUNK SceneInfo(const SceneInfo &other) noexcept {
+    auto metadata = _impl::$s9RayTracer9SceneInfoVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  }
+  SWIFT_INLINE_THUNK SceneInfo &operator =(const SceneInfo &other) noexcept {
+    auto metadata = _impl::$s9RayTracer9SceneInfoVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->assignWithCopy(_getOpaquePointer(), const_cast<char *>(other._getOpaquePointer()), metadata._0);
+  return *this;
+  }
+  SWIFT_INLINE_THUNK SceneInfo &operator =(SceneInfo &&other) = delete;
+  [[noreturn]] SWIFT_INLINE_PRIVATE_HELPER SceneInfo(SceneInfo &&) noexcept {
+  swift::_impl::_fatalError_Cxx_move_of_Swift_value_type_not_supported_yet();
+  swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
+  abort();
+  }
+  SWIFT_INLINE_THUNK swift::Array<CameraSpec> getCameras() const SWIFT_SYMBOL("s:9RayTracer9SceneInfoV7camerasSayAA10CameraSpecVGvp");
+  SWIFT_INLINE_THUNK swift::Int getMeshes() const SWIFT_SYMBOL("s:9RayTracer9SceneInfoV6meshesSivp");
+  SWIFT_INLINE_THUNK swift::Int getTriangles() const SWIFT_SYMBOL("s:9RayTracer9SceneInfoV9trianglesSivp");
+  SWIFT_INLINE_THUNK swift::Int getSpheres() const SWIFT_SYMBOL("s:9RayTracer9SceneInfoV7spheresSivp");
+  SWIFT_INLINE_THUNK swift::Int getPlanes() const SWIFT_SYMBOL("s:9RayTracer9SceneInfoV6planesSivp");
+private:
+  SWIFT_INLINE_THUNK SceneInfo() noexcept {}
+  static SWIFT_INLINE_THUNK SceneInfo _make() noexcept { return SceneInfo(); }
+  SWIFT_INLINE_THUNK const char * _Nonnull _getOpaquePointer() const noexcept { return _storage; }
+  SWIFT_INLINE_THUNK char * _Nonnull _getOpaquePointer() noexcept { return _storage; }
+
+  alignas(8) char _storage[40];
+  friend class _impl::_impl_SceneInfo;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+  typedef char $s9RayTracer9SceneInfoVD;
+  static inline constexpr $s9RayTracer9SceneInfoVD __swift_mangled_name = 0;
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+};
+
+namespace _impl {
+
+class _impl_SceneInfo {
+public:
+  static SWIFT_INLINE_THUNK char * _Nonnull getOpaquePointer(SceneInfo &object) { return object._getOpaquePointer(); }
+  static SWIFT_INLINE_THUNK const char * _Nonnull getOpaquePointer(const SceneInfo &object) { return object._getOpaquePointer(); }
+  template<class T>
+  static SWIFT_INLINE_PRIVATE_HELPER SceneInfo returnNewValue(T callable) {
+    auto result = SceneInfo::_make();
+    callable(result._getOpaquePointer());
+    return result;
+  }
+  static SWIFT_INLINE_THUNK void initializeWithTake(char * _Nonnull destStorage, char * _Nonnull srcStorage) {
+    auto metadata = _impl::$s9RayTracer9SceneInfoVMa(0);
+    auto *vwTableAddr = reinterpret_cast<swift::_impl::ValueWitnessTable **>(metadata._0) - 1;
+#ifdef __arm64e__
+    auto *vwTable = reinterpret_cast<swift::_impl::ValueWitnessTable *>(ptrauth_auth_data(reinterpret_cast<void *>(*vwTableAddr), ptrauth_key_process_independent_data, ptrauth_blend_discriminator(vwTableAddr, 11839)));
+#else
+    auto *vwTable = *vwTableAddr;
+#endif
+    vwTable->initializeWithTake(destStorage, srcStorage, metadata._0);
+  }
+};
+
+} // namespace _impl
+
+} // end namespace 
+
+namespace swift SWIFT_PRIVATE_ATTR {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++17-extensions"
+template<>
+struct TypeMetadataTrait<RayTracer::SceneInfo> {
+  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
+    return RayTracer::_impl::$s9RayTracer9SceneInfoVMa(0)._0;
+  }
+};
+namespace _impl{
+template<>
+inline const constexpr bool isValueType<RayTracer::SceneInfo> = true;
+template<>
+struct implClassFor<RayTracer::SceneInfo> { using type = RayTracer::_impl::_impl_SceneInfo; };
+} // namespace
+#pragma clang diagnostic pop
+} // namespace swift
+
+namespace RayTracer SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("RayTracer") {
+
+  SWIFT_INLINE_THUNK swift::Int BVHBuilder::getMaxLeaf() const {
+  return RayTracer::_impl::$s9RayTracer10BVHBuilderV7maxLeafSivg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8_uint8_t_8_9(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void BVHBuilder::setMaxLeaf(swift::Int value) {
+  RayTracer::_impl::$s9RayTracer10BVHBuilderV7maxLeafSivs(value, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode BVHBuilder::getSplit() const {
+  return RayTracer::_impl::_impl_BVHSplitMode::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint8_t_0_1(result, RayTracer::_impl::$s9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8_uint8_t_8_9(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK void BVHBuilder::setSplit(const BVHSplitMode& value) {
+  RayTracer::_impl::$s9RayTracer10BVHBuilderV5splitAA12BVHSplitModeOvs(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1(RayTracer::_impl::_impl_BVHSplitMode::getOpaquePointer(value)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK BVHBuilder BVHBuilder::init(swift::Int maxLeaf, const BVHSplitMode& split) {
+  return RayTracer::_impl::_impl_BVHBuilder::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint8_t_8_9(result, RayTracer::_impl::$s9RayTracer10BVHBuilderV7maxLeaf5splitACSi_AA12BVHSplitModeOtcfC(maxLeaf, RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1(RayTracer::_impl::_impl_BVHSplitMode::getOpaquePointer(split))));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<BVHNode> BVHNode::getLeft() {
+  return swift::_impl::_impl_Optional<BVHNode>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8(result, RayTracer::_impl::$s9RayTracer7BVHNodeC4leftACSgvg(::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this)));
+  });
+  }
+  SWIFT_INLINE_THUNK void BVHNode::setLeft(const swift::Optional<BVHNode>& value) {
+  alignas(alignof(swift::Optional<BVHNode>)) char copyBuffer_consumedParamCopy_value[sizeof(swift::Optional<BVHNode>)];
+  auto &consumedParamCopy_value = *(new(copyBuffer_consumedParamCopy_value) swift::Optional<BVHNode>(value));
+  swift::_impl::ConsumedValueStorageDestroyer<swift::Optional<BVHNode>> storageGuard_consumedParamCopy_value(consumedParamCopy_value);
+  RayTracer::_impl::$s9RayTracer7BVHNodeC4leftACSgvs(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8(swift::_impl::_impl_Optional<BVHNode>::getOpaquePointer(consumedParamCopy_value)), ::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK swift::Optional<BVHNode> BVHNode::getRight() {
+  return swift::_impl::_impl_Optional<BVHNode>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8(result, RayTracer::_impl::$s9RayTracer7BVHNodeC5rightACSgvg(::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this)));
+  });
+  }
+  SWIFT_INLINE_THUNK void BVHNode::setRight(const swift::Optional<BVHNode>& value) {
+  alignas(alignof(swift::Optional<BVHNode>)) char copyBuffer_consumedParamCopy_value[sizeof(swift::Optional<BVHNode>)];
+  auto &consumedParamCopy_value = *(new(copyBuffer_consumedParamCopy_value) swift::Optional<BVHNode>(value));
+  swift::_impl::ConsumedValueStorageDestroyer<swift::Optional<BVHNode>> storageGuard_consumedParamCopy_value(consumedParamCopy_value);
+  RayTracer::_impl::$s9RayTracer7BVHNodeC5rightACSgvs(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8(swift::_impl::_impl_Optional<BVHNode>::getOpaquePointer(consumedParamCopy_value)), ::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK swift::Int BVHNode::getStart() {
+  return RayTracer::_impl::$s9RayTracer7BVHNodeC5startSivg(::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK void BVHNode::setStart(swift::Int value) {
+  RayTracer::_impl::$s9RayTracer7BVHNodeC5startSivs(value, ::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK swift::Int BVHNode::getCount() {
+  return RayTracer::_impl::$s9RayTracer7BVHNodeC5countSivg(::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK void BVHNode::setCount(swift::Int value) {
+  RayTracer::_impl::$s9RayTracer7BVHNodeC5countSivs(value, ::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK bool BVHNode::isLeaf() {
+  return RayTracer::_impl::$s9RayTracer7BVHNodeC6isLeafSbvg(::swift::_impl::_impl_RefCountedClass::getOpaquePointer(*this));
+  }
+  SWIFT_INLINE_THUNK BVHNode BVHNode::init() {
+  return _impl::_impl_BVHNode::makeRetained(RayTracer::_impl::$s9RayTracer7BVHNodeCACycfC(swift::TypeMetadataTrait<BVHNode>::getTypeMetadata()));
+  }
+  SWIFT_INLINE_THUNK uint8_t BVHPrim::getType() const {
+  return RayTracer::_impl::$s9RayTracer7BVHPrimV4types5UInt8Vvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1_uint64_t_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Int BVHPrim::getIndex() const {
+  return RayTracer::_impl::$s9RayTracer7BVHPrimV5indexSivg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1_uint64_t_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode BVHSplitMode::_impl_sah::operator()() const {
+    auto result = BVHSplitMode::_make();
+    result._destructiveInjectEnumTag(0);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool BVHSplitMode::isSah() const {
+    return *this == BVHSplitMode::sah;
+  }
+  SWIFT_INLINE_THUNK BVHSplitMode BVHSplitMode::_impl_median::operator()() const {
+    auto result = BVHSplitMode::_make();
+    result._destructiveInjectEnumTag(1);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool BVHSplitMode::isMedian() const {
+    return *this == BVHSplitMode::median;
+  }
+  SWIFT_INLINE_THUNK swift::Int BVHSplitMode::getHashValue() const {
+  return RayTracer::_impl::$s9RayTracer12BVHSplitModeO9hashValueSivg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Int CameraSpec::getIndex() const {
+  return RayTracer::_impl::$s9RayTracer10CameraSpecV5indexSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> CameraSpec::getId() const {
+  return swift::_impl::_impl_Optional<swift::String>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(result, RayTracer::_impl::$s9RayTracer10CameraSpecV2idSSSgvg(_getOpaquePointer()));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> CameraSpec::getImageName() const {
+  return swift::_impl::_impl_Optional<swift::String>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(result, RayTracer::_impl::$s9RayTracer10CameraSpecV9imageNameSSSgvg(_getOpaquePointer()));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int CameraSpec::getWidth() const {
+  return RayTracer::_impl::$s9RayTracer10CameraSpecV5widthSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int CameraSpec::getHeight() const {
+  return RayTracer::_impl::$s9RayTracer10CameraSpecV6heightSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK PlyError PlyError::_impl_fileOpenFailed::operator()(const swift::String& val) const {
+    auto result = PlyError::_make();
+    alignas(swift::String) unsigned char buffer[sizeof(swift::String)];
+    auto *valCopy = new(buffer) swift::String(val);
+    swift::_impl::implClassFor<swift::String>::type::initializeWithTake(result._getOpaquePointer(), swift::_impl::implClassFor<swift::String>::type::getOpaquePointer(*valCopy));
+    result._destructiveInjectEnumTag(0);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool PlyError::isFileOpenFailed() const {
+    return *this == PlyError::fileOpenFailed;
+  }
+  SWIFT_INLINE_THUNK swift::String PlyError::getFileOpenFailed() const {
+    if (!isFileOpenFailed()) abort();
+    alignas(PlyError) unsigned char buffer[sizeof(PlyError)];
+    auto *thisCopy = new(buffer) PlyError(*this);
+    char * _Nonnull payloadFromDestruction = thisCopy->_destructiveProjectEnumData();
+    return swift::_impl::implClassFor<swift::String>::type::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+      swift::_impl::implClassFor<swift::String>::type::initializeWithTake(result, payloadFromDestruction);
+    });
+  }
+  SWIFT_INLINE_THUNK PlyError PlyError::_impl_vertexDataMissing::operator()() const {
+    auto result = PlyError::_make();
+    result._destructiveInjectEnumTag(1);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool PlyError::isVertexDataMissing() const {
+    return *this == PlyError::vertexDataMissing;
+  }
+  SWIFT_INLINE_THUNK PlyError PlyError::_impl_faceDataMissing::operator()() const {
+    auto result = PlyError::_make();
+    result._destructiveInjectEnumTag(2);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool PlyError::isFaceDataMissing() const {
+    return *this == PlyError::faceDataMissing;
+  }
+  SWIFT_INLINE_THUNK PlyError PlyError::_impl_triangulationNeedsVerts::operator()() const {
+    auto result = PlyError::_make();
+    result._destructiveInjectEnumTag(3);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool PlyError::isTriangulationNeedsVerts() const {
+    return *this == PlyError::triangulationNeedsVerts;
+  }
+  SWIFT_INLINE_THUNK PlyError PlyError::_impl_corrupted::operator()() const {
+    auto result = PlyError::_make();
+    result._destructiveInjectEnumTag(4);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool PlyError::isCorrupted() const {
+    return *this == PlyError::corrupted;
+  }
+  SWIFT_INLINE_THUNK swift::String PlyError::getDescription() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_void_ptr_8_16(result, RayTracer::_impl::$s9RayTracer8PlyErrorO11descriptionSSvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Array<swift::Int> PlyMesh::getIndices() const {
+  return swift::_impl::_impl_Array<swift::Int>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_void_ptr_0_8(result, RayTracer::_impl::$s9RayTracer7PlyMeshV7indicesSaySiGvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_void_ptr_0_8_void_ptr_8_16_void_ptr_16_24(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK void PlyMesh::setIndices(const swift::Array<swift::Int>& value) {
+  alignas(alignof(swift::Array<swift::Int>)) char copyBuffer_consumedParamCopy_value[sizeof(swift::Array<swift::Int>)];
+  auto &consumedParamCopy_value = *(new(copyBuffer_consumedParamCopy_value) swift::Array<swift::Int>(value));
+  swift::_impl::ConsumedValueStorageDestroyer<swift::Array<swift::Int>> storageGuard_consumedParamCopy_value(consumedParamCopy_value);
+  RayTracer::_impl::$s9RayTracer7PlyMeshV7indicesSaySiGvs(RayTracer::_impl::swift_interop_passDirect_RayTracer_void_ptr_0_8(swift::_impl::_impl_Array<swift::Int>::getOpaquePointer(consumedParamCopy_value)), _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK float RenderConfig::getExposure() const {
+  return RayTracer::_impl::$s9RayTracer12RenderConfigV8exposureSfvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void RenderConfig::setExposure(float value) {
+  RayTracer::_impl::$s9RayTracer12RenderConfigV8exposureSfvs(value, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK bool RenderConfig::getBackfaceCulling() const {
+  return RayTracer::_impl::$s9RayTracer12RenderConfigV15backfaceCullingSbvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void RenderConfig::setBackfaceCulling(bool value) {
+  RayTracer::_impl::$s9RayTracer12RenderConfigV15backfaceCullingSbvs(value, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderConfig::getSsp() const {
+  return RayTracer::_impl::$s9RayTracer12RenderConfigV3sspSivg(RayTracer::_impl::swift_interop_passDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK void RenderConfig::setSsp(swift::Int value) {
+  RayTracer::_impl::$s9RayTracer12RenderConfigV3sspSivs(value, _getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK RenderConfig RenderConfig::init(float exposure, bool backfaceCulling, swift::Int ssp) {
+  return RayTracer::_impl::_impl_RenderConfig::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_float_0_4_bool_4_5_uint64_t_8_16(result, RayTracer::_impl::$s9RayTracer12RenderConfigV8exposure15backfaceCulling3sspACSf_SbSitcfC(exposure, backfaceCulling, ssp));
+  });
+  }
+  SWIFT_INLINE_THUNK double RenderProgress::getFraction() const {
+  return RayTracer::_impl::$s9RayTracer14RenderProgressV8fractionSdvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Optional<swift::String> RenderProgress::getMessage() const {
+  return swift::_impl::_impl_Optional<swift::String>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(result, RayTracer::_impl::$s9RayTracer14RenderProgressV7messageSSSgvg(RayTracer::_impl::swift_interop_passDirect_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24(_getOpaquePointer())));
+  });
+  }
+  SWIFT_INLINE_THUNK RenderProgress RenderProgress::init(double fraction, const swift::Optional<swift::String>& message) {
+  alignas(alignof(swift::Optional<swift::String>)) char copyBuffer_consumedParamCopy_message[sizeof(swift::Optional<swift::String>)];
+  auto &consumedParamCopy_message = *(new(copyBuffer_consumedParamCopy_message) swift::Optional<swift::String>(message));
+  swift::_impl::ConsumedValueStorageDestroyer<swift::Optional<swift::String>> storageGuard_consumedParamCopy_message(consumedParamCopy_message);
+  return RayTracer::_impl::_impl_RenderProgress::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_double_0_8_uint64_t_8_16_uint64_t_16_24(result, RayTracer::_impl::$s9RayTracer14RenderProgressV_7messageACSd_SSSgtcfC(fraction, RayTracer::_impl::swift_interop_passDirect_RayTracer_uint64_t_0_8_uint64_t_8_16(swift::_impl::_impl_Optional<swift::String>::getOpaquePointer(consumedParamCopy_message))));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::String RenderResult::getFileName() const {
+  return swift::_impl::_impl_String::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_uint64_t_0_8_void_ptr_8_16(result, RayTracer::_impl::$s9RayTracer12RenderResultV8fileNameSSvg(_getOpaquePointer()));
+  });
+  }
+  SWIFT_INLINE_THUNK CGImageRef _Nonnull RenderResult::getImage() const {
+return RayTracer::_impl::$s9RayTracer12RenderResultV5imageSo10CGImageRefavg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK CameraSpec RenderResult::getCamera() const {
+  return RayTracer::_impl::_impl_CameraSpec::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::$s9RayTracer12RenderResultV6cameraAA10CameraSpecVvg(result, _getOpaquePointer());
+  });
+  }
+  SWIFT_INLINE_THUNK RenderStats RenderResult::getStats() const {
+  return RayTracer::_impl::_impl_RenderStats::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::$s9RayTracer12RenderResultV5statsAA0C5StatsVvg(result, _getOpaquePointer());
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderStats::getMeshes() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV6meshesSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderStats::getTriangles() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV9trianglesSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderStats::getSpheres() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV7spheresSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderStats::getPlanes() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV6planesSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK int64_t RenderStats::getRays() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV4rayss5Int64Vvg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int RenderStats::getMilliseconds() const {
+  return RayTracer::_impl::$s9RayTracer11RenderStatsV12millisecondsSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK RenderStats RenderStats::init(swift::Int meshes, swift::Int triangles, swift::Int spheres, swift::Int planes, int64_t rays, swift::Int milliseconds) {
+  return RayTracer::_impl::_impl_RenderStats::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::$s9RayTracer11RenderStatsV6meshes9triangles7spheres6planes4rays12millisecondsACSi_S3is5Int64VSitcfC(result, meshes, triangles, spheres, planes, rays, milliseconds);
+  });
+  }
+  SWIFT_INLINE_THUNK SceneFormat SceneFormat::_impl_auto::operator()() const {
+    auto result = SceneFormat::_make();
+    result._destructiveInjectEnumTag(0);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool SceneFormat::isAuto_() const {
+    return *this == SceneFormat::auto_;
+  }
+  SWIFT_INLINE_THUNK SceneFormat SceneFormat::_impl_json::operator()() const {
+    auto result = SceneFormat::_make();
+    result._destructiveInjectEnumTag(1);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool SceneFormat::isJson() const {
+    return *this == SceneFormat::json;
+  }
+  SWIFT_INLINE_THUNK SceneFormat SceneFormat::_impl_xml::operator()() const {
+    auto result = SceneFormat::_make();
+    result._destructiveInjectEnumTag(2);
+    return result;
+  }
+  SWIFT_INLINE_THUNK  bool SceneFormat::isXml() const {
+    return *this == SceneFormat::xml;
+  }
+  SWIFT_INLINE_THUNK swift::Int SceneFormat::getHashValue() const {
+  return RayTracer::_impl::$s9RayTracer11SceneFormatO9hashValueSivg(RayTracer::_impl::swift_interop_passDirect_RayTracer_uint8_t_0_1(_getOpaquePointer()));
+  }
+  SWIFT_INLINE_THUNK swift::Array<CameraSpec> SceneInfo::getCameras() const {
+  return swift::_impl::_impl_Array<CameraSpec>::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    RayTracer::_impl::swift_interop_returnDirect_RayTracer_void_ptr_0_8(result, RayTracer::_impl::$s9RayTracer9SceneInfoV7camerasSayAA10CameraSpecVGvg(_getOpaquePointer()));
+  });
+  }
+  SWIFT_INLINE_THUNK swift::Int SceneInfo::getMeshes() const {
+  return RayTracer::_impl::$s9RayTracer9SceneInfoV6meshesSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int SceneInfo::getTriangles() const {
+  return RayTracer::_impl::$s9RayTracer9SceneInfoV9trianglesSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int SceneInfo::getSpheres() const {
+  return RayTracer::_impl::$s9RayTracer9SceneInfoV7spheresSivg(_getOpaquePointer());
+  }
+  SWIFT_INLINE_THUNK swift::Int SceneInfo::getPlanes() const {
+  return RayTracer::_impl::$s9RayTracer9SceneInfoV6planesSivg(_getOpaquePointer());
+  }
+
+class ImageHelper { } SWIFT_UNAVAILABLE_MSG("'ImageHelper' is a zero sized value type, it cannot be exposed to C++ yet");
+
+// Unavailable in C++: Swift type alias 'Material'.
+
+class PLYLoader { } SWIFT_UNAVAILABLE_MSG("'PLYLoader' is a zero sized value type, it cannot be exposed to C++ yet");
+
+// Unavailable in C++: Swift type alias 'Scene'.
+
+} // namespace RayTracer
+
+#pragma clang diagnostic pop
+#undef SWIFT_SYMBOL
 #endif
 #pragma clang diagnostic pop
 #endif

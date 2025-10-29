@@ -1,0 +1,4 @@
+module CPly {
+    umbrella header "CPly.h"
+    export *
+}

@@ -24,27 +24,47 @@
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift"
         },
         {
           "kind" : "file",
           "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/XMLCoder.swiftmodule"
         },
         {
           "kind" : "file",
@@ -55,15 +75,20 @@
       "moduleName" : "ParsingKit",
       "moduleOutputPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/ParsingKit.swiftmodule",
       "objects" : [
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.swift.o",
         "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o"
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.swift.o"
       ],
       "otherArguments" : [
         "-target",
         "x86_64-apple-macosx12.0",
+        "-v",
         "-incremental",
         "-enable-batch-mode",
         "-serialize-diagnostics",
@@ -114,7 +139,6 @@
         "-fPIC",
         "-Xcc",
         "-g",
-        "-suppress-warnings",
         "-package-name",
         "parsingkit"
       ],
@@ -122,15 +146,23 @@
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.swift.o"
         },
         {
           "kind" : "file",
@@ -138,7 +170,15 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.swift.o"
         },
         {
           "kind" : "file",
@@ -147,11 +187,15 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift",
+        "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift"
       ],
       "tempsPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build",
       "wholeModuleOptimization" : false
@@ -163,11 +207,23 @@
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/AABB.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/BVH.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Light+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Object+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Triangle+Extension.swift"
         },
         {
           "kind" : "file",
@@ -175,23 +231,35 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/PLYReader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RTContext.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderConfig.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderProgress.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderResult.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderStats.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RuntimeStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/SceneFormat.swift"
         },
         {
           "kind" : "file",
@@ -203,15 +271,11 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift"
-        },
-        {
-          "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
-        },
-        {
-          "kind" : "file",
           "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/CPly.build/miniply.cpp.o"
         },
         {
           "kind" : "file",
@@ -226,22 +290,27 @@
       "moduleName" : "RayTracer",
       "moduleOutputPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/RayTracer.swiftmodule",
       "objects" : [
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/AABB.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/BVH.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light+Extension.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object+Extension.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle+Extension.swift.o",
         "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Image.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/PLYReader.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RTContext.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderConfig.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderProgress.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderResult.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderStats.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RuntimeStorage.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/SceneFormat.swift.o",
         "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Ray.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swift.o",
-        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swift.o"
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RayTracer.swift.o"
       ],
       "otherArguments" : [
         "-target",
         "x86_64-apple-macosx12.0",
+        "-v",
         "-incremental",
         "-enable-batch-mode",
         "-serialize-diagnostics",
@@ -253,6 +322,12 @@
         "-DSWIFT_PACKAGE",
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-Xcc",
+        "-fmodule-map-file=/Users/erendemircan/Desktop/MyRayTracer/Sources/CPly/include/module.modulemap",
+        "-Xcc",
+        "-I",
+        "-Xcc",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/CPly/include",
         "-module-cache-path",
         "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
@@ -263,6 +338,7 @@
         "-color-diagnostics",
         "-swift-version",
         "6",
+        "-cxx-interoperability-mode=default",
         "-plugin-path",
         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
@@ -299,11 +375,23 @@
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Camera.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/AABB.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Definitions.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/BVH.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle+Extension.swift.o"
         },
         {
           "kind" : "file",
@@ -311,23 +399,35 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Light.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/PLYReader.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Material.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RTContext.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Object.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderConfig.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Sphere.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderProgress.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Triangle.swift.o"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderResult.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RenderStats.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/RuntimeStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/SceneFormat.swift.o"
         },
         {
           "kind" : "file",
@@ -339,33 +439,617 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/Scene.swift.o"
-        },
-        {
-          "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/VertexData.swift.o"
-        },
-        {
-          "kind" : "file",
           "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/RayTracer.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/AABB.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/BVH.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Light+Extension.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Object+Extension.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Triangle+Extension.swift",
         "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/PLYReader.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RTContext.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderConfig.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderProgress.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderResult.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderStats.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RuntimeStorage.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/SceneFormat.swift",
         "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift",
-        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
+        "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift"
       ],
       "tempsPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.XMLCoder-x86_64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/sources",
+      "importPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Attribute.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/BoolBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/Box.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ChoiceBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DataBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DateBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DecimalBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DoubleBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/FloatBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/IntBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/KeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/NullBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SharedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SingleKeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/StringBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UIntBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/URLBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UnkeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ValueBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Element.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ElementAndAttribute.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ISO8601DateFormatter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/KeyedStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Metatypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/String+Extensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLChoiceCodingKey.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLCoderElement.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLDocumentType.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLHeader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLKey.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLStackParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DecodingErrorExtension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DynamicNodeDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/SingleValueDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLChoiceDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoderImplementation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecodingStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLKeyedDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLUnkeyedDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/DynamicNodeEncoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/EncodingErrorExtension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/SingleValueEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLChoiceEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoderImplementation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncodingStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLKeyedEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLReferencingEncoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLUnkeyedEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "XMLCoder",
+      "moduleOutputPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/XMLCoder.swiftmodule",
+      "objects" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Attribute.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/BoolBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Box.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ChoiceBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DataBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DateBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DecimalBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DoubleBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/FloatBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/IntBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/KeyedBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/NullBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SharedBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleKeyedBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/StringBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/UIntBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/URLBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/UnkeyedBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ValueBox.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Element.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ElementAndAttribute.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ISO8601DateFormatter.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/KeyedStorage.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Metatypes.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/String+Extensions.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceCodingKey.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLCoderElement.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDocumentType.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLHeader.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKey.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLStackParser.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DecodingErrorExtension.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DynamicNodeDecoding.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleValueDecodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceDecodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecoder.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecoderImplementation.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecodingStorage.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKeyedDecodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLUnkeyedDecodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DynamicNodeEncoding.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/EncodingErrorExtension.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleValueEncodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceEncodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncoder.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncoderImplementation.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncodingStorage.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKeyedEncodingContainer.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLReferencingEncoder.swift.o",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLUnkeyedEncodingContainer.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx10.13",
+        "-v",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/include/XMLCoder-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings"
+      ],
+      "outputFileMapPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Attribute.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/BoolBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Box.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ChoiceBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DataBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DateBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DecimalBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DoubleBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/FloatBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/IntBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/KeyedBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/NullBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SharedBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleKeyedBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/StringBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/UIntBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/URLBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/UnkeyedBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ValueBox.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Element.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ElementAndAttribute.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/ISO8601DateFormatter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/KeyedStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/Metatypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/String+Extensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceCodingKey.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLCoderElement.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDocumentType.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLHeader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKey.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLStackParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DecodingErrorExtension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DynamicNodeDecoding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleValueDecodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceDecodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecoder.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecoderImplementation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLDecodingStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKeyedDecodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLUnkeyedDecodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/DynamicNodeEncoding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/EncodingErrorExtension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/SingleValueEncodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLChoiceEncodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncoder.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncoderImplementation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLEncodingStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLKeyedEncodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLReferencingEncoder.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/XMLUnkeyedEncodingContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules/XMLCoder.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Attribute.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/BoolBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/Box.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ChoiceBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DataBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DateBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DecimalBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DoubleBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/FloatBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/IntBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/KeyedBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/NullBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SharedBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SingleKeyedBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/StringBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UIntBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/URLBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UnkeyedBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ValueBox.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Element.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ElementAndAttribute.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ISO8601DateFormatter.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/KeyedStorage.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Metatypes.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/String+Extensions.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLChoiceCodingKey.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLCoderElement.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLDocumentType.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLHeader.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLKey.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLStackParser.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DecodingErrorExtension.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DynamicNodeDecoding.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/SingleValueDecodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLChoiceDecodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoder.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoderImplementation.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecodingStorage.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLKeyedDecodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLUnkeyedDecodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/DynamicNodeEncoding.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/EncodingErrorExtension.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/SingleValueEncodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLChoiceEncodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoder.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoderImplementation.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncodingStorage.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLKeyedEncodingContainer.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLReferencingEncoder.swift",
+        "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLUnkeyedEncodingContainer.swift"
+      ],
+      "tempsPath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build",
       "wholeModuleOptimization" : false
     }
   },
@@ -380,15 +1064,20 @@
       "-package-name",
       "parsingkit",
       "-c",
-      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift",
+      "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift",
       "-I",
       "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
       "-target",
       "x86_64-apple-macosx12.0",
+      "-v",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
@@ -439,7 +1128,6 @@
       "-fPIC",
       "-Xcc",
       "-g",
-      "-suppress-warnings",
       "-package-name",
       "parsingkit",
       "-driver-use-frontend-path",
@@ -452,22 +1140,27 @@
       "-package-name",
       "myraytracer",
       "-c",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/AABB.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/BVH.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Light+Extension.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Object+Extension.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Triangle+Extension.swift",
       "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/Image.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/PLYReader.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RTContext.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderConfig.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderProgress.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderResult.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderStats.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RuntimeStorage.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/SceneFormat.swift",
       "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Ray/Ray.swift",
       "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift",
-      "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift",
       "-I",
       "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
       "-target",
       "x86_64-apple-macosx12.0",
+      "-v",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
@@ -479,6 +1172,12 @@
       "-DSWIFT_PACKAGE",
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-Xcc",
+      "-fmodule-map-file=/Users/erendemircan/Desktop/MyRayTracer/Sources/CPly/include/module.modulemap",
+      "-Xcc",
+      "-I",
+      "-Xcc",
+      "/Users/erendemircan/Desktop/MyRayTracer/Sources/CPly/include",
       "-module-cache-path",
       "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
@@ -489,6 +1188,7 @@
       "-color-diagnostics",
       "-swift-version",
       "6",
+      "-cxx-interoperability-mode=default",
       "-plugin-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
@@ -522,14 +1222,136 @@
       "myraytracer",
       "-driver-use-frontend-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "XMLCoder" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "XMLCoder",
+      "-c",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Attribute.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/BoolBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/Box.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ChoiceBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DataBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DateBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DecimalBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DoubleBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/FloatBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/IntBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/KeyedBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/NullBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SharedBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SingleKeyedBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/StringBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UIntBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/URLBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UnkeyedBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ValueBox.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Element.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ElementAndAttribute.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ISO8601DateFormatter.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/KeyedStorage.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Metatypes.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/String+Extensions.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLChoiceCodingKey.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLCoderElement.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLDocumentType.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLHeader.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLKey.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLStackParser.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DecodingErrorExtension.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DynamicNodeDecoding.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/SingleValueDecodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLChoiceDecodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoder.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoderImplementation.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecodingStorage.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLKeyedDecodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLUnkeyedDecodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/DynamicNodeEncoding.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/EncodingErrorExtension.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/SingleValueEncodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLChoiceEncodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoder.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoderImplementation.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncodingStorage.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLKeyedEncodingContainer.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLReferencingEncoder.swift",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLUnkeyedEncodingContainer.swift",
+      "-I",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx10.13",
+      "-v",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/include/XMLCoder-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ]
   },
   "targetDependencyMap" : {
-    "ParsingKit" : [
+    "CPly" : [
 
     ],
+    "ParsingKit" : [
+      "XMLCoder"
+    ],
     "RayTracer" : [
-      "ParsingKit"
+      "ParsingKit",
+      "XMLCoder",
+      "CPly"
+    ],
+    "XMLCoder" : [
+
     ]
   },
   "testDiscoveryCommands" : {
@@ -553,23 +1375,39 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift"
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift"
         }
       ],
       "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/sources"
@@ -583,11 +1421,23 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Camera/Camera.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/AABB.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Definitions.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Accelearion/BVH.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Light+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Object+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Extensions/Triangle+Extension.swift"
         },
         {
           "kind" : "file",
@@ -595,23 +1445,35 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Lights/Light.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Helpers/PLYReader.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Material/Material.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RTContext.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Object.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderConfig.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Sphere.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderProgress.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Objects/Triangle.swift"
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderResult.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RenderStats.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/RuntimeStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Models/SceneFormat.swift"
         },
         {
           "kind" : "file",
@@ -620,17 +1482,219 @@
         {
           "kind" : "file",
           "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/RayTracer.swift"
-        },
-        {
-          "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/Scene.swift"
-        },
-        {
-          "kind" : "file",
-          "name" : "/Users/erendemircan/Desktop/MyRayTracer/Sources/RayTracer/VertexData.swift"
         }
       ],
       "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/RayTracer.build/sources"
+    },
+    "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Attribute.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/BoolBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/Box.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ChoiceBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DataBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DateBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DecimalBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/DoubleBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/FloatBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/IntBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/KeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/NullBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SharedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/SingleKeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/StringBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UIntBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/URLBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/UnkeyedBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Box/ValueBox.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Element.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ElementAndAttribute.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/ISO8601DateFormatter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/KeyedStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/Metatypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/String+Extensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLChoiceCodingKey.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLCoderElement.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLDocumentType.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLHeader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLKey.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Auxiliaries/XMLStackParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DecodingErrorExtension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/DynamicNodeDecoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/SingleValueDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLChoiceDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecoderImplementation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLDecodingStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLKeyedDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Decoder/XMLUnkeyedDecodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/DynamicNodeEncoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/EncodingErrorExtension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/SingleValueEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLChoiceEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncoderImplementation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLEncodingStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLKeyedEncodingContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLReferencingEncoder.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/XMLCoder/Sources/XMLCoder/Encoder/XMLUnkeyedEncodingContainer.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/XMLCoder.build/sources"
     },
     "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,

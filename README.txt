@@ -1,0 +1,1 @@
+This is a core renderer file. It is also a swift package. There are no executables here. Due to the size limitations I only uploaded this folder. The other files will be explained in the blog post.

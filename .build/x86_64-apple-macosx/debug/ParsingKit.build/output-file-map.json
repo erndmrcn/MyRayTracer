@@ -2,39 +2,67 @@
   "": {
     "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/master.swiftdeps"
   },
-  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoding.swift": {
-    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.d",
-    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swift.o",
-    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding~partial.swiftmodule",
-    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.swiftdeps",
-    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoding.dia"
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/FlexibleDecoders.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/FlexibleDecoders.dia"
   },
-  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/PropertyWrapper.swift": {
-    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.d",
-    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swift.o",
-    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper~partial.swiftmodule",
-    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.swiftdeps",
-    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PropertyWrapper.dia"
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/MathTypes.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/MathTypes.dia"
   },
-  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/RootDecoding.swift": {
-    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.d",
-    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swift.o",
-    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding~partial.swiftmodule",
-    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.swiftdeps",
-    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/RootDecoding.dia"
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Objects.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Objects.dia"
   },
-  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/Scalar.swift": {
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/PLYReader.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/PLYReader.dia"
+  },
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Ray.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Ray.dia"
+  },
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/Scalar.swift": {
     "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.d",
     "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swift.o",
     "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar~partial.swiftmodule",
     "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.swiftdeps",
     "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/Scalar.dia"
   },
-  "/Users/erendemircan/Desktop/MyRayTracer/.build/checkouts/ParsingKit/Sources/ParsingKit/Core/VertexHelper.swift": {
-    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.d",
-    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swift.o",
-    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper~partial.swiftmodule",
-    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.swiftdeps",
-    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/VertexHelper.dia"
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneLoader.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneLoader.dia"
+  },
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/SceneModel.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/SceneModel.dia"
+  },
+  "/Users/erendemircan/ParsingKit/Sources/ParsingKit/Core/XML2JSON.swift": {
+    "dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.d",
+    "object": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.swift.o",
+    "swiftmodule": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON~partial.swiftmodule",
+    "swift-dependencies": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.swiftdeps",
+    "diagnostics": "/Users/erendemircan/Desktop/MyRayTracer/.build/x86_64-apple-macosx/debug/ParsingKit.build/XML2JSON.dia"
   }
 }

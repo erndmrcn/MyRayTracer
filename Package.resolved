@@ -1,15 +1,6 @@
 {
-  "originHash" : "c29fd6643c1546a17c9a2aff796c6f6cb7a3c5cea95ca6f69ab95a02ac2e41d7",
+  "originHash" : "5424afbd0a723f40fa370873913015b76eaa32f65987739b6a2e869b847b812a",
   "pins" : [
-    {
-      "identity" : "parsingkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/erndmrcn/ParsingKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "0b84fffc85de0ea927e1a2bd97fc1941cbc699e7"
-      }
-    },
     {
       "identity" : "xmlcoder",
       "kind" : "remoteSourceControl",
