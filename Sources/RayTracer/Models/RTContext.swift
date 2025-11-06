@@ -5,309 +5,305 @@
 //  Created by Eren Demircan on 10.10.2025.
 //
 
-import ParsingKit
-import simd
 import Foundation
-//import CPly
+import simd
+@preconcurrency import ParsingKit
 
+// MARK: - Common aliases
+public typealias Mat4   = simd_double4x4
+public typealias Vec3   = SIMD3<Double>
+public typealias Scalar = Double
+
+extension Vec3: Hashable { }
+
+// MARK: - Common structs
 public struct BVHPrim: Sendable {
     public let type: UInt8
     public let index: Int
 }
 
-public struct RTContext: Sendable {
-    // Scalars
-    let intersectionTestEpsilon: Scalar
-    let shadowRayEpsilon: Scalar
-
-    // Lookups
-    let materialIndexById: [String: Int]
-    let objectIndexByIdentity: [ObjectIdentifier: Int]
-
-    // Geometry tables
-    var positions: [Vec3]
-
-    // Triangles
-    let triIndex: [Int]
-    let triObj: [Int]
-    let triMat: [Int]
-    let v0: [Vec3], v1: [Vec3], v2: [Vec3]
-    let e1: [Vec3], e2: [Vec3]
-
-    let triSmooth: [UInt8]
-
-    let triN0: [Vec3]
-    let triN1: [Vec3]
-    let triN2: [Vec3]
-
-    // Spheres
-    let sphCenter: [Vec3], sphRadius: [Scalar], sphObj: [Int], sphMat: [Int]
-
-    // Planes
-    let planeCenter: [Vec3], planeNormal: [Vec3], planeObj: [Int], planeMat: [Int]
-
-    var planeCount: Int {
-        planeCenter.count
-    }
-
-    var hasSmoothNormals: Bool = false
-
-    let bvhRoot: BVHNode?
-    let bvhPrims: [BVHPrim]
+public enum ShadingMode: UInt8, Sendable {
+    case flat
+    case smooth
 }
 
-extension RTContext {
-    init(scene: Scene) {
+public struct PrimitiveInfo: Sendable {
+    public let type: GeometryType
+    public let primitiveIndex: Int
+    public let bounds: AABB
+    public var centroid: Vec3
+    public let materialID: Int
+    public var shadingMode: ShadingMode = .smooth
+}
+
+public enum GeometryType: UInt8, Sendable {
+    case mesh
+    case triangle
+    case sphere
+    case plane
+}
+
+// MARK: - Runtime containers
+public struct InstanceRT: Sendable {
+    public var baseIndex: Int
+    public var transform: Mat4
+    public var invTransform: Mat4
+    public var worldBounds: AABB
+    public var materialIndex: Int
+}
+
+// Analytic runtime wrapper (object reference + material)
+public struct AnalyticRT: @unchecked Sendable {
+    public let object: AnalyticRenderable
+    public let materialIndex: Int
+}
+
+// MARK: - RTContext
+public struct RTContext: Sendable {
+    public var intersectionTestEpsilon: Scalar
+    public var shadowRayEpsilon: Scalar
+
+    public var materials: [Material]
+
+    public var spheres: [Sphere]
+    public var planes: [Plane]
+    public var triangles: [Triangle]
+    public var bvhPrims: [PrimitiveInfo]
+
+    public var bvh: BVHBuilder?
+
+    public init(scene: Scene) {
         self.intersectionTestEpsilon = scene.intersectionTestEpsilon
-        self.shadowRayEpsilon = scene.shadowRayEpsilon
-        self.hasSmoothNormals = scene.cameras.contains(where: {$0.imageName.contains("smooth")})
+        self.shadowRayEpsilon        = scene.shadowRayEpsilon
+        self.materials               = scene.materials
+        self.triangles                = []
+        self.spheres               = []
+        self.planes               = []
+        self.bvhPrims               = []
 
-        // Materials
-        var matById: [String: Int] = [:]
-        for (i, m) in scene.materials.enumerated() {
-            if let id = m.id { matById[id] = Int(i) }
-        }
-        self.materialIndexById = matById
+        var currentSphereIndex = 0
+        var currentPlaneIndex = 0
+        var currentTriangleIndex = 0
 
-        // Objects
-        var objByIdent: [ObjectIdentifier: Int] = [:]
-        for (i, obj) in scene.objects.enumerated() {
-            objByIdent[ObjectIdentifier(obj)] = Int(i)
-        }
-        self.objectIndexByIdentity = objByIdent
+        for object in scene.objects {
+            let matID = materialIndex(for: object.material, in: scene.materials)
 
-        // Vertices
-        var positions = scene.vertexData.data
+            if var sph = object as? Sphere {
+                sph.center = scene.vertexData.data[sph.centerIdx - 1]
+                let bounds = AABB(minP: sph.center - Vec3(sph.radius), maxP: sph.center + Vec3(sph.radius))
+                bvhPrims.append(PrimitiveInfo(
+                    type: .sphere, primitiveIndex: currentSphereIndex, bounds: bounds,
+                    centroid: sph.center, materialID: matID
+                ))
+                spheres.append(sph)
+                currentSphereIndex += 1
+            } else if var pln = object as? Plane {
+                pln.center = scene.vertexData.data[pln.centerIdx - 1]
+                let maxCoord = 1e5
+                let bounds = AABB(minP: Vec3(repeating: -maxCoord), maxP: Vec3(repeating: maxCoord))
+                bvhPrims.append(PrimitiveInfo(
+                    type: .plane, primitiveIndex: currentPlaneIndex, bounds: bounds,
+                    centroid: pln.center, materialID: matID
+                ))
+                planes.append(pln)
+                currentPlaneIndex += 1
 
-        // Triangles (Triangle + Mesh.faces)
-        var triIdx: [Int] = []
-        var triObj: [Int] = []
-        var triMat: [Int] = []
-        var triSmooth: [UInt8] = []
+            } else if var tri = object as? Triangle {
+                tri.v0 = scene.vertexData.data[tri.indices[0] - 1]
+                tri.v1 = scene.vertexData.data[tri.indices[1] - 1]
+                tri.v2 = scene.vertexData.data[tri.indices[2] - 1]
+                tri.e1 = tri.v1 - tri.v0
+                tri.e2 = tri.v2 - tri.v0
+                tri.n0 = normalize(cross(tri.e1, tri.e2))
+                tri.n1 = tri.n0
+                tri.n2 = tri.n0
 
-        triIdx.reserveCapacity(scene.objects.count * 6)
-        triObj.reserveCapacity(scene.objects.count * 2)
-        triMat.reserveCapacity(scene.objects.count * 2)
-        triSmooth.reserveCapacity(scene.objects.count * 2)
+                let bounds = AABB(minP: min(tri.v0, min(tri.v1, tri.v2)), maxP: max(tri.v0, max(tri.v1, tri.v2)))
+                tri.centroid = (tri.v0 + tri.v1 + tri.v2) / 3.0
 
-        func isSmooth(_ mode: String?) -> Bool {
-            guard let m = mode else { return false }
-            return m.lowercased() == "smooth"
-        }
+                bvhPrims.append(PrimitiveInfo(
+                    type: .triangle, primitiveIndex: currentTriangleIndex, bounds: bounds,
+                    centroid: tri.centroid, materialID: matID
+                ))
+                triangles.append(tri)
+                currentTriangleIndex += 1
 
-        func matIdx(_ id: String?) -> Int {
-            guard let id = id, let mi = matById[id] else { return -1 }
-            return mi
-        }
+            } else if let m = object as? Mesh {
+                let isSmooth = m.shadingMode == "smooth"
 
-        for obj in scene.objects {
-            let oid = objByIdent[ObjectIdentifier(obj)] ?? -1
-
-            if let t = obj as? Triangle, t.indices.count >= 3 {
-                let i0 = Int(max(0, t.indices[0] - 1))
-                let i1 = Int(max(0, t.indices[1] - 1))
-                let i2 = Int(max(0, t.indices[2] - 1))
-                triIdx += [i0, i1, i2]
-                triObj.append(oid)
-                triMat.append(matIdx(t.material))
-                triSmooth.append(0)
-            } else if let m = obj as? Mesh {
-                let smooth = isSmooth(m.shadingMode) ? UInt8(1) : UInt8(0)
+                var faceIndices: [Int] = []
+                var meshPositions: [Vec3] = []
+                var meshNormals: [Vec3] = []
 
                 if let plyPath = m.faces.plyPath {
-                    var cwd = scene.path?.deletingLastPathComponent()
-                    if cwd == nil {
-                        cwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-                    }
+                    let cwd = scene.path?.deletingLastPathComponent()
+                    ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+                    let plyURL = cwd.appendingPathComponent(plyPath)
 
-
-                    let plyURL = cwd!.appendingPathComponent(plyPath)
                     do {
                         let mesh = try PLYLoader.load(from: plyURL.path)
-
-                        let offset = positions.count
-                        positions.append(contentsOf: mesh.positions.map({Vec3($0)}))
-
-                        for k in stride(from: 0, to: mesh.indices.count, by: 3) {
-                            let f1 = offset + mesh.indices[k]
-                            let f2 = offset + mesh.indices[k+1]
-                            let f3 = offset + mesh.indices[k+2]
-
-                            triIdx += [f1, f2, f3]
-                            triObj.append(oid)
-                            triMat.append(matIdx(m.material))
-                            triSmooth.append(smooth)
-                        }
+                        faceIndices = mesh.indices
+                        meshPositions = mesh.positions
+                        meshNormals = mesh.normals
+                        print("number of vertices = \(meshPositions.count)")
+                        print("number of normal = \(meshNormals.count)")
+                        print("number of faces = \(faceIndices.count)")
                     } catch {
-                        print("Error loading PLY file at \(plyURL.path): \(error)")
+                        print("⚠️ Error loading PLY file at \(plyURL.path): \(error)")
+                        continue
                     }
                 } else {
-                    let face = m.faces.data
-                    let n = (face.count / 3) * 3
-                    var k = 0
-                    while k < n {
-                        let i0 = max(0, face[k+0] - 1)
-                        let i1 = max(0, face[k+1] - 1)
-                        let i2 = max(0, face[k+2] - 1)
-                        triIdx += [i0, i1, i2]
-                        triObj.append(oid)
-                        triMat.append(matIdx(m.material))
-                        triSmooth.append(smooth)
-                        k += 3
+                    faceIndices = m.faces.data
+                    meshPositions = scene.vertexData.data
+                }
+
+                if !meshNormals.isEmpty {
+                    let triangleCount = faceIndices.count / 3
+                    for i in 0..<triangleCount {
+                        let base = i * 3
+
+                        let i0 = faceIndices[base + 0]
+                        let i1 = faceIndices[base + 1]
+                        let i2 = faceIndices[base + 2]
+
+                        let v0 = meshPositions[i0]
+                        let v1 = meshPositions[i1]
+                        let v2 = meshPositions[i2]
+
+                        let n0 = meshNormals[i0]
+                        let n1 = meshNormals[i1]
+                        let n2 = meshNormals[i2]
+
+                        var tri = Triangle()
+                        tri.v0 = v0
+                        tri.v1 = v1
+                        tri.v2 = v2
+                        tri.e1 = v1 - v0
+                        tri.e2 = v2 - v0
+                        tri.centroid = (v0 + v1 + v2) / 3.0
+
+                        tri.n0 = n0
+                        tri.n1 = n1
+                        tri.n2 = n2
+
+                        triangles.append(tri)
+
+                        let bounds = AABB(
+                            minP: min(v0, min(v1, v2)),
+                            maxP: max(v0, max(v1, v2))
+                        )
+
+                        bvhPrims.append(
+                            PrimitiveInfo(
+                                type: .triangle,
+                                primitiveIndex: currentTriangleIndex,
+                                bounds: bounds,
+                                centroid: tri.centroid,
+                                materialID: matID,
+                                shadingMode: isSmooth ? .smooth : .flat
+                            )
+                        )
+
+                        currentTriangleIndex += 1
+                    }
+                } else {
+                    let fromPLY = m.faces.plyPath != nil
+                    let offset = fromPLY ? 0 : 1
+                    let indices1b = faceIndices
+                    let pos = meshPositions
+                    let triCount = indices1b.count / 3
+
+                    var faceNormals = [Vec3](repeating: .zero, count: triCount)
+                    for t in 0..<triCount {
+                        let b = t * 3
+                        let i0 = indices1b[b+0] - offset
+                        let i1 = indices1b[b+1] - offset
+                        let i2 = indices1b[b+2] - offset
+
+                        let v0 = pos[i0]
+                        let v1 = pos[i1]
+                        let v2 = pos[i2]
+                        faceNormals[t] = cross(v1 - v0, v2 - v0)
+                    }
+
+                    var vertexNormals = [Vec3](repeating: .zero, count: pos.count)
+                    if isSmooth {
+                        for t in 0..<triCount {
+                            let b = t * 3
+                            let fn = faceNormals[t]
+                            vertexNormals[indices1b[b+0] - offset] += fn
+                            vertexNormals[indices1b[b+1] - offset] += fn
+                            vertexNormals[indices1b[b+2] - offset] += fn
+                        }
+                        for i in 0..<vertexNormals.count {
+                            vertexNormals[i] = normalize(vertexNormals[i])
+                        }
+                    }
+
+                    for t in 0..<triCount {
+                        let b = t * 3
+                        let i0 = indices1b[b+0] - offset
+                        let i1 = indices1b[b+1] - offset
+                        let i2 = indices1b[b+2] - offset
+
+                        let v0 = pos[i0]
+                        let v1 = pos[i1]
+                        let v2 = pos[i2]
+
+                        var tri = Triangle()
+                        tri.v0 = v0; tri.v1 = v1; tri.v2 = v2
+                        tri.e1 = v1 - v0; tri.e2 = v2 - v0
+                        tri.centroid = (v0 + v1 + v2) / 3.0
+
+                        if isSmooth {
+                            tri.n0 = vertexNormals[i0]
+                            tri.n1 = vertexNormals[i1]
+                            tri.n2 = vertexNormals[i2]
+                        } else {
+                            let nFlat = normalize(faceNormals[t])
+                            tri.n0 = nFlat; tri.n1 = nFlat; tri.n2 = nFlat
+                        }
+
+                        triangles.append(tri)
+
+                        let bounds = AABB(minP: min(v0, min(v1, v2)),
+                                          maxP: max(v0, max(v1, v2)))
+                        bvhPrims.append(PrimitiveInfo(
+                            type: .triangle,
+                            primitiveIndex: currentTriangleIndex,
+                            bounds: bounds,
+                            centroid: tri.centroid,
+                            materialID: matID,
+                            shadingMode: isSmooth ? .smooth : .flat
+                        ))
+                        currentTriangleIndex += 1
                     }
                 }
             }
         }
 
-        let triCount = triIdx.count / 3
-
-        var v0 = [Vec3](repeating: .zero, count: triCount)
-        var v1 = [Vec3](repeating: .zero, count: triCount)
-        var v2 = [Vec3](repeating: .zero, count: triCount)
-        var e1 = [Vec3](repeating: .zero, count: triCount)
-        var e2 = [Vec3](repeating: .zero, count: triCount)
-
-        var faceNormals = [Vec3](repeating: .zero, count: triCount)
-
-        for t in 0..<triCount {
-            let i0 = Int(triIdx[3*t+0])
-            let i1 = Int(triIdx[3*t+1])
-            let i2 = Int(triIdx[3*t+2])
-
-            let p0 = positions[i0]
-            let p1 = positions[i1]
-            let p2 = positions[i2]
-
-            v0[t] = p0
-            v1[t] = p1
-            v2[t] = p2
-
-            let e10 = p1 - p0
-            let e20 = p2 - p0
-            e1[t] = e10
-            e2[t] = e20
-
-            faceNormals[t] = cross(e10, e20)
-        }
-
-        let vertexCount = positions.count
-        var vertexNormals = [Vec3](repeating: .zero, count: vertexCount)
-
-        for t in 0..<triCount {
-            if triSmooth[t] != 0 {
-                let i0 = Int(triIdx[3*t+0])
-                let i1 = Int(triIdx[3*t+1])
-                let i2 = Int(triIdx[3*t+2])
-
-                let fn = faceNormals[t]
-                let area = 0.5 * simd_length(fn)
-                vertexNormals[i0] += area * simd_normalize(fn)
-                vertexNormals[i1] += area * simd_normalize(fn)
-                vertexNormals[i2] += area * simd_normalize(fn)
-            }
-        }
-
-        for i in 0..<vertexCount {
-            let n = vertexNormals[i]
-            vertexNormals[i] = simd_length_squared(n) > 0 ? simd_normalize(n) : Vec3(0, 1, 0) // fallback
-        }
-
-        var n0s = [Vec3](repeating: .zero, count: triCount)
-        var n1s = [Vec3](repeating: .zero, count: triCount)
-        var n2s = [Vec3](repeating: .zero, count: triCount)
-
-        for t in 0..<triCount {
-            let i0 = triIdx[3*t+0]
-            let i1 = triIdx[3*t+1]
-            let i2 = triIdx[3*t+2]
-            if triSmooth[t] != 0 {
-                n0s[t] = vertexNormals[i0]
-                n1s[t] = vertexNormals[i1]
-                n2s[t] = vertexNormals[i2]
-            } else {
-                let fn = faceNormals[t]
-                let gn = simd_length_squared(fn) > 0 ? simd_normalize(fn) : Vec3(0, 1, 0)
-                n0s[t] = gn
-                n1s[t] = gn
-                n2s[t] = gn
-            }
-        }
-
-
-        // Spheres & planes (no mutation back into scene)
-        var sphC: [Vec3] = [], sphR: [Scalar] = [], sphObj: [Int] = [], sphMat: [Int] = []
-        var planeC: [Vec3] = [], planeN: [Vec3] = [], planeObj: [Int] = [], planeMat: [Int] = []
-
-        for obj in scene.objects {
-            let oid = objByIdent[ObjectIdentifier(obj)] ?? -1
-            if let s = obj as? Sphere {
-                let c = positions[s.centerIdx - 1]
-                sphC.append(c); sphR.append(s.radius)
-                sphObj.append(oid); sphMat.append(matIdx(s.material))
-            } else if let p = obj as? Plane {
-                let c = positions[p.centerIdx - 1]
-                planeC.append(c); planeN.append(p.normal)
-                planeObj.append(oid); planeMat.append(matIdx(p.material))
-            }
-        }
-
-        self.triIndex = triIdx
-        self.triObj = triObj
-        self.triMat = triMat
-        self.v0 = v0; self.v1 = v1; self.v2 = v2
-        self.e1 = e1; self.e2 = e2
-
-        self.sphCenter = sphC; self.sphRadius = sphR
-        self.sphObj = sphObj; self.sphMat = sphMat
-
-        self.planeCenter = planeC; self.planeNormal = planeN
-        self.planeObj = planeObj; self.planeMat = planeMat
-
-        self.triSmooth = triSmooth
-        self.triN0 = n0s
-        self.triN1 = n1s
-        self.triN2 = n2s
-
-        self.positions = positions
-
-        self.bvhRoot = nil
-        self.bvhPrims = []
+        bvh = BVHBuilder(primitives: bvhPrims)
     }
 }
 
-extension RTContext {
-    func buildBVH(maxLeaf: Int = 8, split: BVHSplitMode = .sah) -> RTContext {
-        let builder = BVHBuilder(maxLeaf: maxLeaf, split: split)
-        let start = DispatchTime.now()
-        let (root, prims) = builder.buildFinite(
-            triCount: v0.count,
-            sphereCount: sphCenter.count,
-            context: self
-        )
-        let elapsedMs = Int(Double(DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000.0)
-        print("BVH has built in \(elapsedMs) ms")
+// MARK: - Helpers
+private extension RTContext {
+    func materialIndex(for id: String?, in materials: [Material]) -> Int {
+        guard let id, let idx = Int(id) else { return 0 }
+        return idx
+    }
 
-        return RTContext(
-            intersectionTestEpsilon: intersectionTestEpsilon,
-            shadowRayEpsilon: shadowRayEpsilon,
-            materialIndexById: materialIndexById,
-            objectIndexByIdentity: objectIndexByIdentity,
-            positions: positions,
-            triIndex: triIndex,
-            triObj: triObj,
-            triMat: triMat,
-            v0: v0, v1: v1, v2: v2,
-            e1: e1, e2: e2,
-            triSmooth: triSmooth,
-            triN0: triN0,
-            triN1: triN1,
-            triN2: triN2,
-            sphCenter: sphCenter, sphRadius: sphRadius,
-            sphObj: sphObj, sphMat: sphMat,
-            planeCenter: planeCenter, planeNormal: planeNormal,
-            planeObj: planeObj, planeMat: planeMat,
-            bvhRoot: root,
-            bvhPrims: prims
-        )
+    @inline(__always)
+    func findMatchingVertexIndex(in meshID: Int, v: Vec3, positions: [Vec3]) -> Int {
+        var bestIndex = 0
+        var bestDist = Double.greatestFiniteMagnitude
+        for i in 0..<positions.count {
+            let d2 = simd_length_squared(positions[i] - v)
+            if d2 < bestDist {
+                bestDist = d2
+                bestIndex = i
+            }
+        }
+        return bestDist < 1e-6 ? bestIndex : 0
     }
 }

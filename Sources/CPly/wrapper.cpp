@@ -67,6 +67,10 @@ bool ply_reader_find_indices(PLYReaderRef reader, uint32_t* propIdxs) {
     return reader && reader->reader.find_indices(propIdxs);
 }
 
+bool ply_reader_find_normals(PLYReaderRef reader, uint32_t* propIdxs) {
+    return reader && reader->reader.find_normal(propIdxs);
+}
+
 // Data extraction
 bool ply_reader_extract_properties(PLYReaderRef reader,
                                    const uint32_t* propIdxs,

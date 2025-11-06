@@ -43,6 +43,7 @@ uint32_t ply_reader_num_rows(PLYReaderRef reader);
 bool ply_reader_find_pos(PLYReaderRef reader, uint32_t* propIdxs);
 bool ply_reader_find_texcoord(PLYReaderRef reader, uint32_t* propIdxs);
 bool ply_reader_find_indices(PLYReaderRef reader, uint32_t* propIdxs);
+bool ply_reader_find_normals(PLYReaderRef reader, uint32_t* propIdxs);
 
 // Data extraction
 bool ply_reader_extract_properties(PLYReaderRef reader,

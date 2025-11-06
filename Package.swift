@@ -9,34 +9,31 @@ let package = Package(
         .tvOS(.v14)
     ],
     products: [
-        // ✅ Expose both modules to clients
         .library(name: "CPly", targets: ["CPly"]),
         .library(name: "RayTracer", targets: ["RayTracer"])
     ],
     dependencies: [
-        .package(path: "/Users/erendemircan/ParsingKit")
+//        .package(path: "/Users/erendemircan/ParsingKit")
+        .package(url: "https://github.com/erndmrcn/ParsingKit", branch: "main")
     ],
     targets: [
         // MARK: - CPly (C++ target)
         .target(
             name: "CPly",
             path: "Sources/CPly",
-            sources: ["wrapper.cpp", "miniply.cpp"],  // Specify the .cpp file
+            sources: ["wrapper.cpp", "miniply.cpp"],
             publicHeadersPath: "include",
             cxxSettings: [
-                // normal include paths
                 .headerSearchPath("include"),
                 .headerSearchPath("include/CPly"),
                 .headerSearchPath("include/miniply"),
                 .headerSearchPath("include/module"),
-//                .languageStandard(.cxx17), // Or .cxx14 / .cxx11
-                .unsafeFlags(["-stdlib=libc++"]) // Tell Clang to use the right s
+                .unsafeFlags(["-stdlib=libc++"])
             ],
             linkerSettings: [
                             .linkedLibrary("c++")
                         ]
         ),
-        // MARK: - RayTracer (Swift target)
         .target(
             name: "RayTracer",
             dependencies: [

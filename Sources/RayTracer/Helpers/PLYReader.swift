@@ -2,8 +2,6 @@
 //  PLYLoader.swift
 //  RayTracer
 //
-//  Safe Swift translation using C wrapper for miniply
-//
 
 import Foundation
 import ParsingKit
@@ -15,6 +13,7 @@ import CPly
 // ------------------------------------------------------------
 public struct PlyMesh {
     public var positions: [Vec3] = []
+    public var normals: [Vec3] = []
     public var texcoords: [SIMD2<Float>] = []
     public var indices: [Int] = []
 }
@@ -44,15 +43,7 @@ public enum PlyError: Error, CustomStringConvertible {
 // MARK: - PLY Property Type (matching C++ enum)
 // ------------------------------------------------------------
 private enum PLYPropertyType: Int32 {
-    case char = 0
-    case uchar = 1
-    case short = 2
-    case ushort = 3
-    case int = 4
-    case uint = 5
-    case float = 6
-    case double = 7
-    case none = 8
+    case char = 0, uchar, short, ushort, int, uint, float, double, none
 }
 
 // ------------------------------------------------------------
@@ -61,45 +52,46 @@ private enum PLYPropertyType: Int32 {
 public enum PLYLoader {
 
     public static func load(from path: String) throws -> PlyMesh {
-        print("Entered load")
-        var mesh = PlyMesh()
-        var gotVerts = false
-        var gotFaces = false
+        print("➡️ Loading PLY:", path)
 
-        // Create reader using C wrapper
         guard let reader = ply_reader_create(path) else {
             throw PlyError.fileOpenFailed(path)
         }
         defer { ply_reader_destroy(reader) }
 
-        print("reader created")
         guard ply_reader_valid(reader) else {
-            throw PlyError.fileOpenFailed(path)
+            throw PlyError.corrupted
         }
-        print("reader is valid")
 
+        var mesh = PlyMesh()
         var propIdxs = [UInt32](repeating: 0, count: 3)
+        var gotVerts = false
+        var gotFaces = false
 
-        // Iterate elements
-        while ply_reader_has_element(reader) && (!gotVerts || !gotFaces) {
-            print("reader has element")
-
+        // --------------------------------------------------------
+        // Iterate through all elements
+        // --------------------------------------------------------
+        while ply_reader_has_element(reader) {
             // -----------------------------
-            // Vertices
+            // VERTICES
             // -----------------------------
             if ply_reader_element_is(reader, "vertex"),
                ply_reader_load_element(reader),
                ply_reader_find_pos(reader, &propIdxs) {
 
                 let n = Int(ply_reader_num_rows(reader))
-                print("Found \(n) vertices")
+                print("✅ Found vertex element with \(n) vertices")
 
-                // positions
+                // Positions
                 var posF = [Float](repeating: 0, count: n * 3)
                 posF.withUnsafeMutableBytes {
-                    _ = ply_reader_extract_properties(reader, &propIdxs, 3,
-                                                     PLYPropertyType.float.rawValue,
-                                                     $0.baseAddress)
+                    _ = ply_reader_extract_properties(
+                        reader,
+                        &propIdxs,
+                        3,
+                        PLYPropertyType.float.rawValue,
+                        $0.baseAddress
+                    )
                 }
 
                 mesh.positions.reserveCapacity(n)
@@ -110,13 +102,40 @@ public enum PLYLoader {
                     mesh.positions.append(Vec3(x, y, z))
                 }
 
-                // optional texcoords
+                // Optional normals
+                if ply_reader_find_normals(reader, &propIdxs) {
+                    print("✅ Found normals")
+                    var normF = [Float](repeating: 0, count: n * 3)
+                    normF.withUnsafeMutableBytes {
+                        _ = ply_reader_extract_properties(
+                            reader,
+                            &propIdxs,
+                            3,
+                            PLYPropertyType.float.rawValue,
+                            $0.baseAddress
+                        )
+                    }
+                    mesh.normals.reserveCapacity(n)
+                    for i in 0..<n {
+                        let nx = Double(normF[3*i+0])
+                        let ny = Double(normF[3*i+1])
+                        let nz = Double(normF[3*i+2])
+                        mesh.normals.append(normalize(Vec3(nx, ny, nz)))
+                    }
+                }
+
+                // Optional texcoords
                 if ply_reader_find_texcoord(reader, &propIdxs) {
+                    print("✅ Found texcoords")
                     var uvF = [Float](repeating: 0, count: n * 2)
                     uvF.withUnsafeMutableBytes {
-                        _ = ply_reader_extract_properties(reader, &propIdxs, 2,
-                                                         PLYPropertyType.float.rawValue,
-                                                         $0.baseAddress)
+                        _ = ply_reader_extract_properties(
+                            reader,
+                            &propIdxs,
+                            2,
+                            PLYPropertyType.float.rawValue,
+                            $0.baseAddress
+                        )
                     }
                     mesh.texcoords.reserveCapacity(n)
                     for i in 0..<n {
@@ -128,7 +147,7 @@ public enum PLYLoader {
             }
 
             // -----------------------------
-            // Faces
+            // FACES
             // -----------------------------
             else if ply_reader_element_is(reader, "face"),
                     ply_reader_load_element(reader),
@@ -136,15 +155,13 @@ public enum PLYLoader {
 
                 let idxProp = propIdxs[0]
                 let needsTri = ply_reader_requires_triangulation(reader, idxProp)
-
-                print("Found faces, needs triangulation: \(needsTri)")
+                print("✅ Found face element (triangulate: \(needsTri))")
 
                 if needsTri && !gotVerts {
                     throw PlyError.triangulationNeedsVerts
                 }
 
                 if needsTri {
-                    // Build a float-position buffer for triangulation helper
                     let numVerts = mesh.positions.count
                     var posF = [Float](repeating: 0, count: numVerts * 3)
                     for i in 0..<numVerts {
@@ -156,6 +173,7 @@ public enum PLYLoader {
 
                     let triCount = Int(ply_reader_num_triangles(reader, idxProp))
                     var triI32 = [Int32](repeating: 0, count: triCount * 3)
+
                     posF.withUnsafeBufferPointer { posBuf in
                         triI32.withUnsafeMutableBufferPointer { triBuf in
                             _ = ply_reader_extract_triangles(
@@ -170,13 +188,15 @@ public enum PLYLoader {
                     }
                     mesh.indices = triI32.map(Int.init)
                 } else {
-                    // Faces are already triangles; read concatenated list
                     let total = Int(ply_reader_sum_of_list_counts(reader, idxProp))
                     var rawI32 = [Int32](repeating: 0, count: total)
                     rawI32.withUnsafeMutableBytes {
-                        _ = ply_reader_extract_list_property(reader, idxProp,
-                                                            PLYPropertyType.int.rawValue,
-                                                            $0.baseAddress)
+                        _ = ply_reader_extract_list_property(
+                            reader,
+                            idxProp,
+                            PLYPropertyType.int.rawValue,
+                            $0.baseAddress
+                        )
                     }
                     mesh.indices = rawI32.map(Int.init)
                 }
@@ -184,14 +204,16 @@ public enum PLYLoader {
                 gotFaces = true
             }
 
-            if gotVerts && gotFaces { break }
             ply_reader_next_element(reader)
         }
 
         if !gotVerts { throw PlyError.vertexDataMissing }
         if !gotFaces { throw PlyError.faceDataMissing }
 
-        print("Successfully loaded: \(mesh.positions.count) vertices, \(mesh.indices.count/3) triangles")
+        print("✅ Loaded \(mesh.positions.count) vertices, \(mesh.indices.count / 3) triangles")
+        print("✅ Normals:", mesh.normals.isEmpty ? "none" : "\(mesh.normals.count)")
+        print("✅ Texcoords:", mesh.texcoords.isEmpty ? "none" : "\(mesh.texcoords.count)")
+
         return mesh
     }
 }
