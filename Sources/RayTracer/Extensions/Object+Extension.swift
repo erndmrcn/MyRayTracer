@@ -23,49 +23,11 @@ extension Renderer {
 
     @inline(__always)
     func intersectScene(_ ray: inout Ray, backfaceCulling: Bool) -> Bool {
-        guard let bvh = ctx.bvh else { return false }
+        guard let tlas = ctx.tlas else { return false }
         let eps = ctx.intersectionTestEpsilon
-        bvh.intersectBVH(ray: &ray, nodeIdx: 0, ctx: ctx, eps: eps)
+        ctx.intersectTLAS(ray: &ray, tlas: tlas, eps: eps)
         return ray.hit.kind != .none
     }
-
-    // --- Per-mesh BLAS traversal ---
-//    @inline(__always)
-//    func intersectBLAS(ray: inout Ray, mesh: MeshBase) {
-//        guard let root = mesh.blasRoot else { return }
-//
-//        var stack: [BVHNode] = [root]
-//        let eps = ctx.intersectionTestEpsilon
-//
-//        while let node = stack.popLast() {
-//            if !node.bounds.hit(ray.origin, ray.dir, 1.0 / ray.dir, tMax: ray.tMax, eps: eps) { continue }
-//
-//            if node.isLeaf {
-//                let end = node.start + node.count
-//                for i in node.start..<end {
-//                    let prim = mesh.blasPrims[i]
-//                    let i0 = mesh.indices[3*prim.index + 0]
-//                    let i1 = mesh.indices[3*prim.index + 1]
-//                    let i2 = mesh.indices[3*prim.index + 2]
-//
-//                    let v0 = mesh.positions[i0]
-//                    let v1 = mesh.positions[i1]
-//                    let v2 = mesh.positions[i2]
-//
-//                    intersectTriangle(ray: &ray,
-//                                      v0: v0,
-//                                      v1: v1,
-//                                      v2: v2,
-//                                      eps: eps,
-//                                      backfaceCulling: false,
-//                                      material: mesh.materialIndex)
-//                }
-//            } else {
-//                if let l = node.left { stack.append(l) }
-//                if let r = node.right { stack.append(r) }
-//            }
-//        }
-//    }
 
     // --- Triangle intersection ---
     @inline(__always)
@@ -106,41 +68,6 @@ extension Renderer {
             ray.hit.mat = material
         }
     }
-
-//    func traverseTLAS(ray: inout Ray, node: BVHNode?, ctx: RTContext) {
-//        guard let node else { return }
-//        let invDir = 1.0 / ray.dir
-//        if !node.bounds.hit(ray.origin, ray.dir, ray.dir, tMax: ray.tMax, eps: ctx.shadowRayEpsilon) {
-//            return
-//        }
-//
-//        if node.isLeaf {
-//            for j in node.start ..< node.start + node.count {
-//                let instIdx = ctx.tlasPrims[j].index
-//                let inst = ctx.instances[instIdx]
-//
-//                var rLocal = ray.transformed(by: inst.invTransform, inverse: true)
-//                intersectBLAS(ray: &rLocal, mesh: ctx.meshes[inst.baseIndex])
-//
-//                if rLocal.hit.kind != .none {
-//                    let pW = (inst.transform * SIMD4(rLocal.hit.p, 1)).xyz
-//                    let nW = normalize((inst.invTransform.transpose * SIMD4(rLocal.hit.n, 0)).xyz)
-//
-//                    if rLocal.hit.t < ray.hit.t {
-//                        ray.hit.t = rLocal.hit.t
-//                        ray.hit.p = pW
-//                        ray.hit.n = nW
-//                        ray.hit.kind = .triangle
-//                        ray.hit.mat = inst.materialIndex
-//                        ray.tMax = rLocal.hit.t
-//                    }
-//                }
-//            }
-//        } else {
-//            traverseTLAS(ray: &ray, node: node.left,  ctx: ctx)
-//            traverseTLAS(ray: &ray, node: node.right, ctx: ctx)
-//        }
-//    }
 }
 
 // MARK: - Rendering (Whitted-style Ray Tracer)
@@ -170,15 +97,15 @@ extension Renderer {
         let startRow: Int
         let endRow: Int
         let pixels: [Vec3]
-        let rays: Int64
+//        let rays: Int64
         let nodeVisits: Int64
     }
 
     @Sendable func render(
         scene: Scene,
         cameraIndex: Int = 0,
-        progressRow: (@Sendable (Int) -> Void)? = nil,
-        raysTraced: inout Int64
+        progressRow: (@Sendable (Int) -> Void)? = nil
+//        raysTraced: inout Int64
     ) async throws -> [Vec3] {
 
         let cam = scene.cameras[cameraIndex]
@@ -215,8 +142,8 @@ extension Renderer {
         @inline(__always)
         @Sendable func trace(_ inRay: inout Ray, _ depth: Int, _ localNodeVisits: inout Int64) -> Vec3 {
             if depth > maxDepth { return scene.backgroundColor }
-            guard let bvh = ctx.bvh else { return .zero }
-            let visits = bvh.intersectBVH(ray: &inRay, nodeIdx: 0, ctx: ctx, eps: eps)
+            guard let tlas = ctx.tlas else { return .zero }
+            let visits = ctx.intersectTLAS(ray: &inRay, tlas: tlas , eps: eps)
             localNodeVisits += Int64(visits)
             if inRay.hit.kind == .none {
                 return scene.backgroundColor
@@ -241,7 +168,7 @@ extension Renderer {
                     let dist = length(wi)
                     wi = normalize(wi)
 
-                    var sRay = Ray(origin: p + N * shadowEps, dir: wi)
+                    var sRay = Ray(origin: p + wi * shadowEps, dir: wi)
                     sRay.tMax = dist
                     let blocked = self.occluded(shadowRay: sRay)
                     if !blocked {
@@ -284,12 +211,11 @@ extension Renderer {
 
                 let rd = reflect(inRay.dir, N)
                 var rRay = inRay
-                rRay.origin = p + N * shadowEps
+                rRay.origin = p + rd * shadowEps
                 rRay.dir = rd
                 rRay.invDir = 1.0 / rd
                 rRay.hit = .init()
                 let LiR = trace(&rRay, depth + 1, &localNodeVisits)
-
 
                 if cosTopt == nil || sin2T > 1 {
                     Lo += LiR
@@ -299,9 +225,9 @@ extension Renderer {
                     var tRay = Ray(origin: p + td * shadowEps, dir: td)
                     var LiT = trace(&tRay, depth + 1, &localNodeVisits)
 
-                    if mat.absorption != .zero {
-                        let d = tRay.hit.t
-                        LiT = beerAttenuate(LiT, c: mat.absorption, distance: d)
+                    if entering, mat.absorption != .zero, tRay.hit.kind != .none {
+                        let d = max(tRay.hit.t, 0.0)
+                        LiT *= beerAttenuate(LiT, c: mat.absorption, distance: d)
                     }
                     Lo += LiR * R + LiT * (1.0 - R)
                 }
@@ -330,7 +256,7 @@ extension Renderer {
             for (startRow, endRow) in chunks {
                 group.addTask {
                     var local = [Vec3](repeating: .zero, count: (endRow - startRow) * width)
-                    var localRays: Int64 = 0
+//                    var localRays: Int64 = 0
                     var localNodeVisits: Int64 = 0
 
                     for j in startRow..<endRow {
@@ -355,12 +281,12 @@ extension Renderer {
                             let pixel = trace(&ray, 0, &localNodeVisits)
                             local[base + i] = pixel
 
-                            localRays &+= 1
+//                            localRays &+= 1
                         }
                     }
 
                     if let relay { await relay.rowFinished() }
-                    return ChunkResult(startRow: startRow, endRow: endRow, pixels: local, rays: localRays, nodeVisits: localNodeVisits)
+                    return ChunkResult(startRow: startRow, endRow: endRow, pixels: local, nodeVisits: localNodeVisits)
                 }
             }
 
@@ -373,14 +299,14 @@ extension Renderer {
                             .assign(from: src.baseAddress!, count: rows * width)
                     }
                 }
-                raysSum &+= chunk.rays
+//                raysSum &+= chunk.rays
                 totalNodeVisits &+= chunk.nodeVisits
             }
 
             try await group.waitForAll()
         }
 
-        raysTraced &+= raysSum
+//        raysTraced &+= raysSum
         let avgVisits = Double(totalNodeVisits) / Double(raysSum)
         print("📊 Avg BVH node visits per ray: \(avgVisits)")
 
@@ -436,92 +362,22 @@ extension Renderer {
     }
 
     func occluded(shadowRay rIn: Ray) -> Bool {
-        guard let bvh = ctx.bvh else { return false }
+        guard let tlas = ctx.tlas else { return false }
         let eps = ctx.intersectionTestEpsilon
-        return bvh.intersectBVHShadow(ray: rIn, nodeIdx: 0, ctx: ctx, eps: eps)
+        return ctx.occludedTLAS(ray: rIn, tlas: tlas, eps: eps)
     }
+}
 
-//    @inline(__always)
-//    private func traverseTLASShadow(ray: inout Ray, node: BVHNode?) {
-//        guard let node else { return }
-//        let invDir = 1.0 / ray.dir
-//        if !node.bounds.hit(ray.origin, ray.dir, ray.dir, tMax: ray.tMax, eps: ctx.shadowRayEpsilon) {
-//            return
-//        }
-//        if node.isLeaf {
-//            for j in node.start ..< node.start + node.count {
-//                let instIdx = ctx.tlasPrims[j].index
-//                let inst = ctx.instances[instIdx]
-//                var rLocal = ray.transformed(by: inst.invTransform, inverse: true)
-//                if occludedBLAS(ray: &rLocal, mesh: ctx.meshes[inst.baseIndex]) {
-//                    ray.hit.t = rLocal.hit.t
-//                    ray.hit.kind = .triangle
-//                    return
-//                }
-//            }
-//        } else {
-//            traverseTLASShadow(ray: &ray, node: node.left)
-//            if ray.hit.kind != .none { return }
-//            traverseTLASShadow(ray: &ray, node: node.right)
-//        }
-//    }
-
-//    @inline(__always)
-//    private func occludedBLAS(ray: inout Ray, mesh: MeshBase) -> Bool {
-//        guard let root = mesh.blasRoot else { return false }
-//        var stack: [BVHNode] = [root]
-//        let eps = ctx.intersectionTestEpsilon
-//
-//        while let node = stack.popLast() {
-//            if !node.bounds.hit(ray.origin, ray.dir, 1.0 / ray.dir, tMax: ray.tMax, eps: eps) { continue }
-//            if node.isLeaf {
-//                let end = node.start + node.count
-//                for i in node.start..<end {
-//                    let prim = mesh.blasPrims[i]
-//                    let i0 = mesh.indices[3*prim.index + 0]
-//                    let i1 = mesh.indices[3*prim.index + 1]
-//                    let i2 = mesh.indices[3*prim.index + 2]
-//                    if triShadowHit(ray, v0: mesh.positions[i0], v1: mesh.positions[i1], v2: mesh.positions[i2], eps: eps) {
-//                        ray.hit.t = min(ray.hit.t, ray.tMax)
-//                        ray.hit.kind = .triangle
-//                        return true
-//                    }
-//                }
-//            } else {
-//                if let l = node.left { stack.append(l) }
-//                if let r = node.right { stack.append(r) }
-//            }
-//        }
-//        return false
-//    }
-
-    @inline(__always)
-    private func triShadowHit(_ ray: Ray, v0: Vec3, v1: Vec3, v2: Vec3, eps: Double) -> Bool {
-        let e1 = v1 - v0
-        let e2 = v2 - v0
-        let pvec = cross(ray.dir, e2)
-        let det  = dot(e1, pvec)
-        if Swift.abs(det) < eps { return false }
-        let invDet = 1.0 / det
-        let tvec = ray.origin - v0
-        let u = dot(tvec, pvec) * invDet
-        if u < 0.0 || u > 1.0 { return false }
-        let q = cross(tvec, e1)
-        let v = dot(ray.dir, q) * invDet
-        if v < 0.0 || u + v > 1.0 { return false }
-        let t = dot(e2, q) * invDet
-        return (t > eps && t < ray.hit.t)
-    }
-
-    // --- Utilities ---
+// MARK: - Material helpers
+extension Renderer {
     @inline(__always)
     private func reflect(_ d: Vec3, _ n: Vec3) -> Vec3 { d - 2.0 * dot(d, n) * n }
 
     @inline(__always)
     private func beerAttenuate(_ Li: Vec3, c: Vec3, distance x: Double) -> Vec3 {
-        Vec3(x: Li.x * exp(-c.x * x),
-             y: Li.y * exp(-c.y * x),
-             z: Li.z * exp(-c.z * x))
+        guard x.isFinite, x > 0 else { return Li }
+        let att = exp(-c * x)
+        return att
     }
 
     @inline(__always)
@@ -534,8 +390,8 @@ extension Renderer {
             return (R: 1.0, cosT: nil, sin2T: sin2T)
         }
         let cosPhi = sqrt(max(0.0, 1.0 - sin2T))
-        let Rs = (n1 * cosTheta - n2 * cosPhi) / (n1 * cosTheta + n2 * cosPhi)
-        let Rp = (n1 * cosPhi - n2 * cosTheta) / (n1 * cosPhi + n2 * cosTheta)
+        let Rs = (n2 * cosTheta - n1 * cosPhi) / (n2 * cosTheta + n1 * cosPhi)
+        let Rp = (n1 * cosTheta - n2 * cosPhi) / (n1 * cosTheta + n2 * cosPhi)
         let R  = 0.5 * (Rs * Rs + Rp * Rp)
         return (R: R, cosT: cosPhi, sin2T: sin2T)
     }

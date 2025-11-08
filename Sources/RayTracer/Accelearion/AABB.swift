@@ -16,6 +16,15 @@ public struct AABB: Sendable {
 
     // MARK: - Core AABB Functions
 
+    init() {
+
+    }
+
+    init(minP: Vec3, maxP: Vec3) {
+        self.minP = minP
+        self.maxP = maxP
+    }
+
     // CRITICAL FIX: The correct surface area calculation
     @inlinable public func area() -> Double {
         let e = maxP - minP
@@ -59,40 +68,27 @@ public struct AABB: Sendable {
     }
 
     public var extent: Vec3 { maxP - minP }
+    func transformed(by M: Mat4) -> AABB {
+        // Eski merkez ve extent
+        let cOld = 0.5 * (minP + maxP)
+        let eOld = 0.5 * (maxP - minP)
 
-    // Optimized Transformed AABB Calculation
-    public func transformed(by M: Mat4) -> AABB {
-        // Start with the translation component of the transform
-        let translation = Vec3(M.columns.3.x, M.columns.3.y, M.columns.3.z)
-        var out = AABB(minP: translation, maxP: translation)
+        // Lineer kısım (3x3) ve translasyon
+        let r: Mat3 = Mat3(M.columns.0.xyz, M.columns.1.xyz, M.columns.2.xyz) // sütunlar
+        let t = Vec3(M.columns.3.x, M.columns.3.y, M.columns.3.z)
 
-        // Loop over the 3 axes of the transformation matrix (columns 0, 1, 2)
-        for i in 0..<3 {
-            let col = Vec3(M[i].x, M[i].y, M[i].z)
-            let e = extent[i] // e is the extent of the original AABB along axis i
+        // Yeni merkez
+        let cNew = r * cOld + t
 
-            // Add the extent of the transformed primary axes.
-            // This is more numerically stable and faster than transforming all 8 corners.
-            let a = col * minP[i]
-            let b = col * maxP[i]
-            out.grow(a)
-            out.grow(b)
-        }
-        return out
-        // Note: The original 8-corner method is correct, but this is a standard,
-        // faster way to compute the transformed AABB if rotation/scaling is involved.
-        /*
-        let corners = [
-            Vec3(minP.x, minP.y, minP.z),
-            // ... all 8 corners
-        ]
-        var out = AABB()
-        for c in corners {
-             // ... transform logic ...
-             out.grow(Vec3(q.x, q.y, q.z))
-        }
-        return out
-        */
+        let ar: Mat3 = Mat3(simd_abs(r.columns.0), simd_abs(r.columns.1), simd_abs(r.columns.2))
+
+        let eNew = Vec3(
+            ar.columns.0.x * eOld.x + ar.columns.1.x * eOld.y + ar.columns.2.x * eOld.z,
+            ar.columns.0.y * eOld.x + ar.columns.1.y * eOld.y + ar.columns.2.y * eOld.z,
+            ar.columns.0.z * eOld.x + ar.columns.1.z * eOld.y + ar.columns.2.z * eOld.z
+        )
+
+        return AABB(minP: cNew - eNew, maxP: cNew + eNew)
     }
 }
 

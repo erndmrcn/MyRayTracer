@@ -6,16 +6,16 @@
 //
 
 import simd
-import Foundation
 import ParsingKit
+import Foundation
 
 enum MeshHelper {
-    static func materialIndex(for id: String?, in materials: [Material]) -> Int {
+    static func materialIndex(for id: String?, in materials: [RayTracer.Material]) -> Int {
         guard let id, !id.isEmpty else { return 0 }
         return materials.firstIndex(where: { $0.id == id }) ?? 0
     }
 
-    static func loadMeshData(_ mesh: Mesh, scene: Scene) -> ([Vec3],[Int],[Vec3]) {
+    static func loadMeshData(_ mesh: Mesh, scene: RayTracer.Scene) -> ([Vec3],[Int],[Vec3]) {
         var positions: [Vec3] = []
         var indices: [Int] = []
         var normals: [Vec3] = []

@@ -39,7 +39,7 @@ public final class RayTracerEngine: @unchecked Sendable {
             print("❌ Error decoding scene:", error)
         }
 
-        if let scene {
+        if var scene {
             // ✅ Build TLAS/BLAS hierarchy (no legacy BVH)
             let rtContext = RTContext(scene: scene)
             self.renderer = Renderer(ctx: rtContext)
@@ -74,11 +74,11 @@ public final class RayTracerEngine: @unchecked Sendable {
 
         let cams = scene.cameras
         var results: [RenderResult] = []
-        results.reserveCapacity(cams.count)
 
         let totalRowsAll = max(1, cams.reduce(0) { $0 + $1.imageResolution.1 })
         var rowsOffset = 0
 
+        print("\(cams.enumerated())")
         for (idx, cam) in cams.enumerated() {
             let height = max(1, cam.imageResolution.1)
             let baseOffset = rowsOffset
@@ -92,7 +92,9 @@ public final class RayTracerEngine: @unchecked Sendable {
                 return progress?(RenderProgress(globalFrac, message: msg)) ?? true
             }
 
+            print("making CGImage")
             let cg = try makeCGImage(width: spec.width, height: spec.height, rgba: rgba)
+            print("made CGImage")
             let name = (spec.imageName?.isEmpty == false) ? spec.imageName! : "Camera-\(spec.index)"
             results.append(RenderResult(fileName: name, image: cg, camera: spec, stats: stats))
             rowsOffset += height
@@ -180,8 +182,8 @@ extension RayTracerEngine {
                         withUnsafeCurrentTask { $0?.cancel() }
                     }
                 }
-            },
-            raysTraced: &rays
+            }
+//            raysTraced: &rays
         )
 
         // Convert Vec3 color buffer → RGBA8
