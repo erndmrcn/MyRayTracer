@@ -42,7 +42,7 @@ public enum ShadingMode: UInt8, Sendable { case flat, smooth }
 public struct PrimitiveInfo: Sendable {
     public let type: GeometryType
     public let primitiveIndex: Int
-    public let bounds: AABB
+    public var bounds: AABB
     public var centroid: Vec3
     public let materialID: Int
     public var shadingMode: ShadingMode = .smooth
@@ -97,8 +97,10 @@ public struct PrimitiveInfo: Sendable {
         nodesUsed = 0
         rootNodeIdx = 0
 
+        let start = DispatchTime.now()
         updateNodeBounds(0)
         subdivide(0)
+        print("Elapsed time for BVH building is \((DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000) ms")
     }
 
     // MARK: - Bounds
@@ -245,5 +247,46 @@ public struct PrimitiveInfo: Sendable {
             }
         }
         return bestCost
+    }
+}
+
+// MARK: - Refit (bottom-up AABB update)
+public extension BVHBuilder {
+    mutating func refit(using updatedPrimitives: [PrimitiveInfo]) {
+        // replace primitives array if new bounds were given
+        self.primitives = updatedPrimitives
+        guard !bvhNode.isEmpty else { return }
+        refitNode(0)
+    }
+
+    @inline(__always)
+    private mutating func refitNode(_ idx: UInt) {
+        var node = bvhNode[Int(idx)]
+        if node.isLeaf {
+            // leaf node: recompute directly from primitives
+            let first = Int(node.leftFirst)
+            let count = Int(node.primitiveCount)
+            var minP = Vec3(repeating: .infinity)
+            var maxP = Vec3(repeating: -.infinity)
+            for i in 0..<count {
+                let prim = primitives[Int(primitiveIdx[first + i])]
+                minP = min(minP, prim.bounds.minP)
+                maxP = max(maxP, prim.bounds.maxP)
+            }
+            node.aabbMin = minP
+            node.aabbMax = maxP
+            bvhNode[Int(idx)] = node
+        } else {
+            // inner node: refit children first
+            let left = node.leftFirst
+            let right = left + 1
+            refitNode(left)
+            refitNode(right)
+            let lNode = bvhNode[Int(left)]
+            let rNode = bvhNode[Int(right)]
+            node.aabbMin = min(lNode.aabbMin, rNode.aabbMin)
+            node.aabbMax = max(lNode.aabbMax, rNode.aabbMax)
+            bvhNode[Int(idx)] = node
+        }
     }
 }

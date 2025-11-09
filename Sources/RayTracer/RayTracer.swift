@@ -78,7 +78,6 @@ public final class RayTracerEngine: @unchecked Sendable {
         let totalRowsAll = max(1, cams.reduce(0) { $0 + $1.imageResolution.1 })
         var rowsOffset = 0
 
-        print("\(cams.enumerated())")
         for (idx, cam) in cams.enumerated() {
             let height = max(1, cam.imageResolution.1)
             let baseOffset = rowsOffset
@@ -92,9 +91,7 @@ public final class RayTracerEngine: @unchecked Sendable {
                 return progress?(RenderProgress(globalFrac, message: msg)) ?? true
             }
 
-            print("making CGImage")
             let cg = try makeCGImage(width: spec.width, height: spec.height, rgba: rgba)
-            print("made CGImage")
             let name = (spec.imageName?.isEmpty == false) ? spec.imageName! : "Camera-\(spec.index)"
             results.append(RenderResult(fileName: name, image: cg, camera: spec, stats: stats))
             rowsOffset += height
@@ -246,11 +243,6 @@ private func makeCGImage(width: Int, height: Int, rgba: [UInt8]) throws -> CGIma
 
     let maxValue = rgba.max()
     let minValue = rgba.min()
-
-    print("max pixel value of the result: \(maxValue)")
-    print("count of the max pixel value: \(rgba.count(where: { $0 == maxValue }))")
-    print("min pixel value of the result: \(minValue)")
-    print("count of the min pixel value: \(rgba.count(where: { $0 == minValue }))")
 
     guard let img = CGImage(width: width,
                             height: height,

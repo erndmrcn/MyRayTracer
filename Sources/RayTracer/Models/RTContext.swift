@@ -38,7 +38,6 @@ public struct BLAS: Sendable {
     public let root: UInt
     public init(nodes: [BVHNode], primIdx: [UInt], prims: [PrimitiveInfo], root: UInt) {
         self.nodes = nodes; self.primIdx = primIdx; self.prims = prims; self.root = root
-        print("Builded BLAS")
     }
 }
 public struct Instance: Sendable {
@@ -54,18 +53,16 @@ public struct Instance: Sendable {
         self.worldToLocal = worldToLocal
         self.worldBounds = worldBounds
         self.materialOverride = materialOverride
-        print("Builded Instance")
     }
 }
 
 public struct TLAS: Sendable {
-    public let builder: BVHBuilder
+    public var builder: BVHBuilder
     public let instances: [Instance]
 
     init(builder: BVHBuilder, instances: [Instance]) {
         self.builder = builder
         self.instances = instances
-        print("Builded TLAS")
     }
 }
 
@@ -231,7 +228,6 @@ public struct RTContext: Sendable {
                 if mI.material == "" || mI.material == nil {
                     mI.material = scene.objects.first(where: { $0.id == mI.baseMeshID })?.material
                 }
-                //                print("MeshInstance added with material \(mI.material)")
                 meshInstances.append(mI)
                 continue
             } else if let m = object as? Mesh {
@@ -354,116 +350,43 @@ public struct RTContext: Sendable {
                     let blas = buildBLASForMesh(prims: bvhPrims, triRange: start..<end)
                     let baseTransform = scene.composeTransform(tokens: m.transformTokens, reset: m.resetTransform)
                     instanceByID[meshID] = (blas: blas, material: matID, transform: baseTransform)
-                    print("instanceByID updated for meshID \(meshID)= \(instanceByID[meshID]?.material), \(instanceByID[meshID]?.transform)")
                 }
             }
         }
 
-        // Build global BVH for non-instanced prims (optional, kept for compatibility)
         if !bvhPrims.isEmpty {
             self.bvh = BVHBuilder(primitives: bvhPrims)
         }
 
-        //        print("🔍 Found \(meshInstances.count) MeshInstance objects")
+        for instObj in meshInstances {
+            let instID = instObj.id ?? ""
+            let baseMeshID = instObj.baseMeshID
+            guard let baseData = instanceByID[baseMeshID] else { continue }
+            let instanceTransform = scene.composeTransform(tokens: instObj.transformTokens,
+                                                           reset: instObj.resetTransform,
+                                                           base: baseData.transform)
 
-        // Multi-pass processing to handle instance chains (e.g., inst4 -> inst3 -> mesh2)
-        var processed: Set<String> = []
-        var maxPasses = 20 // Prevent infinite loops from circular references
+            let matOverride = materialIndex(for: instObj.material, in: scene.materials)
+            let instance = makeInstance(from: baseData.blas,
+                                        localToWorld: instanceTransform,
+                                        materialOverride: matOverride)
+            instArray.append(instance)
 
-        while processed.count < (meshInstances.count + instanceByID.count) && maxPasses > 0 {
-            maxPasses -= 1
-            var madeProgress = false
-
-            for instObj in meshInstances {
-                let instID = instObj.id ?? ""
-                //                print("Eren Test: checking if already processed?")
-                if processed.contains(instID) {
-                    //                    print("Eren Test: \(instID) already processed")
-                    continue
-                } // Already processed
-
-                let baseMeshID = instObj.baseMeshID
-
-                // Check if base mesh/instance is ready
-                guard let baseData = instanceByID[baseMeshID] else {
-                    // Base not ready yet, will retry in next pass
-                    continue
-                }
-
-                // Compute transform for this instance
-                let instanceTransform = scene.composeTransform(tokens: instObj.transformTokens,
-                                                               reset: instObj.resetTransform,
-                                                               base: baseData.transform)
-
-                let matOverride = materialIndex(for: instObj.material, in: scene.materials)
-                //                print("Processed loop for instObj with material \(instObj.material)")
-                // Create TLAS instance for THIS specific MeshInstance
-                // Each MeshInstance gets its own entry in the TLAS, even if cascading
-                let instance = makeInstance(from: baseData.blas,
-                                            localToWorld: instanceTransform,
-                                            materialOverride: matOverride)
-                instArray.append(instance)
-
-                // Also store this instance data so OTHER instances can reference it (cascading)
-                instanceByID[instID] = (blas: baseData.blas, material: matOverride, transform: instanceTransform)
-                //                print("Eren Test: \(instID) processed")
-                processed.insert(instID)
-                madeProgress = true
-                //                print("✅ Processed MeshInstance id=\(instID), baseMeshId=\(baseMeshID), material=\(matOverride)")
-                //                print("   instanceTransform: \(instanceTransform)")  // Translation column
-                //                print("   baseData.transform: \(baseData.transform)")
-            }
-            if !madeProgress { break } // No more progress possible
+            instanceByID[instID] = (blas: baseData.blas, material: matOverride, transform: instanceTransform)
         }
 
-        //        print("📊 Processing summary:")
-        //        print("  Total MeshInstances found: \(meshInstances.count)")
-        //        print("  Instances added to TLAS: \(instArray.count)")
-        //        print("  Processed IDs: \(processed)")
-
-        // Warn about unprocessed instances (circular references or missing bases)
-        //        let unprocessed = meshInstances.filter { inst in
-        //            !processed.contains(inst.id ?? "")
-        //        }
-        //        if !unprocessed.isEmpty {
-        //            print("⚠️ Could not process \(unprocessed.count) instances (circular refs or missing base):")
-        //            for inst in unprocessed {
-        //                print("   - id=\(inst.id ?? "?"), baseMeshId=\(inst.baseMeshID)")
-        //            }
-        //        }
-        //
-        //        for (meshID, triRange) in meshTriRangeByID {
-        ////            let isReferenced = meshInstances.contains { $0.baseMeshID == meshID }
-        ////            if isReferenced { continue }
-        //
-        //            if let baseData = instanceByID[meshID] {
-        //                let instance = makeInstance(from: baseData.blas,
-        //                                            localToWorld: baseData.transform,
-        //                                            materialOverride: baseData.material)
-        //                instArray.append(instance)
-        //                print("✅ Added unreferenced base mesh \(meshID)")
-        //            }
-        //        }
-
-        // Add one instance for each base Mesh so originals are visible.
-        // meshTriRangeByID contains only IDs of Mesh (not MeshInstance).
         for (meshID, _) in meshTriRangeByID {
-            if processed.contains(meshID) { continue }
             if let baseData = instanceByID[meshID] {
                 let baseInstance = makeInstance(from: baseData.blas,
                                                 localToWorld: baseData.transform,
                                                 materialOverride: baseData.material)
                 instArray.append(baseInstance)
-                //                print("✅ Added base mesh instance \(meshID)")
             }
         }
 
-
-        // Build TLAS containing all instances (transformed + base meshes)
         if !instArray.isEmpty {
             self.tlas = buildTLAS(instances: instArray)
             self.instances = instArray
-            //            print("✅ Built TLAS with \(instArray.count) instances")
         } else {
             print("⚠️ No instances to build TLAS")
         }
@@ -485,17 +408,19 @@ public func buildBLASForMesh(prims: [PrimitiveInfo], triRange: Range<Int>) -> BL
     // ✅ use the actual root index
     return BLAS(nodes: b.bvhNode, primIdx: b.primitiveIdx, prims: subset, root: b.rootNodeIdx)
 }
-//public func buildBLASForMesh(prims: [PrimitiveInfo], triRange: Range<Int>) -> BLAS {
-//    
-//    // Filter only triangles in the given range
-//    let subset = prims.filter { p in p.type == .triangle && triRange.contains(p.primitiveIndex) }
-//    var b = BVHBuilder(primitives: subset, maxLeaf: 2, split: .sah, binCount: 12)
-//    return BLAS(nodes: b.bvhNode, primIdx: b.primitiveIdx, prims: subset, root: 0)
-//}
 
 public func makeInstance(from base: BLAS, localToWorld M: Mat4, materialOverride: Int?) -> Instance {
-    let root = base.nodes[Int(base.root)]
-    let worldB = AABB(minP: root.aabbMin, maxP: root.aabbMax).transformed(by: M)
+    // Recompute world bounds by transforming all leaf AABBs
+    var minW = Vec3(repeating: .infinity)
+    var maxW = Vec3(repeating: -.infinity)
+    for p in base.prims {
+        let localB = p.bounds
+        let worldB = localB.transformed(by: M)
+        minW = min(minW, worldB.minP)
+        maxW = max(maxW, worldB.maxP)
+    }
+    let worldB = AABB(minP: minW, maxP: maxW)
+
     return Instance(blas: base,
                     localToWorld: M,
                     worldToLocal: M.inverse,
@@ -899,9 +824,53 @@ public extension RTContext {
 
 @inlinable
 func decomposeUniformScale(_ M: Mat4) -> Double {
-    // “Uniform enough” scale = average of column lengths
     let sx = length(Vec3(M.columns.0.x, M.columns.0.y, M.columns.0.z))
     let sy = length(Vec3(M.columns.1.x, M.columns.1.y, M.columns.1.z))
     let sz = length(Vec3(M.columns.2.x, M.columns.2.y, M.columns.2.z))
-    return (sx + sy + sz) /*/ 3.0*/
+    return (sx + sy + sz) / 3.0
+}
+
+// MARK: - TLAS Refit (for animation frames)
+public extension RTContext {
+    mutating func refitTLAS() {
+        guard var tlas = self.tlas else {
+            print("⚠️ No TLAS to refit")
+            return
+        }
+
+        // Step 1: Recompute world bounds for all instances based on their updated transforms
+        for i in 0..<instances.count {
+            let inst = instances[i]
+            var minW = Vec3(repeating: .infinity)
+            var maxW = Vec3(repeating: -.infinity)
+            for p in inst.blas.prims {
+                let localB = p.bounds
+                let worldB = localB.transformed(by: inst.localToWorld)
+                minW = min(minW, worldB.minP)
+                maxW = max(maxW, worldB.maxP)
+            }
+            let updatedBounds = AABB(minP: minW, maxP: maxW)
+            instances[i] = Instance(
+                blas: inst.blas,
+                localToWorld: inst.localToWorld,
+                worldToLocal: inst.localToWorld.inverse,
+                worldBounds: updatedBounds,
+                materialOverride: inst.materialOverride
+            )
+        }
+
+        // Step 2: Update TLAS primitive bounds and centroids
+        for (i, inst) in instances.enumerated() {
+            let b = inst.worldBounds
+            let c = (b.minP + b.maxP) * 0.5
+            tlas.builder.primitives[i].bounds = b
+            tlas.builder.primitives[i].centroid = c
+        }
+
+        // Step 3: Refit BVH hierarchy (no rebuild)
+        tlas.builder.refit(using: tlas.builder.primitives)
+
+        // Step 4: Save back the updated TLAS
+        self.tlas = tlas
+    }
 }

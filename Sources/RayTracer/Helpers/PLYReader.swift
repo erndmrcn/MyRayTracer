@@ -80,7 +80,6 @@ public enum PLYLoader {
                ply_reader_find_pos(reader, &propIdxs) {
 
                 let n = Int(ply_reader_num_rows(reader))
-                print("✅ Found vertex element with \(n) vertices")
 
                 // Positions
                 var posF = [Float](repeating: 0, count: n * 3)
@@ -104,7 +103,6 @@ public enum PLYLoader {
 
                 // Optional normals
                 if ply_reader_find_normals(reader, &propIdxs) {
-                    print("✅ Found normals")
                     var normF = [Float](repeating: 0, count: n * 3)
                     normF.withUnsafeMutableBytes {
                         _ = ply_reader_extract_properties(
@@ -126,7 +124,6 @@ public enum PLYLoader {
 
                 // Optional texcoords
                 if ply_reader_find_texcoord(reader, &propIdxs) {
-                    print("✅ Found texcoords")
                     var uvF = [Float](repeating: 0, count: n * 2)
                     uvF.withUnsafeMutableBytes {
                         _ = ply_reader_extract_properties(
@@ -155,7 +152,6 @@ public enum PLYLoader {
 
                 let idxProp = propIdxs[0]
                 let needsTri = ply_reader_requires_triangulation(reader, idxProp)
-                print("✅ Found face element (triangulate: \(needsTri))")
 
                 if needsTri && !gotVerts {
                     throw PlyError.triangulationNeedsVerts
@@ -209,10 +205,6 @@ public enum PLYLoader {
 
         if !gotVerts { throw PlyError.vertexDataMissing }
         if !gotFaces { throw PlyError.faceDataMissing }
-
-        print("✅ Loaded \(mesh.positions.count) vertices, \(mesh.indices.count / 3) triangles")
-        print("✅ Normals:", mesh.normals.isEmpty ? "none" : "\(mesh.normals.count)")
-        print("✅ Texcoords:", mesh.texcoords.isEmpty ? "none" : "\(mesh.texcoords.count)")
 
         return mesh
     }

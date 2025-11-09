@@ -11,67 +11,15 @@ import UIKit
 #endif
 
 final class Renderer: @unchecked Sendable {
-    let ctx: RTContext
+    public let ctx: RTContext
 
-    init(ctx: RTContext) {
+    public init(ctx: RTContext) {
         self.ctx = ctx
     }
 }
 
-// MARK: - Intersections
-extension Renderer {
-
-    @inline(__always)
-    func intersectScene(_ ray: inout Ray, backfaceCulling: Bool) -> Bool {
-        guard let tlas = ctx.tlas else { return false }
-        let eps = ctx.intersectionTestEpsilon
-        ctx.intersectTLAS(ray: &ray, tlas: tlas, eps: eps)
-        return ray.hit.kind != .none
-    }
-
-    // --- Triangle intersection ---
-    @inline(__always)
-    private func intersectTriangle(
-        ray: inout Ray,
-        v0: Vec3, v1: Vec3, v2: Vec3,
-        eps: Scalar,
-        backfaceCulling: Bool,
-        material: Int
-    ) {
-        let e1 = v1 - v0
-        let e2 = v2 - v0
-        let pvec = cross(ray.dir, e2)
-        let det = dot(e1, pvec)
-        if Swift.abs(det) < eps { return }
-        if backfaceCulling && det < 0 { return }
-
-        let invDet = 1.0 / det
-        let tvec = ray.origin - v0
-        let u = dot(tvec, pvec) * invDet
-        if u < 0.0 || u > 1.0 { return }
-
-        let qvec = cross(tvec, e1)
-        let v = dot(ray.dir, qvec) * invDet
-        if v < 0.0 || u + v > 1.0 { return }
-
-        let t = dot(e2, qvec) * invDet
-        if t <= eps || t >= ray.hit.t { return }
-
-        let n = normalize(cross(e1, e2))
-        let p = ray.origin + ray.dir * t
-
-        if t < ray.hit.t {
-            ray.hit.t = t
-            ray.hit.kind = .triangle
-            ray.hit.p = p
-            ray.hit.n = n
-            ray.hit.mat = material
-        }
-    }
-}
-
 // MARK: - Rendering (Whitted-style Ray Tracer)
-private actor ProgressRelay {
+public actor ProgressRelay {
     private var done = 0
     private let total: Int
     private let cb: (@Sendable (Int) -> Void)?
@@ -93,7 +41,7 @@ private actor ProgressRelay {
 }
 
 extension Renderer {
-    private struct ChunkResult: Sendable {
+    public struct ChunkResult: Sendable {
         let startRow: Int
         let endRow: Int
         let pixels: [Vec3]
@@ -101,11 +49,10 @@ extension Renderer {
         let nodeVisits: Int64
     }
 
-    @Sendable func render(
+    @Sendable public func render(
         scene: Scene,
         cameraIndex: Int = 0,
         progressRow: (@Sendable (Int) -> Void)? = nil
-//        raysTraced: inout Int64
     ) async throws -> [Vec3] {
 
         let cam = scene.cameras[cameraIndex]
@@ -131,7 +78,6 @@ extension Renderer {
             row = end
         }
 
-        var raysSum: Int64 = 0
         var totalNodeVisits: Int64 = 0
         let bvh = ctx.bvh
         let materials = ctx.materials
@@ -256,7 +202,6 @@ extension Renderer {
             for (startRow, endRow) in chunks {
                 group.addTask {
                     var local = [Vec3](repeating: .zero, count: (endRow - startRow) * width)
-//                    var localRays: Int64 = 0
                     var localNodeVisits: Int64 = 0
 
                     for j in startRow..<endRow {
@@ -281,7 +226,6 @@ extension Renderer {
                             let pixel = trace(&ray, 0, &localNodeVisits)
                             local[base + i] = pixel
 
-//                            localRays &+= 1
                         }
                     }
 
@@ -299,22 +243,17 @@ extension Renderer {
                             .assign(from: src.baseAddress!, count: rows * width)
                     }
                 }
-//                raysSum &+= chunk.rays
                 totalNodeVisits &+= chunk.nodeVisits
             }
 
             try await group.waitForAll()
         }
 
-//        raysTraced &+= raysSum
-        let avgVisits = Double(totalNodeVisits) / Double(raysSum)
-        print("📊 Avg BVH node visits per ray: \(avgVisits)")
-
         return out
     }
 
     // --- Camera assembly
-    private func makeCameraBasis(from cam: ParsingKit.Camera, aspect: Double)
+    public func makeCameraBasis(from cam: ParsingKit.Camera, aspect: Double)
     -> (eye: Vec3, u: Vec3, v: Vec3, w: Vec3, l: Double, r: Double, b: Double, t: Double, nd: Double, isLookAt: Bool) {
 
         let e  = cam.position
@@ -361,7 +300,7 @@ extension Renderer {
         }
     }
 
-    func occluded(shadowRay rIn: Ray) -> Bool {
+    public func occluded(shadowRay rIn: Ray) -> Bool {
         guard let tlas = ctx.tlas else { return false }
         let eps = ctx.intersectionTestEpsilon
         return ctx.occludedTLAS(ray: rIn, tlas: tlas, eps: eps)
@@ -371,17 +310,17 @@ extension Renderer {
 // MARK: - Material helpers
 extension Renderer {
     @inline(__always)
-    private func reflect(_ d: Vec3, _ n: Vec3) -> Vec3 { d - 2.0 * dot(d, n) * n }
+    public func reflect(_ d: Vec3, _ n: Vec3) -> Vec3 { d - 2.0 * dot(d, n) * n }
 
     @inline(__always)
-    private func beerAttenuate(_ Li: Vec3, c: Vec3, distance x: Double) -> Vec3 {
+    public func beerAttenuate(_ Li: Vec3, c: Vec3, distance x: Double) -> Vec3 {
         guard x.isFinite, x > 0 else { return Li }
         let att = exp(-c * x)
         return att
     }
 
     @inline(__always)
-    private func fresnelDielectric(n1: Double, n2: Double, cosTheta cosI: Double)
+    public func fresnelDielectric(n1: Double, n2: Double, cosTheta cosI: Double)
     -> (R: Double, cosT: Double?, sin2T: Double) {
         let cosTheta = max(0.0, min(1.0, Swift.abs(cosI)))
         let eta  = n1 / n2
@@ -397,7 +336,7 @@ extension Renderer {
     }
 
     @inline(__always)
-    private func fresnelConductorRGB(eta: Scalar, k: Scalar, cosI_: Double) -> Vec3 {
+    public func fresnelConductorRGB(eta: Scalar, k: Scalar, cosI_: Double) -> Vec3 {
         let cosI = max(0.0, min(1.0, Swift.abs(cosI_)))
         let cos2 = cosI * cosI
         let one  = Vec3(1, 1, 1)
