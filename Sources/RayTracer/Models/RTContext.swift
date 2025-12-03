@@ -46,13 +46,17 @@ public struct Instance: Sendable {
     public let worldToLocal: Mat4
     public let worldBounds: AABB
     public let materialOverride: Int?
+    public var instanceMotion: Vec3 = .zero
+    public var normalMatrix: Mat3
 
-    init(blas: BLAS, localToWorld: Mat4, worldToLocal: Mat4, worldBounds: AABB, materialOverride: Int?) {
+    init(blas: BLAS, localToWorld: Mat4, worldToLocal: Mat4, worldBounds: AABB, materialOverride: Int?, instanceMotion: Vec3 = .zero, normalMatrix: Mat3) {
         self.blas = blas
         self.localToWorld = localToWorld
         self.worldToLocal = worldToLocal
         self.worldBounds = worldBounds
         self.materialOverride = materialOverride
+        self.instanceMotion = instanceMotion
+        self.normalMatrix = normalMatrix
     }
 }
 
@@ -76,6 +80,9 @@ public struct RTContext: Sendable {
     public var planes: [Plane]
     public var triangles: [Triangle]
 
+    public var pointLights: [PointLight]
+    public var areaLights: [AreaLight]
+
     // Global BVH for non-instanced prims (optional)
     public var bvhPrims: [PrimitiveInfo]
     public var bvh: BVHBuilder?
@@ -93,6 +100,8 @@ public struct RTContext: Sendable {
         self.planes                  = []
         self.bvhPrims                = []
 
+        self.pointLights = scene.lights.points.compactMap { $0 as? PointLight }
+        self.areaLights  = scene.lights.points.compactMap { $0 as? AreaLight }
         // --- Build analytic & mesh triangles into arrays and bvhPrims ---
         var currentSphereIndex = 0
         var currentPlaneIndex = 0
@@ -268,9 +277,16 @@ public struct RTContext: Sendable {
                         t.e1=v1-v0; t.e2=v2-v0
                         t.centroid = (v0+v1+v2)/3
                         t.n0=n0; t.n1=n1; t.n2=n2
+                        t.motionBlur = m.motionBlur
                         triangles.append(t)
 
-                        let bnd = AABB(minP: min(v0, min(v1, v2)), maxP: max(v0, max(v1, v2)))
+                        let blurV0 = m.motionBlur != .zero ? v0.withMotionBlur(m.motionBlur) : v0
+                        let blurV1 = m.motionBlur != .zero ? v1.withMotionBlur(m.motionBlur) : v1
+                        let blurV2 = m.motionBlur != .zero ? v2.withMotionBlur(m.motionBlur) : v2
+
+                        let minP = min(min(v0, min(v1, v2)), min(blurV0, min(blurV1, blurV2)))
+                        let maxP = max(max(v0, max(v1, v2)), max(blurV0, max(blurV1, blurV2)))
+                        let bnd = AABB(minP: minP, maxP: maxP)
                         bvhPrims.append(PrimitiveInfo(type: .triangle,
                                                       primitiveIndex: currentTriangleIndex,
                                                       bounds: bnd,
@@ -294,7 +310,7 @@ public struct RTContext: Sendable {
                         let i1 = idx1b[b+1] - offset
                         let i2 = idx1b[b+2] - offset
                         let v0 = pos[i0], v1 = pos[i1], v2 = pos[i2]
-                        faceNormals[t] = cross(v1 - v0, v2 - v0)
+                        faceNormals[t] = normalize(cross(v1 - v0, v2 - v0))
                     }
 
                     var vtxNormals = [Vec3](repeating: .zero, count: pos.count)
@@ -320,6 +336,7 @@ public struct RTContext: Sendable {
                         tri.v0=v0; tri.v1=v1; tri.v2=v2
                         tri.e1=v1-v0; tri.e2=v2-v0
                         tri.centroid = (v0+v1+v2)/3
+                        tri.motionBlur = m.motionBlur
                         if isSmooth {
                             tri.n0 = vtxNormals[i0]; tri.n1 = vtxNormals[i1]; tri.n2 = vtxNormals[i2]
                         } else {
@@ -328,7 +345,13 @@ public struct RTContext: Sendable {
                         }
                         triangles.append(tri)
 
-                        let bounds = AABB(minP: min(v0, min(v1, v2)), maxP: max(v0, max(v1, v2)))
+                        let blurV0 = m.motionBlur != .zero ? v0.withMotionBlur(m.motionBlur) : v0
+                        let blurV1 = m.motionBlur != .zero ? v1.withMotionBlur(m.motionBlur) : v1
+                        let blurV2 = m.motionBlur != .zero ? v2.withMotionBlur(m.motionBlur) : v2
+
+                        let minP = min(min(v0, min(v1, v2)), min(blurV0, min(blurV1, blurV2)))
+                        let maxP = max(max(v0, max(v1, v2)), max(blurV0, max(blurV1, blurV2)))
+                        let bounds = AABB(minP: minP, maxP: maxP)
                         bvhPrims.append(PrimitiveInfo(type: .triangle,
                                                       primitiveIndex: currentTriangleIndex,
                                                       bounds: bounds,
@@ -369,7 +392,9 @@ public struct RTContext: Sendable {
             let matOverride = materialIndex(for: instObj.material, in: scene.materials)
             let instance = makeInstance(from: baseData.blas,
                                         localToWorld: instanceTransform,
-                                        materialOverride: matOverride)
+                                        materialOverride: matOverride,
+                                        instanceMotion: instObj.motionBlur 
+            )
             instArray.append(instance)
 
             instanceByID[instID] = (blas: baseData.blas, material: matOverride, transform: instanceTransform)
@@ -409,7 +434,7 @@ public func buildBLASForMesh(prims: [PrimitiveInfo], triRange: Range<Int>) -> BL
     return BLAS(nodes: b.bvhNode, primIdx: b.primitiveIdx, prims: subset, root: b.rootNodeIdx)
 }
 
-public func makeInstance(from base: BLAS, localToWorld M: Mat4, materialOverride: Int?) -> Instance {
+public func makeInstance(from base: BLAS, localToWorld M: Mat4, materialOverride: Int?, instanceMotion: Vec3 = .zero) -> Instance {
     // Recompute world bounds by transforming all leaf AABBs
     var minW = Vec3(repeating: .infinity)
     var maxW = Vec3(repeating: -.infinity)
@@ -420,12 +445,15 @@ public func makeInstance(from base: BLAS, localToWorld M: Mat4, materialOverride
         maxW = max(maxW, worldB.maxP)
     }
     let worldB = AABB(minP: minW, maxP: maxW)
-
+    let nMat = normalTransformMatrix(from: M)
     return Instance(blas: base,
                     localToWorld: M,
                     worldToLocal: M.inverse,
                     worldBounds: worldB,
-                    materialOverride: materialOverride)
+                    materialOverride: materialOverride,
+                    instanceMotion: instanceMotion,
+                    normalMatrix: nMat
+    )
 }
 
 public func buildTLAS(instances: [Instance]) -> TLAS {
@@ -449,23 +477,26 @@ public func buildTLAS(instances: [Instance]) -> TLAS {
 public extension RTContext {
     @inlinable @inline(__always)
     func intersectTriangle(ray: inout Ray, triangle: Triangle, isSmooth: Bool, matIdx: Int, eps: Scalar) {
+        let offset = triangle.motionBlur * ray.time
+        let origin = ray.origin - offset
+
         let pvec = cross(ray.dir, triangle.e2)
         let det  = dot(triangle.e1, pvec)
         if Swift.abs(det) < eps { return }
         let invDet = 1.0 / det
-        let tvec = ray.origin - triangle.v0
+        let tvec = origin - triangle.v0
         let u = dot(tvec, pvec) * invDet
         if u < 0.0 || u > 1.0 { return }
         let q = cross(tvec, triangle.e1)
         let v = dot(ray.dir, q) * invDet
         if v < 0.0 || u + v > 1.0 { return }
         let t = dot(triangle.e2, q) * invDet
-        if t <= eps || t >= ray.hit.t { return }
+        if t <= max(eps, ray.tMin) || t >= ray.hit.t { return }
 
         let w = 1.0 - u - v
         var n: Vec3
         if isSmooth {
-            let interp = triangle.n0 + u*triangle.n1 + v*triangle.n2
+            let interp = w*triangle.n0 + u*triangle.n1 + v*triangle.n2
             n = normalize(interp)
         } else {
             n = normalize(cross(triangle.e1, triangle.e2))
@@ -489,7 +520,7 @@ public extension RTContext {
         let sd = sqrt(disc)
         var t = (-b - sd) / (2*a)
         if t < eps { t = (-b + sd) / (2*a) }
-        if t <= eps || t >= ray.hit.t { return }
+        if t <= max(eps, ray.tMin) || t >= ray.hit.t { return }
         let p = ray.origin + ray.dir * t
         let n = normalize(p - sphere.center)
         ray.hit.t = t; ray.hit.p = p; ray.hit.n = n; ray.hit.kind = .sphere; ray.hit.mat = matIdx
@@ -500,7 +531,7 @@ public extension RTContext {
         let denom = dot(plane.normal, ray.dir)
         if Swift.abs(denom) < eps { return }
         let t = dot(plane.center - ray.origin, plane.normal) / denom
-        if t <= eps || t >= ray.hit.t { return }
+        if t <= max(eps, ray.tMin) || t >= ray.hit.t { return }
         let p = ray.origin + ray.dir * t
         let n = normalize(plane.normal)
         ray.hit.t = t; ray.hit.p = p; ray.hit.n = n; ray.hit.kind = .plane; ray.hit.mat = matIdx
@@ -515,69 +546,74 @@ public extension RTContext {
         let prims = inst.blas.prims
         let primIdx = inst.blas.primIdx
 
-        var visits = 0
-        var stack = UnsafeMutableBufferPointer<UInt>.allocate(capacity: 128)
-        defer { stack.deallocate() }
-        var sp = 0
-        stack[sp] = inst.blas.root
+        // ✅ Optimization 1: Stack allocation (Zero malloc overhead)
+        return withUnsafeTemporaryAllocation(of: UInt.self, capacity: 64) { stack in
+            var visits = 0
+            var sp = 0
+            stack[sp] = inst.blas.root
 
-        @inline(__always)
-        func hitAABB(_ n: BVHNode, _ r: Ray) -> Double {
-            let t1 = (n.aabbMin - r.origin) * r.invDir
-            let t2 = (n.aabbMax - r.origin) * r.invDir
-            let tminv = simd.min(t1, t2)
-            let tmaxv = simd.max(t1, t2)
-            let tmin = max(max(tminv.x, tminv.y), tminv.z)
-            let tmax = min(tmaxv.x, min(tmaxv.y, tmaxv.z))
-            return (tmax >= max(tmin, eps)) ? tmin : .infinity
-        }
-
-        while sp >= 0 {
-            visits &+= 1
-            let idx = stack[sp]; sp &-= 1
-            let node = nodes[Int(idx)]
-            if hitAABB(node, ray) == .infinity { continue }
-
-            if node.isLeaf {
-                let first = Int(node.leftFirst)
-                let count = Int(node.primitiveCount)
-                for k in 0..<count {
-                    let pid = Int(primIdx[first + k])
-                    let p = prims[pid]
-                    switch p.type {
-                    case .triangle:
-                        let tri = triangles[p.primitiveIndex]
-                        intersectTriangle(ray: &ray,
-                                          triangle: tri,
-                                          isSmooth: p.shadingMode == .smooth,
-                                          matIdx: p.materialID,
-                                          eps: eps)
-                    case .sphere:
-                        let s = spheres[p.primitiveIndex]
-                        intersectSphere(ray: &ray, sphere: s, matIdx: p.materialID, eps: eps)
-                    case .plane:
-                        let pl = planes[p.primitiveIndex]
-                        intersectPlane(ray: &ray, plane: pl, matIdx: p.materialID, eps: eps)
-                    case .mesh:
-                        break // never inside BLAS
-                    }
-                }
-                continue
+            // Helper closure to keep scope clean
+            @inline(__always)
+            func hitAABB(_ n: BVHNode, _ r: Ray) -> Double {
+                let t1 = (n.aabbMin - r.origin) * r.invDir
+                let t2 = (n.aabbMax - r.origin) * r.invDir
+                let tminv = simd.min(t1, t2)
+                let tmaxv = simd.max(t1, t2)
+                let tmin = max(max(tminv.x, tminv.y), tminv.z)
+                let tmax = min(tmaxv.x, min(tmaxv.y, tmaxv.z))
+                return (tmax >= max(tmin, eps)) ? tmin : .infinity
             }
 
-            var L = node.leftFirst
-            var R = L + 1
-            let lNode = nodes[Int(L)], rNode = nodes[Int(R)]
-            var d1 = hitAABB(lNode, ray), d2 = hitAABB(rNode, ray)
-            if d1 > d2 { swap(&d1, &d2); swap(&L, &R) }
-            if d2 != .infinity { sp &+= 1; stack[sp] = R }
-            if d1 != .infinity { sp &+= 1; stack[sp] = L }
+            while sp >= 0 {
+                visits &+= 1
+                let idx = stack[sp]; sp &-= 1
+                let node = nodes[Int(idx)]
+                if hitAABB(node, ray) == .infinity { continue }
+
+                if node.isLeaf {
+                    let first = Int(node.leftFirst)
+                    let count = Int(node.primitiveCount)
+                    for k in 0..<count {
+                        let pid = Int(primIdx[first + k])
+                        let p = prims[pid]
+                        switch p.type {
+                        case .triangle:
+                            let tri = triangles[p.primitiveIndex]
+                            intersectTriangle(ray: &ray,
+                                              triangle: tri,
+                                              isSmooth: p.shadingMode == .smooth,
+                                              matIdx: p.materialID,
+                                              eps: eps)
+                        case .sphere:
+                            let s = spheres[p.primitiveIndex]
+                            intersectSphere(ray: &ray, sphere: s, matIdx: p.materialID, eps: eps)
+                        case .plane:
+                            let pl = planes[p.primitiveIndex]
+                            intersectPlane(ray: &ray, plane: pl, matIdx: p.materialID, eps: eps)
+                        case .mesh:
+                            break
+                        }
+                    }
+                    continue
+                }
+
+                var L = node.leftFirst
+                var R = L + 1
+                let lNode = nodes[Int(L)], rNode = nodes[Int(R)]
+                var d1 = hitAABB(lNode, ray), d2 = hitAABB(rNode, ray)
+                if d1 > d2 { swap(&d1, &d2); swap(&L, &R) }
+                if d2 != .infinity { sp &+= 1; stack[sp] = R }
+                if d1 != .infinity { sp &+= 1; stack[sp] = L }
+            }
+            return visits
         }
-        return visits
     }
 }
 
 // MARK: - TLAS traversal (world → local → BLAS → world)
+// In RTContext.swift
+
+// MARK: - TLAS traversal (world -> local -> BLAS -> world)
 public extension RTContext {
     @inlinable @inline(__always)
     func intersectTLAS(ray worldRay: inout Ray, tlas: TLAS, eps: Scalar) -> Int {
@@ -586,94 +622,101 @@ public extension RTContext {
         let pidx  = tlas.builder.primitiveIdx
         let insts = tlas.instances
 
-        var visits = 0
-        var stack = UnsafeMutableBufferPointer<UInt>.allocate(capacity: 128)
-        defer { stack.deallocate() }
-        var sp = 0
-        stack[sp] = tlas.builder.rootNodeIdx
+        // ✅ Optimization 1: Stack allocation
+        return withUnsafeTemporaryAllocation(of: UInt.self, capacity: 64) { stack in
+            var visits = 0
+            var sp = 0
+            stack[sp] = tlas.builder.rootNodeIdx
 
-        @inline(__always)
-        func hitAABB(_ n: BVHNode, _ r: Ray) -> Double {
-            let t1 = (n.aabbMin - r.origin) * r.invDir
-            let t2 = (n.aabbMax - r.origin) * r.invDir
-            let tminv = simd.min(t1, t2)
-            let tmaxv = simd.max(t1, t2)
-            let tmin = max(max(tminv.x, tminv.y), tminv.z)
-            let tmax = min(tmaxv.x, min(tmaxv.y, tmaxv.z))
-            return (tmax >= max(tmin, eps)) ? tmin : .infinity
-        }
-
-        while sp >= 0 {
-            visits &+= 1
-            let idx = stack[sp]; sp &-= 1
-            let node = nodes[Int(idx)]
-            if hitAABB(node, worldRay) == .infinity { continue }
-
-            if node.isLeaf {
-                let first = Int(node.leftFirst)
-                let count = Int(node.primitiveCount)
-                for k in 0..<count {
-                    let pid = Int(pidx[first + k])
-                    let p = prims[pid]
-                    guard p.type == .mesh else { continue }
-                    let inst = insts[p.primitiveIndex]
-
-                    // world → local ray
-                    // world → local ray
-                    var rL = worldRay
-                    let o4 = inst.worldToLocal * SIMD4(worldRay.origin.x, worldRay.origin.y, worldRay.origin.z, 1.0)
-                    let d4 = inst.worldToLocal * SIMD4(worldRay.dir.x,    worldRay.dir.y,    worldRay.dir.z,    0.0)
-                    let dirL = Vec3(d4.x, d4.y, d4.z)
-
-                    rL.origin = Vec3(o4.x, o4.y, o4.z)
-                    rL.dir    = dirL
-                    rL.invDir = 1.0 / rL.dir
-
-                    rL.tMax   = worldRay.tMax
-                    rL.hit    = worldRay.hit
-                    rL.hit.t  = worldRay.hit.t
-
-                    // trace BLAS in local space
-                    var tmp = rL
-                    visits &+= intersectBLAS(ray: &tmp, inst: inst, eps: eps)
-
-                    if tmp.hit.t < worldRay.hit.t {
-                        // local hit → world
-                        let hp = SIMD4(tmp.hit.p, 1.0)
-                        let wp = inst.localToWorld * hp
-
-                        // Transform normal with inverse-transpose of localToWorld
-                        let Nmat = normalTransformMatrix(from: inst.localToWorld)
-                        var wn = normalize(Nmat * tmp.hit.n)
-                        let M3 = simd_double3x3(
-                                    SIMD3(inst.localToWorld.columns.0.x, inst.localToWorld.columns.0.y, inst.localToWorld.columns.0.z),
-                                    SIMD3(inst.localToWorld.columns.1.x, inst.localToWorld.columns.1.y, inst.localToWorld.columns.1.z),
-                                    SIMD3(inst.localToWorld.columns.2.x, inst.localToWorld.columns.2.y, inst.localToWorld.columns.2.z)
-                                )
-                        if simd_determinant(M3) < 0.0 {
-                            wn = -wn
-                        }
-
-                        worldRay.hit.t    = tmp.hit.t
-                        worldRay.hit.p    = Vec3(wp.x, wp.y, wp.z)
-                        worldRay.hit.n    = wn
-                        worldRay.hit.kind = tmp.hit.kind
-                        worldRay.hit.mat  = inst.materialOverride ?? tmp.hit.mat
-
-                    }
-                }
-                continue
+            @inline(__always)
+            func hitAABB(_ n: BVHNode, _ r: Ray) -> Double {
+                let t1 = (n.aabbMin - r.origin) * r.invDir
+                let t2 = (n.aabbMax - r.origin) * r.invDir
+                let tminv = simd.min(t1, t2)
+                let tmaxv = simd.max(t1, t2)
+                let tmin = max(max(tminv.x, tminv.y), tminv.z)
+                let tmax = min(tmaxv.x, min(tmaxv.y, tmaxv.z))
+                return (tmax >= max(tmin, eps)) ? tmin : .infinity
             }
 
-            var L = node.leftFirst
-            var R = L + 1
-            let lNode = nodes[Int(L)], rNode = nodes[Int(R)]
-            var d1 = hitAABB(lNode, worldRay), d2 = hitAABB(rNode, worldRay)
-            if d1 > d2 { swap(&d1, &d2); swap(&L, &R) }
-            if d2 != .infinity { sp &+= 1; stack[sp] = R }
-            if d1 != .infinity { sp &+= 1; stack[sp] = L }
+            while sp >= 0 {
+                visits &+= 1
+                let idx = stack[sp]; sp &-= 1
+                let node = nodes[Int(idx)]
+                if hitAABB(node, worldRay) == .infinity { continue }
+
+                if node.isLeaf {
+                    let first = Int(node.leftFirst)
+                    let count = Int(node.primitiveCount)
+                    for k in 0..<count {
+                        let pid = Int(pidx[first + k])
+                        let p = prims[pid]
+                        guard p.type == .mesh else { continue }
+                        let inst = insts[p.primitiveIndex]
+
+                        // world -> local ray
+                        let instOffset = inst.instanceMotion * worldRay.time
+                        var rL = worldRay
+                        rL.time = worldRay.time
+                        rL.origin -= instOffset
+
+                        let o4 = inst.worldToLocal * SIMD4(rL.origin.x, rL.origin.y, rL.origin.z, 1.0)
+                        let d4 = inst.worldToLocal * SIMD4(rL.dir.x,    rL.dir.y,    rL.dir.z,    0.0)
+                        let dirL = Vec3(d4.x, d4.y, d4.z)
+
+                        rL.origin = Vec3(o4.x, o4.y, o4.z)
+                        rL.dir    = dirL
+                        rL.invDir = 1.0 / rL.dir
+
+                        rL.tMax   = worldRay.tMax
+                        rL.hit    = worldRay.hit
+                        rL.hit.t  = worldRay.hit.t
+
+                        // trace BLAS in local space
+                        var tmp = rL
+                        visits &+= intersectBLAS(ray: &tmp, inst: inst, eps: eps)
+
+                        if tmp.hit.t < worldRay.hit.t {
+                            // local hit -> world
+                            let instOffset = inst.instanceMotion * worldRay.time
+                            let hp = SIMD4(tmp.hit.p, 1.0)
+                            let wp = inst.localToWorld * hp
+
+                            // ✅ Optimization 2: Use precomputed normal matrix (Multiplier only)
+                            var wn = normalize(inst.normalMatrix * tmp.hit.n)
+
+                            // Check determinant to flip normal if scaled negatively
+                            // (You can also precalculate the determinant sign if you want to be even faster,
+                            //  but this is usually cheap enough)
+                            let M3 = simd_double3x3(
+                                SIMD3(inst.localToWorld.columns.0.x, inst.localToWorld.columns.0.y, inst.localToWorld.columns.0.z),
+                                SIMD3(inst.localToWorld.columns.1.x, inst.localToWorld.columns.1.y, inst.localToWorld.columns.1.z),
+                                SIMD3(inst.localToWorld.columns.2.x, inst.localToWorld.columns.2.y, inst.localToWorld.columns.2.z)
+                            )
+                            if simd_determinant(M3) < 0.0 {
+                                wn = -wn
+                            }
+
+                            worldRay.hit.t    = tmp.hit.t
+                            worldRay.hit.p    = Vec3(wp.x, wp.y, wp.z) + instOffset
+                            worldRay.hit.n    = wn
+                            worldRay.hit.kind = tmp.hit.kind
+                            worldRay.hit.mat  = inst.materialOverride ?? tmp.hit.mat
+                        }
+                    }
+                    continue
+                }
+
+                var L = node.leftFirst
+                var R = L + 1
+                let lNode = nodes[Int(L)], rNode = nodes[Int(R)]
+                var d1 = hitAABB(lNode, worldRay), d2 = hitAABB(rNode, worldRay)
+                if d1 > d2 { swap(&d1, &d2); swap(&L, &R) }
+                if d2 != .infinity { sp &+= 1; stack[sp] = R }
+                if d1 != .infinity { sp &+= 1; stack[sp] = L }
+            }
+            return visits
         }
-        return visits
     }
 
     // Optional: shadow traversal (short-circuit)
@@ -710,8 +753,11 @@ public extension RTContext {
 
                     // world → local
                     var rL = worldRay
-                    let o4 = inst.worldToLocal * SIMD4(worldRay.origin.x, worldRay.origin.y, worldRay.origin.z, 1.0)
-                    let d4 = inst.worldToLocal * SIMD4(worldRay.dir.x,    worldRay.dir.y,    worldRay.dir.z,    0.0)
+                    let instOffset = inst.instanceMotion * worldRay.time
+                    rL.origin -= instOffset
+                    rL.time = worldRay.time
+                    let o4 = inst.worldToLocal * SIMD4(rL.origin.x, rL.origin.y, rL.origin.z, 1.0)
+                    let d4 = inst.worldToLocal * SIMD4(rL.dir.x,    rL.dir.y,    rL.dir.z,    0.0)
                     let dirL = Vec3(d4.x, d4.y, d4.z)
 
                     rL.origin = Vec3(o4.x, o4.y, o4.z)
@@ -784,18 +830,21 @@ public extension RTContext {
 
     @inlinable @inline(__always)
     func triShadowHit(_ ray: Ray, triangle: Triangle, eps: Double) -> Bool {
+        let offset = triangle.motionBlur * ray.time
+        let origin = ray.origin - offset
+
         let pvec = cross(ray.dir, triangle.e2)
         let det = dot(triangle.e1, pvec)
         if Swift.abs(det) < eps { return false }
         let invDet = 1.0 / det
-        let tvec = ray.origin - triangle.v0
+        let tvec = origin - triangle.v0
         let u = dot(tvec, pvec) * invDet
         if u < 0.0 || u > 1.0 { return false }
         let q = cross(tvec, triangle.e1)
         let v = dot(ray.dir, q) * invDet
         if v < 0.0 || u + v > 1.0 { return false }
         let t = dot(triangle.e2, q) * invDet
-        return (t > eps && t < ray.tMax)
+        return (t > max(eps, ray.tMin) && t < ray.tMax)
     }
     
     @inlinable @inline(__always)
@@ -808,8 +857,8 @@ public extension RTContext {
         if disc < 0 { return false }
         let sd = sqrt(disc)
         var t = (-b - sd) / (2*a)
-        if t < eps { t = (-b + sd) / (2*a) }
-        return (t > eps && t < ray.tMax)
+        if t < max(eps, ray.tMin) { t = (-b + sd) / (2*a) }
+        return (t > max(eps, ray.tMin) && t < ray.tMax)
     }
 
     @inlinable @inline(__always)
@@ -817,7 +866,7 @@ public extension RTContext {
         let denom = dot(plane.normal, ray.dir)
         if Swift.abs(denom) < eps { return false }
         let t = dot(plane.center - ray.origin, plane.normal) / denom
-        return (t > eps && t < ray.tMax)
+        return (t > max(eps, ray.tMin) && t < ray.tMax)
     }
 }
 
@@ -850,12 +899,15 @@ public extension RTContext {
                 maxW = max(maxW, worldB.maxP)
             }
             let updatedBounds = AABB(minP: minW, maxP: maxW)
+            let nMat = normalTransformMatrix(from: inst.localToWorld) // Do the math ONCE here
             instances[i] = Instance(
                 blas: inst.blas,
                 localToWorld: inst.localToWorld,
                 worldToLocal: inst.localToWorld.inverse,
                 worldBounds: updatedBounds,
-                materialOverride: inst.materialOverride
+                materialOverride: inst.materialOverride,
+                normalMatrix: nMat
+
             )
         }
 
@@ -872,5 +924,59 @@ public extension RTContext {
 
         // Step 4: Save back the updated TLAS
         self.tlas = tlas
+    }
+}
+
+extension Vec3 {
+    // Creates a coordinate system where 'self' is the Z-axis (the forward direction)
+    func makeOrthonormalBasis() -> (u: Vec3, v: Vec3, w: Vec3) {
+        let w = normalize(self)
+
+        // Pick an arbitrary helper vector not parallel to W
+        // If W is close to Y-axis, use X-axis, otherwise use Y-axis
+        let helper = (Swift.abs(w.x) > 0.9) ? Vec3(x: 0, y: 1, z: 0) : Vec3(x: 1, y: 0, z: 0)
+
+        let u = normalize(cross(w, helper))
+        let v = cross(w, u) // v is automatically normalized since w and u are orthogonal unit vectors
+
+        return (u, v, w)
+    }
+
+    static func random(min: Double, max: Double) -> Double {
+        return Double.random(in: min...max)
+    }
+}
+
+extension RTContext {
+    @inlinable
+    func orthonormalBasis(_ n: Vec3) -> (Vec3, Vec3) {
+        let sign = n.z >= 0 ? 1.0 : -1.0
+        let a = -1.0 / (sign + n.z)
+        let b = n.x * n.y * a
+
+        let tangent = normalize(Vec3(
+            1.0 + sign * n.x * n.x * a,
+            sign * b,
+            -sign * n.x
+        ))
+
+        let bitangent = normalize(Vec3(
+            b,
+            sign + n.y * n.y * a,
+            -n.y
+        ))
+
+        return (tangent, bitangent)
+    }
+
+
+}
+
+public extension Vec3 {
+
+    @inlinable
+    /// only supports translations for now
+    func withMotionBlur(_ motionVector: Vec3) -> Vec3 {
+        self + motionVector
     }
 }
